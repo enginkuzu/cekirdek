@@ -19,5 +19,14 @@ public class Değişkenler {
 		TİP_11TANIMLAMA_SOLA,
 		TİP_12TANIMLAMA_SAĞA
 	}
+	
+	public enum CÜMLE {
+		TİP_01DEĞİŞKENYENİ,
+		TİP_02DEĞİŞKENSİL,
+		TİP_03OPERATÖRİŞLEMİ,
+		TİP_04FUNKSİYONÇAĞRISI,
+		TİP_05SABİTTANIMLAMA,
+		TİP_06DEĞİŞKENATAMA
+	}
 
 }

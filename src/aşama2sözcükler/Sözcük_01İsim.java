@@ -4,11 +4,11 @@ import yardımcı.Değişkenler.SÖZCÜK;
 
 public class Sözcük_01İsim extends Sözcük {
 
-	public String isim;
+	public String isim = "";
 
 	public Sözcük_01İsim(char karakter) {
 		super(SÖZCÜK.TİP_01İSİM);
-		this.isim = "" + karakter;
+		this.isim = this.isim + karakter;
 	}
 
 	public Sözcük_01İsim(String isim) {
@@ -23,7 +23,7 @@ public class Sözcük_01İsim extends Sözcük {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Sözcük_01İsim && this.isim != null) {
+		if (obj instanceof Sözcük_01İsim) {
 			return this.isim.equals(((Sözcük_01İsim) obj).isim);
 		}
 		return false;

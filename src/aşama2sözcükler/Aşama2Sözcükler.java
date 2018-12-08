@@ -2,19 +2,22 @@ package aşama2sözcükler;
 
 import java.util.ArrayList;
 
+import yardımcı.Fonksiyonlar;
 import yardımcı.Değişkenler.SÖZCÜK;
 
 public class Aşama2Sözcükler {
 
 	private static Sözcük öncekiSözcük = null;
 	private static ArrayList<Sözcük> aktifCümle = null;
-	private static ArrayList<Sözcük> tümCümleler = null;
+	private static ArrayList<Sözcük[]> tümCümleler = null;
 
 	public static void sözcükEkle(Sözcük sözcük) throws Exception {
 		if (sözcük.tip == SÖZCÜK.TİP_06SATIR_SONU) {
 			if (aktifCümle.size() > 0) {
 				aktifCümle.add(sözcük);
-				tümCümleler.addAll(aktifCümle);
+				Sözcük[] cümle = new Sözcük[aktifCümle.size()];
+				aktifCümle.toArray(cümle);
+				tümCümleler.add(cümle);
 				aktifCümle = new ArrayList<Sözcük>();
 			} else {
 				throw new Exception("Gereksiz yere ';' kullanılmış");
@@ -32,11 +35,11 @@ public class Aşama2Sözcükler {
 		öncekiSözcük = sözcük;
 	}
 
-	public static ArrayList<Sözcük> işle(String içerik) throws Exception {
+	public static ArrayList<Sözcük[]> işle(String içerik, String dosyaAdı) throws Exception {
 
 		öncekiSözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
 		aktifCümle = new ArrayList<Sözcük>();
-		tümCümleler = new ArrayList<Sözcük>();
+		tümCümleler = new ArrayList<Sözcük[]>();
 
 		// durum 0 : Normal durum
 		// durum 1 : Operatör
@@ -213,6 +216,20 @@ public class Aşama2Sözcükler {
 
 		if (durum != 0) {
 			throw new Exception("Anormal Sonlanma : Durum : " + durum);
+		}
+
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Sözcük[] cümle : tümCümleler) {
+			for (Sözcük kelime : cümle) {
+				stringBuilder.append(kelime.toString());
+				stringBuilder.append(" ");
+			}
+			stringBuilder.append("\n");
+		}
+		String çıktı = stringBuilder.toString();
+		//System.out.print(çıktı);
+		if (dosyaAdı != null) {
+			Fonksiyonlar.dosyaKaydet("kodlar/" + dosyaAdı + ".a2.txt", çıktı);
 		}
 
 		return tümCümleler;

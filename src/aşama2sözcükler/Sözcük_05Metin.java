@@ -22,7 +22,7 @@ public class Sözcük_05Metin extends Sözcük {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Sözcük_05Metin && this.metin != null) {
+		if (obj instanceof Sözcük_05Metin) {
 			return this.metin.equals(((Sözcük_05Metin) obj).metin);
 		}
 		return false;
