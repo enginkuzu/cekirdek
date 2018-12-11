@@ -2,7 +2,7 @@ package yardımcı;
 
 public class Değişkenler {
 
-	public static final String UYGULAMA_ADI_VE_SURUMU = "Yeni Bir Programlama Dili Derleyicisi sürüm 0.0.0";
+	public static final String UYGULAMA_ADI_VE_SURUMU = "Yeni Bir Programlama Dili Derleyicisi sürüm 0.0.1";
 
 	public enum SÖZCÜK {
 		TİP_00YOK,
@@ -27,6 +27,10 @@ public class Değişkenler {
 		TİP_04FUNKSİYONÇAĞRISI,
 		TİP_05SABİTTANIMLAMA,
 		TİP_06DEĞİŞKENATAMA
+	}
+	
+	public enum SAKLAÇ {
+		RAX, RBX, RCX, RDX, RBP, RSI, RDI, RSP, R8, R9, R10, R11, R12, R13, R14, R15
 	}
 
 }

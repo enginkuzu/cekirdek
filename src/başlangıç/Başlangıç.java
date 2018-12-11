@@ -6,6 +6,11 @@ import aşama1oku.Aşama1Oku;
 import aşama2sözcükler.Aşama2Sözcükler;
 import aşama2sözcükler.Sözcük;
 import aşama3cümleler.Aşama3Cümleler;
+import aşama3cümleler.Aşama3Çıktısı;
+import aşama3cümleler.Cümle;
+import aşama4iyileştirmeler.Aşama4İyileştirmeler;
+import aşama5makinedili.Aşama5MakineDili;
+import aşama6çıktı.Aşama6Çıktı;
 
 public class Başlangıç {
 
@@ -23,7 +28,10 @@ public class Başlangıç {
 
 		try {
 			ArrayList<Sözcük[]> cümlecikler = Aşama2Sözcükler.işle(içerik, dosyaAdı);
-			Aşama3Cümleler.işle(cümlecikler, dosyaAdı);
+			Aşama3Çıktısı cümleler = Aşama3Cümleler.işle(cümlecikler, dosyaAdı);
+			ArrayList<Cümle> cümleler4 = Aşama4İyileştirmeler.işle(cümleler, dosyaAdı);
+			String komutlar = Aşama5MakineDili.işle(cümleler4);
+			Aşama6Çıktı.işle(komutlar);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return;

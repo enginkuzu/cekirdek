@@ -1,0 +1,4 @@
+
+gcc -S -masm=intel a.c
+as a.s -o a.o
+

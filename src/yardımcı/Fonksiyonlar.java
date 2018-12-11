@@ -75,12 +75,14 @@ public class Fonksiyonlar {
 			int sonlanmaKodu = process.waitFor();
 			long zaman2 = System.currentTimeMillis();
 			if (detaylariGöster) {
-				System.out.println("Fonksiyonlar : komutÇalıştır() : SONLANMA KODU : " + sonlanmaKodu + " (" + (zaman2 - zaman1) + " ms sürdü)");
+				System.out.println("Fonksiyonlar : komutÇalıştır() : SONLANMA KODU : " + sonlanmaKodu + " ("
+						+ (zaman2 - zaman1) + " ms sürdü)");
 			}
 			return komutÇıktısı;
 		} catch (Exception ex) {
 			if (detaylariGöster) {
-				System.out.println("Fonksiyonlar : komutÇalıştır() : " + Arrays.toString(parametreler) + " " + ex.toString());
+				System.out.println(
+						"Fonksiyonlar : komutÇalıştır() : " + Arrays.toString(parametreler) + " " + ex.toString());
 			}
 		} finally {
 			try {

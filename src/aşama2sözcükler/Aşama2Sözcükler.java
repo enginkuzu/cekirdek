@@ -227,9 +227,9 @@ public class Aşama2Sözcükler {
 			stringBuilder.append("\n");
 		}
 		String çıktı = stringBuilder.toString();
-		//System.out.print(çıktı);
+		// System.out.print(çıktı);
 		if (dosyaAdı != null) {
-			Fonksiyonlar.dosyaKaydet("kodlar/" + dosyaAdı + ".a2.txt", çıktı);
+			Fonksiyonlar.dosyaKaydet("kodlar/" + dosyaAdı + "_a2.txt", çıktı);
 		}
 
 		return tümCümleler;

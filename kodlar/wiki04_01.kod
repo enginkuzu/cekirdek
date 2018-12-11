@@ -1,36 +1,43 @@
 
-sayı1:i32<123750;
-sayı2<:123750;
-340777>sayı3:i32;
-340777:>sayı4;
+''bu birden fazla
+satırdan oluşan açıklama
+ifadesidir''
+
+sayı1:i32<255;
+sayı1.println; 'bu bir açıklama satırıdır
+
+sayı2<:15;
+sayı2.println; ''bu da satır içi açıklama ifadesidir'' sayı2.println;
+
+255>sayı3:i32;
+sayı3.println;
+
+15:>sayı4;
+sayı4.println;
+
 
 ' sayı5 : i32 < -123750;
 ' sayı6 <: -123750;
 ' -340777 > sayı7 : i32;
 ' -340777 :> sayı8;
 
-sayı5 : i32 < 123750;
-sayı7 <: 123750;
 
-sayı1 > sayı3;
-sayı3 < sayı1;
+sayı1 > sayı2;
+sayı2 < sayı4;
 
-sayı5>sayı7;
-sayı7<sayı5;
+sayı1 + sayı2 > sayı3;	sayı3.println;
+sayı1 - sayı2 > sayı3;	sayı3.println;
+sayı3 < sayı1 * sayı2;	sayı3.println;
 
-sayı1 + sayı2 > sayı3;
-sayı1 - sayı2 > sayı3;
-sayı3		< sayı1 * sayı2;
-sayı3		< sayı1 // sayı2;
+sayı1.println;
+sayı2.println;
+sayı3 < sayı1 // sayı2;	sayı3.println;
 
-sayı1.println;		sayı2.println;
 
-sayı1.println; 'bu bir açıklama satırıdır
-sayı2.println; ''bu da satır içi açıklama ifadesidir'' sayı2.println;
 
-''bu da birden
-fazla satırdan oluşan
-açıklama ifadesidir''
+
+
+
 
 
 ' Olası hatalar :
