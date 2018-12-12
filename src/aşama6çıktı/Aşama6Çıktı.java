@@ -39,7 +39,7 @@ public class Aşama6Çıktı {
 		}
 
 		KomutÇıktısı kç4 = Fonksiyonlar.komutÇalıştır(false,
-				new String[] { "ld", "kodlar/main.o", "kodlar/println.o", "kodlar/exit.o", "-o", "kodlar/main" });
+				new String[] { "ld", "-s", "kodlar/main.o", "kodlar/println.o", "kodlar/exit.o", "-o", "kodlar/main" });
 		if (!kç4.hata.isEmpty()) {
 			hatalarıYazdır(kç4.hata);
 			return false;

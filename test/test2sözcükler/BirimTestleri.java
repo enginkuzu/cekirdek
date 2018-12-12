@@ -144,21 +144,21 @@ public class BirimTestleri {
 	
 	@Test
 	public void test02Atama05() throws Exception {
-		// 1 > sayı : i32;
+		// 1 > sayı : i64;
 		assertArrayEquals(
-				Aşama2Sözcükler.işle("1>sayı:i32;", null).toArray(),
+				Aşama2Sözcükler.işle("1>sayı:i64;", null).toArray(),
 				new Sözcük[][] {
-					new Sözcük[] {new Sözcük_03TamSayı("1"), new Sözcük(SÖZCÜK.TİP_10ATAMA_SAĞA), new Sözcük_01İsim("sayı"), new Sözcük(SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ), new Sözcük_01İsim("i32"), new Sözcük(SÖZCÜK.TİP_06SATIR_SONU)}
+					new Sözcük[] {new Sözcük_03TamSayı("1"), new Sözcük(SÖZCÜK.TİP_10ATAMA_SAĞA), new Sözcük_01İsim("sayı"), new Sözcük(SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ), new Sözcük_01İsim("i64"), new Sözcük(SÖZCÜK.TİP_06SATIR_SONU)}
 				});
 	}
 	
 	@Test
 	public void test02Atama06() throws Exception {
-		// sayı : i32 < 1;
+		// sayı : i64 < 1;
 		assertArrayEquals(
-				Aşama2Sözcükler.işle("sayı:i32<1;", null).toArray(),
+				Aşama2Sözcükler.işle("sayı:i64<1;", null).toArray(),
 				new Sözcük[][] {
-					new Sözcük[] {new Sözcük_01İsim("sayı"), new Sözcük(SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ), new Sözcük_01İsim("i32"), new Sözcük(SÖZCÜK.TİP_09ATAMA_SOLA), new Sözcük_03TamSayı("1"), new Sözcük(SÖZCÜK.TİP_06SATIR_SONU)}
+					new Sözcük[] {new Sözcük_01İsim("sayı"), new Sözcük(SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ), new Sözcük_01İsim("i64"), new Sözcük(SÖZCÜK.TİP_09ATAMA_SOLA), new Sözcük_03TamSayı("1"), new Sözcük(SÖZCÜK.TİP_06SATIR_SONU)}
 			});
 	}
 	

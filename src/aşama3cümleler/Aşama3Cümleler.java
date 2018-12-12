@@ -64,7 +64,7 @@ public class Aşama3Cümleler {
 					&& cümle[1].tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ && cümle[2].tip == SÖZCÜK.TİP_01İSİM
 					&& cümle[3].tip == SÖZCÜK.TİP_09ATAMA_SOLA && cümle[4].tip == SÖZCÜK.TİP_03TAM_SAYI
 					&& cümle[5].tip == SÖZCÜK.TİP_06SATIR_SONU) {
-				// sayı:i32 < 123;
+				// sayı:i64 < 123;
 				gerçekDeğişkenNo++;
 				Değişken değişken = new Değişken(gerçekDeğişkenNo, ((Sözcük_01İsim) cümle[0]).isim,
 						((Sözcük_01İsim) cümle[2]).isim);
@@ -72,14 +72,12 @@ public class Aşama3Cümleler {
 				değişkenİsimMap.put(değişken.değişkenİsim, değişken);
 				cümleler.add(
 						new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişken.değişkenİsim, değişken.değişkenTipi));
-				geçiciDeğişkenNo--;
-				cümleler.add(new Cümle_05SabitTanımlama(geçiciDeğişkenNo, ((Sözcük_03TamSayı) cümle[4]).sayı, "i32"));
-				cümleler.add(new Cümle_06DeğişkenAtama(geçiciDeğişkenNo, gerçekDeğişkenNo));
+				cümleler.add(new Cümle_05SabitTanımlama(gerçekDeğişkenNo, ((Sözcük_03TamSayı) cümle[4]).sayı, "i64"));
 			} else if (cümle.length == 6 && cümle[0].tip == SÖZCÜK.TİP_03TAM_SAYI
 					&& cümle[1].tip == SÖZCÜK.TİP_10ATAMA_SAĞA && cümle[2].tip == SÖZCÜK.TİP_01İSİM
 					&& cümle[3].tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ && cümle[4].tip == SÖZCÜK.TİP_01İSİM
 					&& cümle[5].tip == SÖZCÜK.TİP_06SATIR_SONU) {
-				// 123 > sayı:i32;
+				// 123 > sayı:i64;
 				gerçekDeğişkenNo++;
 				Değişken değişken = new Değişken(gerçekDeğişkenNo, ((Sözcük_01İsim) cümle[2]).isim,
 						((Sözcük_01İsim) cümle[4]).isim);
@@ -87,35 +85,29 @@ public class Aşama3Cümleler {
 				değişkenİsimMap.put(değişken.değişkenİsim, değişken);
 				cümleler.add(
 						new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişken.değişkenİsim, değişken.değişkenTipi));
-				geçiciDeğişkenNo--;
-				cümleler.add(new Cümle_05SabitTanımlama(geçiciDeğişkenNo, ((Sözcük_03TamSayı) cümle[0]).sayı, "i32"));
-				cümleler.add(new Cümle_06DeğişkenAtama(geçiciDeğişkenNo, gerçekDeğişkenNo));
+				cümleler.add(new Cümle_05SabitTanımlama(gerçekDeğişkenNo, ((Sözcük_03TamSayı) cümle[0]).sayı, "i64"));
 			} else if (cümle.length == 4 && cümle[0].tip == SÖZCÜK.TİP_01İSİM
 					&& cümle[1].tip == SÖZCÜK.TİP_11TANIMLAMA_SOLA && cümle[2].tip == SÖZCÜK.TİP_03TAM_SAYI
 					&& cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// sayı <: 123;
 				gerçekDeğişkenNo++;
-				Değişken değişken = new Değişken(gerçekDeğişkenNo, ((Sözcük_01İsim) cümle[0]).isim, "i32");
+				Değişken değişken = new Değişken(gerçekDeğişkenNo, ((Sözcük_01İsim) cümle[0]).isim, "i64");
 				değişkenNoMap.put(değişken.değişkenNo, değişken);
 				değişkenİsimMap.put(değişken.değişkenİsim, değişken);
 				cümleler.add(
 						new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişken.değişkenİsim, değişken.değişkenTipi));
-				geçiciDeğişkenNo--;
-				cümleler.add(new Cümle_05SabitTanımlama(geçiciDeğişkenNo, ((Sözcük_03TamSayı) cümle[2]).sayı, "i32"));
-				cümleler.add(new Cümle_06DeğişkenAtama(geçiciDeğişkenNo, gerçekDeğişkenNo));
+				cümleler.add(new Cümle_05SabitTanımlama(gerçekDeğişkenNo, ((Sözcük_03TamSayı) cümle[2]).sayı, "i64"));
 			} else if (cümle.length == 4 && cümle[0].tip == SÖZCÜK.TİP_03TAM_SAYI
 					&& cümle[1].tip == SÖZCÜK.TİP_12TANIMLAMA_SAĞA && cümle[2].tip == SÖZCÜK.TİP_01İSİM
 					&& cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// 123 :> sayı;
 				gerçekDeğişkenNo++;
-				Değişken değişken = new Değişken(gerçekDeğişkenNo, ((Sözcük_01İsim) cümle[2]).isim, "i32");
+				Değişken değişken = new Değişken(gerçekDeğişkenNo, ((Sözcük_01İsim) cümle[2]).isim, "i64");
 				değişkenNoMap.put(değişken.değişkenNo, değişken);
 				değişkenİsimMap.put(değişken.değişkenİsim, değişken);
 				cümleler.add(
 						new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişken.değişkenİsim, değişken.değişkenTipi));
-				geçiciDeğişkenNo--;
-				cümleler.add(new Cümle_05SabitTanımlama(geçiciDeğişkenNo, ((Sözcük_03TamSayı) cümle[0]).sayı, "i32"));
-				cümleler.add(new Cümle_06DeğişkenAtama(geçiciDeğişkenNo, gerçekDeğişkenNo));
+				cümleler.add(new Cümle_05SabitTanımlama(gerçekDeğişkenNo, ((Sözcük_03TamSayı) cümle[0]).sayı, "i64"));
 			} else if (cümle.length == 6 && cümle[0].tip == SÖZCÜK.TİP_01İSİM && cümle[1].tip == SÖZCÜK.TİP_09ATAMA_SOLA
 					&& cümle[2].tip == SÖZCÜK.TİP_01İSİM && cümle[3].tip == SÖZCÜK.TİP_02OPERATÖR
 					&& cümle[4].tip == SÖZCÜK.TİP_01İSİM && cümle[5].tip == SÖZCÜK.TİP_06SATIR_SONU) {
@@ -130,11 +122,9 @@ public class Aşama3Cümleler {
 				} else if (!değişkenİsimMap.containsKey(isim2)) {
 					throw new Exception("Tanımsız Değişken : " + isim2 + " !!!");
 				} else {
-					geçiciDeğişkenNo--;
-					cümleler.add(new Cümle_03Operatörİşlemi(geçiciDeğişkenNo, ((Sözcük_02Operatör) cümle[3]).operatör,
-							değişkenİsimMap.get(isim1).değişkenNo, değişkenİsimMap.get(isim2).değişkenNo));
-					cümleler.add(
-							new Cümle_06DeğişkenAtama(geçiciDeğişkenNo, değişkenİsimMap.get(isimHedef).değişkenNo));
+					cümleler.add(new Cümle_03Operatörİşlemi(değişkenİsimMap.get(isimHedef).değişkenNo,
+							((Sözcük_02Operatör) cümle[3]).operatör, değişkenİsimMap.get(isim1).değişkenNo,
+							değişkenİsimMap.get(isim2).değişkenNo));
 				}
 			} else if (cümle.length == 6 && cümle[0].tip == SÖZCÜK.TİP_01İSİM && cümle[1].tip == SÖZCÜK.TİP_02OPERATÖR
 					&& cümle[2].tip == SÖZCÜK.TİP_01İSİM && cümle[3].tip == SÖZCÜK.TİP_10ATAMA_SAĞA
@@ -150,11 +140,9 @@ public class Aşama3Cümleler {
 				} else if (!değişkenİsimMap.containsKey(isim2)) {
 					throw new Exception("Tanımsız Değişken : " + isim2 + " !!!");
 				} else {
-					geçiciDeğişkenNo--;
-					cümleler.add(new Cümle_03Operatörİşlemi(geçiciDeğişkenNo, ((Sözcük_02Operatör) cümle[1]).operatör,
-							değişkenİsimMap.get(isim1).değişkenNo, değişkenİsimMap.get(isim2).değişkenNo));
-					cümleler.add(
-							new Cümle_06DeğişkenAtama(geçiciDeğişkenNo, değişkenİsimMap.get(isimHedef).değişkenNo));
+					cümleler.add(new Cümle_03Operatörİşlemi(değişkenİsimMap.get(isimHedef).değişkenNo,
+							((Sözcük_02Operatör) cümle[1]).operatör, değişkenİsimMap.get(isim1).değişkenNo,
+							değişkenİsimMap.get(isim2).değişkenNo));
 				}
 			} else {
 				for (Sözcük c : cümle) {

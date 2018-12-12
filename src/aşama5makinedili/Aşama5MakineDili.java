@@ -36,7 +36,7 @@ public class Aşama5MakineDili {
 		HashMap<Integer, String> aktifDeğişkenler = new HashMap<Integer, String>();
 
 		for (Cümle cümle : cümleler) {
-			sb.append("\n\t#" + cümle + "\n");
+			sb.append("\n\t# " + cümle + "\n");
 			if (cümle instanceof Cümle_01DeğişkenYeni) {
 				Cümle_01DeğişkenYeni cümle01 = (Cümle_01DeğişkenYeni) cümle;
 				aktifDeğişkenler.put(cümle01.değişkenNo, stack.pop());

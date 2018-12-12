@@ -29,7 +29,7 @@ public class BirimTestleri {
 				Aşama3Cümleler.işle(new ArrayList<Sözcük[]>() {{
 					add(new Sözcük[] {new Sözcük_01İsim("sayı1"), new Sözcük(SÖZCÜK.TİP_11TANIMLAMA_SOLA), new Sözcük_03TamSayı("123750"), new Sözcük(SÖZCÜK.TİP_06SATIR_SONU)});
 				}}, null).cümleler.toArray(),
-				new Cümle[] {new Cümle_01DeğişkenYeni(1, "sayı1", "i32"), new Cümle_05SabitTanımlama(-1, "123750", "i32"), new Cümle_06DeğişkenAtama(-1, 1)});
+				new Cümle[] {new Cümle_01DeğişkenYeni(1, "sayı1", "i64"), new Cümle_05SabitTanımlama(1, "123750", "i64")});
 	}
 	
 	@Test
@@ -38,25 +38,25 @@ public class BirimTestleri {
 				Aşama3Cümleler.işle(new ArrayList<Sözcük[]>() {{
 					add(new Sözcük[] {new Sözcük_03TamSayı("123750"), new Sözcük(SÖZCÜK.TİP_12TANIMLAMA_SAĞA), new Sözcük_01İsim("sayı1"), new Sözcük(SÖZCÜK.TİP_06SATIR_SONU)});
 				}}, null).cümleler.toArray(),
-				new Cümle[] {new Cümle_01DeğişkenYeni(1, "sayı1", "i32"), new Cümle_05SabitTanımlama(-1, "123750", "i32"), new Cümle_06DeğişkenAtama(-1, 1)});
+				new Cümle[] {new Cümle_01DeğişkenYeni(1, "sayı1", "i64"), new Cümle_05SabitTanımlama(1, "123750", "i64")});
 	}
 	
 	@Test
 	public void test01DeğişkenTanımlama03() throws Exception {
 		assertArrayEquals(
 				Aşama3Cümleler.işle(new ArrayList<Sözcük[]>() {{
-					add(new Sözcük[] {new Sözcük_01İsim("sayı1"), new Sözcük(SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ), new Sözcük_01İsim("i32"), new Sözcük(SÖZCÜK.TİP_09ATAMA_SOLA), new Sözcük_03TamSayı("123750"), new Sözcük(SÖZCÜK.TİP_06SATIR_SONU)});
+					add(new Sözcük[] {new Sözcük_01İsim("sayı1"), new Sözcük(SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ), new Sözcük_01İsim("i64"), new Sözcük(SÖZCÜK.TİP_09ATAMA_SOLA), new Sözcük_03TamSayı("123750"), new Sözcük(SÖZCÜK.TİP_06SATIR_SONU)});
 				}}, null).cümleler.toArray(),
-				new Cümle[] {new Cümle_01DeğişkenYeni(1, "sayı1", "i32"), new Cümle_05SabitTanımlama(-1, "123750", "i32"), new Cümle_06DeğişkenAtama(-1, 1)});
+				new Cümle[] {new Cümle_01DeğişkenYeni(1, "sayı1", "i64"), new Cümle_05SabitTanımlama(1, "123750", "i64")});
 	}
 	
 	@Test
 	public void test01DeğişkenTanımlama04() throws Exception {
 		assertArrayEquals(
 				Aşama3Cümleler.işle(new ArrayList<Sözcük[]>() {{
-					add(new Sözcük[] {new Sözcük_03TamSayı("123750"), new Sözcük(SÖZCÜK.TİP_10ATAMA_SAĞA), new Sözcük_01İsim("sayı1"), new Sözcük(SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ), new Sözcük_01İsim("i32"), new Sözcük(SÖZCÜK.TİP_06SATIR_SONU)});
+					add(new Sözcük[] {new Sözcük_03TamSayı("123750"), new Sözcük(SÖZCÜK.TİP_10ATAMA_SAĞA), new Sözcük_01İsim("sayı1"), new Sözcük(SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ), new Sözcük_01İsim("i64"), new Sözcük(SÖZCÜK.TİP_06SATIR_SONU)});
 				}}, null).cümleler.toArray(),
-				new Cümle[] {new Cümle_01DeğişkenYeni(1, "sayı1", "i32"), new Cümle_05SabitTanımlama(-1, "123750", "i32"), new Cümle_06DeğişkenAtama(-1, 1)});
+				new Cümle[] {new Cümle_01DeğişkenYeni(1, "sayı1", "i64"), new Cümle_05SabitTanımlama(1, "123750", "i64")});
 	}
 	
 	@Test
@@ -69,8 +69,8 @@ public class BirimTestleri {
 					add(new Sözcük[] {new Sözcük_01İsim("sayı2"), new Sözcük(SÖZCÜK.TİP_09ATAMA_SOLA), new Sözcük_01İsim("sayı1"), new Sözcük(SÖZCÜK.TİP_06SATIR_SONU)});
 				}}, null).cümleler.toArray(),
 				new Cümle[] {
-						new Cümle_01DeğişkenYeni(1, "sayı1", "i32"), new Cümle_05SabitTanımlama(-1, "123750", "i32"), new Cümle_06DeğişkenAtama(-1, 1),
-						new Cümle_01DeğişkenYeni(2, "sayı2", "i32"), new Cümle_05SabitTanımlama(-2, "123755", "i32"), new Cümle_06DeğişkenAtama(-2, 2),
+						new Cümle_01DeğişkenYeni(1, "sayı1", "i64"), new Cümle_05SabitTanımlama(1, "123750", "i64"),
+						new Cümle_01DeğişkenYeni(2, "sayı2", "i64"), new Cümle_05SabitTanımlama(2, "123755", "i64"),
 						new Cümle_06DeğişkenAtama(1, 2),
 						new Cümle_06DeğişkenAtama(1, 2)
 						});
@@ -84,8 +84,8 @@ public class BirimTestleri {
 					add(new Sözcük[] {new Sözcük_01İsim("sayı1"), new Sözcük(SÖZCÜK.TİP_08NOKTA), new Sözcük_01İsim("println"), new Sözcük(SÖZCÜK.TİP_06SATIR_SONU)});
 				}}, null).cümleler.toArray(),
 				new Cümle[] {
-						new Cümle_01DeğişkenYeni(1, "sayı1", "i32"), new Cümle_05SabitTanımlama(-1, "123750", "i32"), new Cümle_06DeğişkenAtama(-1, 1),
-						new Cümle_04FonksiyonÇağrısı(-2, "println", 1)
+						new Cümle_01DeğişkenYeni(1, "sayı1", "i64"), new Cümle_05SabitTanımlama(1, "123750", "i64"),
+						new Cümle_04FonksiyonÇağrısı(-1, "println", 1)
 						});
 	}
 	
@@ -102,13 +102,13 @@ public class BirimTestleri {
 					add(new Sözcük[] {new Sözcük_01İsim("sayı3"), new Sözcük(SÖZCÜK.TİP_09ATAMA_SOLA), new Sözcük_01İsim("sayı1"), new Sözcük_02Operatör("//"), new Sözcük_01İsim("sayı2"), new Sözcük(SÖZCÜK.TİP_06SATIR_SONU)});
 				}}, null).cümleler.toArray(),
 				new Cümle[] {
-						new Cümle_01DeğişkenYeni(1, "sayı1", "i32"), new Cümle_05SabitTanımlama(-1, "123750", "i32"), new Cümle_06DeğişkenAtama(-1, 1),
-						new Cümle_01DeğişkenYeni(2, "sayı2", "i32"), new Cümle_05SabitTanımlama(-2, "123755", "i32"), new Cümle_06DeğişkenAtama(-2, 2),
-						new Cümle_01DeğişkenYeni(3, "sayı3", "i32"), new Cümle_05SabitTanımlama(-3, "123760", "i32"), new Cümle_06DeğişkenAtama(-3, 3),
-						new Cümle_03Operatörİşlemi(-4, "+", 1, 2), new Cümle_06DeğişkenAtama(-4, 3),
-						new Cümle_03Operatörİşlemi(-5, "-", 1, 2), new Cümle_06DeğişkenAtama(-5, 3),
-						new Cümle_03Operatörİşlemi(-6, "*", 1, 2), new Cümle_06DeğişkenAtama(-6, 3),
-						new Cümle_03Operatörİşlemi(-7, "//", 1, 2), new Cümle_06DeğişkenAtama(-7, 3),
+						new Cümle_01DeğişkenYeni(1, "sayı1", "i64"), new Cümle_05SabitTanımlama(1, "123750", "i64"),
+						new Cümle_01DeğişkenYeni(2, "sayı2", "i64"), new Cümle_05SabitTanımlama(2, "123755", "i64"),
+						new Cümle_01DeğişkenYeni(3, "sayı3", "i64"), new Cümle_05SabitTanımlama(3, "123760", "i64"),
+						new Cümle_03Operatörİşlemi(3, "+", 1, 2),
+						new Cümle_03Operatörİşlemi(3, "-", 1, 2),
+						new Cümle_03Operatörİşlemi(3, "*", 1, 2),
+						new Cümle_03Operatörİşlemi(3, "//", 1, 2)
 						});
 	}
 	
