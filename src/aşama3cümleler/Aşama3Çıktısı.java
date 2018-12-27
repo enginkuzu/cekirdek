@@ -1,17 +1,18 @@
 package aşama3cümleler;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Aşama3Çıktısı {
 
-	public ArrayList<Cümle> cümleler;
-	public int geçiciDeğişkenNo;
-	public int gerçekDeğişkenNo;
+	public HashMap<String, Fonksiyon_01OperatörFonksiyon> operatörFonksiyonMap;
+	public HashMap<String, Fonksiyon_02İsimliFonksiyon> isimFonksiyonMap;
+	public Fonksiyon_03AnaFonksiyon anaFonksiyon;
 
-	public Aşama3Çıktısı(ArrayList<Cümle> cümleler, int geçiciDeğişkenNo, int gerçekDeğişkenNo) {
-		this.cümleler = cümleler;
-		this.geçiciDeğişkenNo = geçiciDeğişkenNo;
-		this.gerçekDeğişkenNo = gerçekDeğişkenNo;
+	public Aşama3Çıktısı(HashMap<String, Fonksiyon_01OperatörFonksiyon> operatörFonksiyonMap,
+			HashMap<String, Fonksiyon_02İsimliFonksiyon> isimFonksiyonMap, Fonksiyon_03AnaFonksiyon anaFonksiyon) {
+		this.operatörFonksiyonMap = operatörFonksiyonMap;
+		this.isimFonksiyonMap = isimFonksiyonMap;
+		this.anaFonksiyon = anaFonksiyon;
 	}
 
 }

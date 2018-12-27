@@ -43,10 +43,11 @@ public class Aşama2Sözcükler {
 
 		// durum 0 : Normal durum
 		// durum 1 : Operatör
-		// durum 2 : Metin
 		// durum 3 : isim
 		// durum 4,5,6 : Tam sayı ve ondalıklı sayı
 		// durum 7,8,9,10 : Açıklamalar
+		// durum 11 : Özellik
+		// durum 12,13 : Metin
 		int durum = 0;
 		Sözcük sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
 
@@ -99,12 +100,51 @@ public class Aşama2Sözcükler {
 						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
 					}
 					sözcükEkle(new Sözcük(SÖZCÜK.TİP_10ATAMA_SAĞA));
+				} else if (karakter == '@') {
+					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
+						sözcükEkle(sözcük);
+						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+					}
+					sözcükEkle(new Sözcük(SÖZCÜK.TİP_13ÖZELLİK));
+					durum = 11;
+				} else if (karakter == '(') {
+					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
+						sözcükEkle(sözcük);
+						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+					}
+					sözcükEkle(new Sözcük(SÖZCÜK.TİP_14AÇPARANTEZ));
+				} else if (karakter == ')') {
+					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
+						sözcükEkle(sözcük);
+						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+					}
+					sözcükEkle(new Sözcük(SÖZCÜK.TİP_15KAPAPARANTEZ));
+				} else if (karakter == '{') {
+					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
+						sözcükEkle(sözcük);
+						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+					}
+					sözcükEkle(new Sözcük(SÖZCÜK.TİP_16AÇSÜSLÜ));
+					sözcükEkle(new Sözcük(SÖZCÜK.TİP_06SATIR_SONU));
+				} else if (karakter == '}') {
+					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
+						sözcükEkle(sözcük);
+						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+					}
+					sözcükEkle(new Sözcük(SÖZCÜK.TİP_17KAPASÜSLÜ));
+					sözcükEkle(new Sözcük(SÖZCÜK.TİP_06SATIR_SONU));
+				} else if (karakter == ',') {
+					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
+						sözcükEkle(sözcük);
+						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+					}
+					sözcükEkle(new Sözcük(SÖZCÜK.TİP_18VİRGÜL));
 				} else if (karakter == '"') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
 					}
 					sözcük = new Sözcük_05Metin();
-					durum = 2;
+					durum = 12;
 				} else {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
@@ -132,15 +172,6 @@ public class Aşama2Sözcükler {
 					durum = 0;
 					sözcükEkle(sözcük);
 					sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
-				}
-			} else if (durum == 2) {
-				// durum 2 : Metin
-				if (karakter == '"') {
-					sözcükEkle(sözcük);
-					sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
-					durum = 0;
-				} else {
-					((Sözcük_05Metin) sözcük).metin += karakter;
 				}
 			} else if (durum == 3) {
 				// durum 3 : isim
@@ -211,6 +242,44 @@ public class Aşama2Sözcükler {
 				} else {
 					durum = 9;
 				}
+			} else if (durum == 11) {
+				// durum 11 : Özellik
+				if (karakter == '\n') {
+					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
+						sözcükEkle(sözcük);
+						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+					}
+					sözcükEkle(new Sözcük(SÖZCÜK.TİP_06SATIR_SONU));
+					durum = 0;
+				} else if (karakter == ' ') {
+					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
+						sözcükEkle(sözcük);
+						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+					}
+				} else {
+					if (sözcük.tip == SÖZCÜK.TİP_00YOK) {
+						sözcük = new Sözcük_01İsim(karakter);
+					} else {
+						((Sözcük_01İsim) sözcük).isim += karakter;
+					}
+				}
+			} else if (durum == 12) {
+				// durum 12,13 : Metin
+				if (karakter == '"') {
+					durum = 13;
+				} else {
+					((Sözcük_05Metin) sözcük).metin += karakter;
+				}
+			} else if (durum == 13) {
+				if (karakter == '"') {
+					((Sözcük_05Metin) sözcük).metin += karakter;
+					durum = 12;
+				} else {
+					i--;
+					durum = 0;
+					sözcükEkle(sözcük);
+					sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+				}
 			}
 		}
 
@@ -229,7 +298,7 @@ public class Aşama2Sözcükler {
 		String çıktı = stringBuilder.toString();
 		// System.out.print(çıktı);
 		if (dosyaAdı != null) {
-			Fonksiyonlar.dosyaKaydet("kodlar/" + dosyaAdı + "_a2.txt", çıktı);
+			Fonksiyonlar.dosyaKaydet(dosyaAdı + ".2.log", çıktı);
 		}
 
 		return tümCümleler;

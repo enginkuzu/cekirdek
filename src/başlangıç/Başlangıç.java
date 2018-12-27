@@ -7,7 +7,6 @@ import aşama2sözcükler.Aşama2Sözcükler;
 import aşama2sözcükler.Sözcük;
 import aşama3cümleler.Aşama3Cümleler;
 import aşama3cümleler.Aşama3Çıktısı;
-import aşama3cümleler.Cümle;
 import aşama4iyileştirmeler.Aşama4İyileştirmeler;
 import aşama5makinedili.Aşama5MakineDili;
 import aşama6çıktı.Aşama6Çıktı;
@@ -15,28 +14,44 @@ import aşama6çıktı.Aşama6Çıktı;
 public class Başlangıç {
 
 	public Başlangıç() {
-		derle("wiki04_01");
-	}
-
-	public void derle(String dosyaAdı) {
-
-		String içerik = Aşama1Oku.oku(dosyaAdı);
-		if (içerik == null) {
-			System.err.println("Aşama1Oku : " + dosyaAdı + ".kod okunamadı !!!");
-			return;
-		}
-
 		try {
-			ArrayList<Sözcük[]> cümlecikler = Aşama2Sözcükler.işle(içerik, dosyaAdı);
-			Aşama3Çıktısı cümleler = Aşama3Cümleler.işle(cümlecikler, dosyaAdı);
-			ArrayList<Cümle> cümleler4 = Aşama4İyileştirmeler.işle(cümleler, dosyaAdı);
-			String komutlar = Aşama5MakineDili.işle(cümleler4);
-			Aşama6Çıktı.işle(komutlar);
+			derle("kodlar/wiki04_01.kod");
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			return;
+		}
+	}
+
+	public void derle(String kaynakKodDosyası) throws Exception {
+
+		String kütüphaneDosyası1 = "kütüphane/exit.kod";
+		String kütüphane1 = Aşama1Oku.oku(kütüphaneDosyası1);
+		if (kütüphane1 == null) {
+			throw new Exception("Aşama1Oku : " + kütüphaneDosyası1 + " okunamadı !!!");
 		}
 
+		String kütüphaneDosyası2 = "kütüphane/i64.kod";
+		String kütüphane2 = Aşama1Oku.oku(kütüphaneDosyası2);
+		if (kütüphane2 == null) {
+			throw new Exception("Aşama1Oku : " + kütüphaneDosyası2 + " okunamadı !!!");
+		}
+
+		String kütüphaneDosyası3 = "kütüphane/println.kod";
+		String kütüphane3 = Aşama1Oku.oku(kütüphaneDosyası3);
+		if (kütüphane3 == null) {
+			throw new Exception("Aşama1Oku : " + kütüphaneDosyası3 + " okunamadı !!!");
+		}
+
+		String kaynakKod = Aşama1Oku.oku(kaynakKodDosyası);
+		if (kaynakKod == null) {
+			throw new Exception("Aşama1Oku : " + kaynakKodDosyası + " okunamadı !!!");
+		}
+
+		ArrayList<Sözcük[]> sözcükler = Aşama2Sözcükler
+				.işle(kütüphane1 + "\n" + kütüphane2 + "\n" + kütüphane3 + "\n" + kaynakKod, kaynakKodDosyası);
+		Aşama3Çıktısı cümleler = Aşama3Cümleler.işle(sözcükler, kaynakKodDosyası);
+		Aşama3Çıktısı iyileştirmeler = Aşama4İyileştirmeler.işle(cümleler, kaynakKodDosyası);
+		Aşama5MakineDili.işle(iyileştirmeler, kaynakKodDosyası);
+		Aşama6Çıktı.işle(kaynakKodDosyası);
 	}
 
 	public static void main(String[] args) {

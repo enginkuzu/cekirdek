@@ -8,6 +8,8 @@ import aşama3cümleler.Cümle_02DeğişkenSil;
 import aşama3cümleler.Cümle_03Operatörİşlemi;
 import aşama3cümleler.Cümle_04FonksiyonÇağrısı;
 import aşama3cümleler.Cümle_06DeğişkenAtama;
+import aşama3cümleler.Fonksiyon_01OperatörFonksiyon;
+import aşama3cümleler.Fonksiyon_02İsimliFonksiyon;
 import yardımcı.Fonksiyonlar;
 
 public class Aşama4İyileştirmeler {
@@ -37,7 +39,7 @@ public class Aşama4İyileştirmeler {
 		return ret;
 	}
 
-	public static ArrayList<Cümle> işle(Aşama3Çıktısı cümleler, String dosyaAdı) {
+	public static Aşama3Çıktısı işle(Aşama3Çıktısı çıktı, String dosyaAdı) {
 
 		// TODO 1 : Bir değişken tanımlandıktan sonra hiç okuma işlemi yapılmamışsa
 		// değişkenle ilgili tüm ifadeleri kaldır
@@ -49,31 +51,54 @@ public class Aşama4İyileştirmeler {
 		// aradan çıkart (kaldır)
 		// TODO 6 : Değişkenle ilgili işleri grupla (yer değiştirme yaparak)
 
-		for (int i = -1; i >= cümleler.geçiciDeğişkenNo; i--) {
-			int sıraNo = sonOkumayıBul(cümleler.cümleler, i);
+		for (int i = -1; i >= çıktı.anaFonksiyon.geçiciDeğişkenNo; i--) {
+			int sıraNo = sonOkumayıBul(çıktı.anaFonksiyon.cümleler, i);
 			if (sıraNo > 0) {
-				cümleler.cümleler.add(sıraNo + 1, new Cümle_02DeğişkenSil(i));
+				çıktı.anaFonksiyon.cümleler.add(sıraNo + 1, new Cümle_02DeğişkenSil(i));
 			}
 		}
-		for (int i = 1; i <= cümleler.gerçekDeğişkenNo; i++) {
-			int sıraNo = sonOkumayıBul(cümleler.cümleler, i);
+		for (int i = 1; i <= çıktı.anaFonksiyon.gerçekDeğişkenNo; i++) {
+			int sıraNo = sonOkumayıBul(çıktı.anaFonksiyon.cümleler, i);
 			if (sıraNo > 0) {
-				cümleler.cümleler.add(sıraNo + 1, new Cümle_02DeğişkenSil(i));
+				çıktı.anaFonksiyon.cümleler.add(sıraNo + 1, new Cümle_02DeğişkenSil(i));
 			}
 		}
 
 		StringBuilder stringBuilder = new StringBuilder();
-		for (Cümle cümle : cümleler.cümleler) {
-			stringBuilder.append(cümle.toString());
+		for (Fonksiyon_01OperatörFonksiyon operatörFonksiyon : çıktı.operatörFonksiyonMap.values()) {
+			stringBuilder.append(operatörFonksiyon.toString());
 			stringBuilder.append("\n");
+			for (Cümle cümle : operatörFonksiyon.cümleler) {
+				stringBuilder.append("\t");
+				stringBuilder.append(cümle.toString());
+				stringBuilder.append("\n");
+			}
 		}
-		String çıktı = stringBuilder.toString();
-		// System.out.print(çıktı);
+		for (Fonksiyon_02İsimliFonksiyon isimFonksiyon : çıktı.isimFonksiyonMap.values()) {
+			stringBuilder.append(isimFonksiyon.toString());
+			stringBuilder.append("\n");
+			for (Cümle cümle : isimFonksiyon.cümleler) {
+				stringBuilder.append("\t");
+				stringBuilder.append(cümle.toString());
+				stringBuilder.append("\n");
+			}
+		}
+		{
+			stringBuilder.append(çıktı.anaFonksiyon.toString());
+			stringBuilder.append("\n");
+			for (Cümle cümle : çıktı.anaFonksiyon.cümleler) {
+				stringBuilder.append("\t");
+				stringBuilder.append(cümle.toString());
+				stringBuilder.append("\n");
+			}
+		}
+		String metinÇıktı = stringBuilder.toString();
+		// System.out.print(metinÇıktı);
 		if (dosyaAdı != null) {
-			Fonksiyonlar.dosyaKaydet("kodlar/" + dosyaAdı + "_a4.txt", çıktı);
+			Fonksiyonlar.dosyaKaydet(dosyaAdı + ".4.log", metinÇıktı);
 		}
 
-		return cümleler.cümleler;
+		return çıktı;
 	}
 
 }

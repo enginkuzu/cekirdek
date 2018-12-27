@@ -1,9 +1,9 @@
 package aşama5makinedili;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
 
+import aşama3cümleler.Aşama3Çıktısı;
 import aşama3cümleler.Cümle;
 import aşama3cümleler.Cümle_01DeğişkenYeni;
 import aşama3cümleler.Cümle_02DeğişkenSil;
@@ -11,17 +11,44 @@ import aşama3cümleler.Cümle_03Operatörİşlemi;
 import aşama3cümleler.Cümle_04FonksiyonÇağrısı;
 import aşama3cümleler.Cümle_05SabitTanımlama;
 import aşama3cümleler.Cümle_06DeğişkenAtama;
+import aşama3cümleler.Cümle_07Assembly;
+import aşama3cümleler.Cümle_08AssemblyData;
+import aşama3cümleler.Cümle_09AssemblyRoData;
+import aşama3cümleler.Fonksiyon_01OperatörFonksiyon;
+import aşama3cümleler.Fonksiyon_02İsimliFonksiyon;
+import yardımcı.Fonksiyonlar;
 
 public class Aşama5MakineDili {
 
-	public static String işle(ArrayList<Cümle> cümleler) {
+	public static void işle(Aşama3Çıktısı çıktı, String dosyaAdı) {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("\t.intel_syntax noprefix\n");
-		sb.append("\t.text\n");
-		sb.append("\t.globl	_start\n");
-		sb.append("\t.type	_start, @function\n");
-		sb.append("_start:\n");
+		sb.append("\n");
+
+		sb.append("\t.section\t.data\n\n");
+		for (Fonksiyon_02İsimliFonksiyon isimFonksiyon : çıktı.isimFonksiyonMap.values()) {
+			for (Cümle cümle : isimFonksiyon.cümleler) {
+				if (cümle instanceof Cümle_08AssemblyData) {
+					String assembly = ((Cümle_08AssemblyData) cümle).ifade;
+					sb.append("\t" + assembly + "\n");
+				}
+			}
+		}
+		sb.append("\n");
+
+		sb.append("\t.section\t.rodata\n\n");
+		for (Fonksiyon_02İsimliFonksiyon isimFonksiyon : çıktı.isimFonksiyonMap.values()) {
+			for (Cümle cümle : isimFonksiyon.cümleler) {
+				if (cümle instanceof Cümle_09AssemblyRoData) {
+					String assembly = ((Cümle_09AssemblyRoData) cümle).ifade;
+					sb.append("\t" + assembly + "\n");
+				}
+			}
+		}
+		sb.append("\n");
+
+		sb.append("\t.section\t.text\n");
 
 		Stack<String> stack = new Stack<String>();
 		stack.push("r10");
@@ -35,7 +62,24 @@ public class Aşama5MakineDili {
 
 		HashMap<Integer, String> aktifDeğişkenler = new HashMap<Integer, String>();
 
-		for (Cümle cümle : cümleler) {
+		for (Fonksiyon_02İsimliFonksiyon isimFonksiyon : çıktı.isimFonksiyonMap.values()) {
+			sb.append("\n\t.globl	" + isimFonksiyon.isim + "\n");
+			sb.append(isimFonksiyon.isim + ":\n");
+			for (Cümle cümle : isimFonksiyon.cümleler) {
+				if (cümle instanceof Cümle_07Assembly) {
+					String assembly = ((Cümle_07Assembly) cümle).ifade;
+					if (isimFonksiyon.değişken1İsim != null && isimFonksiyon.değişken1Tip != null) {
+						assembly = assembly.replace(isimFonksiyon.değişken1İsim, isimFonksiyon.değişken1Tip);
+					}
+					sb.append("\t" + assembly + "\n");
+				}
+			}
+		}
+
+		sb.append("\n\t.globl	_start\n");
+		sb.append("_start:\n");
+
+		for (Cümle cümle : çıktı.anaFonksiyon.cümleler) {
 			sb.append("\n\t# " + cümle + "\n");
 			if (cümle instanceof Cümle_01DeğişkenYeni) {
 				Cümle_01DeğişkenYeni cümle01 = (Cümle_01DeğişkenYeni) cümle;
@@ -48,28 +92,16 @@ public class Aşama5MakineDili {
 				if (!aktifDeğişkenler.containsKey(cümle03.değişkenNo)) {
 					aktifDeğişkenler.put(cümle03.değişkenNo, stack.pop());
 				}
-				if (cümle03.operatör.equals("+")) {
-					sb.append("\tmov " + aktifDeğişkenler.get(cümle03.değişkenNo) + ","
-							+ aktifDeğişkenler.get(cümle03.parametreNo1) + "\n");
-					sb.append("\tadd " + aktifDeğişkenler.get(cümle03.değişkenNo) + ","
-							+ aktifDeğişkenler.get(cümle03.parametreNo2) + "\n");
-				} else if (cümle03.operatör.equals("-")) {
-					sb.append("\tmov " + aktifDeğişkenler.get(cümle03.değişkenNo) + ","
-							+ aktifDeğişkenler.get(cümle03.parametreNo1) + "\n");
-					sb.append("\tsub " + aktifDeğişkenler.get(cümle03.değişkenNo) + ","
-							+ aktifDeğişkenler.get(cümle03.parametreNo2) + "\n");
-				} else if (cümle03.operatör.equals("*")) {
-					sb.append("\tmov rax," + aktifDeğişkenler.get(cümle03.parametreNo1) + "\n");
-					sb.append("\tmul " + aktifDeğişkenler.get(cümle03.parametreNo2) + "\n");
-					sb.append("\tmov " + aktifDeğişkenler.get(cümle03.değişkenNo) + ",rax\n");
-				} else if (cümle03.operatör.equals("//")) {
-					sb.append("\tmov rdx,0\n");
-					sb.append("\tmov rax," + aktifDeğişkenler.get(cümle03.parametreNo1) + "\n");
-					sb.append("\tdiv " + aktifDeğişkenler.get(cümle03.parametreNo2) + "\n");
-					sb.append("\tmov " + aktifDeğişkenler.get(cümle03.değişkenNo) + ",rax\n");
-				} else {
-					sb.append("TODO : " + cümle + "\n");
-				}
+				String anahtar = çıktı.anaFonksiyon.değişkenNoMap.get(cümle03.parametreNo1).değişkenTipi
+						+ cümle03.operatör + çıktı.anaFonksiyon.değişkenNoMap.get(cümle03.parametreNo2).değişkenTipi;
+				Fonksiyon_01OperatörFonksiyon operatörFonksiyon = çıktı.operatörFonksiyonMap.get(anahtar);
+				String assembly = ((Cümle_07Assembly) operatörFonksiyon.cümleler.get(0)).ifade;
+				assembly = assembly.replace(operatörFonksiyon.değişken1İsim,
+						aktifDeğişkenler.get(cümle03.parametreNo1));
+				assembly = assembly.replace(operatörFonksiyon.değişken2İsim,
+						aktifDeğişkenler.get(cümle03.parametreNo2));
+				assembly = assembly.replace(operatörFonksiyon.sonuçİsim, aktifDeğişkenler.get(cümle03.değişkenNo));
+				sb.append("\t" + assembly + "\n");
 			} else if (cümle instanceof Cümle_04FonksiyonÇağrısı) {
 				Cümle_04FonksiyonÇağrısı cümle04 = (Cümle_04FonksiyonÇağrısı) cümle;
 				sb.append("\tmov rax," + aktifDeğişkenler.get(cümle04.parametre) + "\n");
@@ -92,7 +124,7 @@ public class Aşama5MakineDili {
 		sb.append("\tcall exit\n");
 		sb.append("\tret\n");
 
-		return sb.toString();
+		Fonksiyonlar.dosyaKaydet(dosyaAdı + ".5.s", sb.toString());
 	}
 
 }

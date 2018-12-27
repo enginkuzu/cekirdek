@@ -1,7 +1,46 @@
 	.intel_syntax noprefix
-	.text
+
+	.section	.data
+
+	enter:
+	.octa	0
+	.byte	10
+
+	.section	.rodata
+
+	.hex:
+	.string	"0123456789ABCDEF"
+
+	.section	.text
+
+	.globl	exit
+exit:
+	xor rdi,rdi	# 0
+	mov rax,60	# exit (60)
+	syscall
+	ret
+
+	.globl	println
+println:
+	mov rcx, 0
+döngü:
+	rol rax, 4
+	mov rdx, rax
+	and rdx, 0x0F
+	mov dil, [.hex+rdx]
+	mov [enter+rcx], dil
+	inc rcx
+	cmp rcx, 16
+	jnz döngü
+
+	mov rdx, 17		# 
+	lea	rsi, enter	# 
+	mov rdi, 1		# file descriptor : 1 - standard output
+	mov rax, 1		# system call : write (1)
+	syscall			# Call the kernel
+	ret
+
 	.globl	_start
-	.type	_start, @function
 _start:
 
 	# Cümle_01DeğişkenYeni[sayı1 i64 > 1]
@@ -53,25 +92,25 @@ _start:
 	# Cümle_02DeğişkenSil[4]
 
 	# Cümle_03Operatörİşlemi[1 + 2 > 3]
-	mov r9,r14
-	add r9,r12
+	mov r9, r14
+	add r9, r12
 
 	# Cümle_04FonksiyonÇağrısı[println(3) > -6]
 	mov rax,r9
 	call println
 
 	# Cümle_03Operatörİşlemi[1 - 2 > 3]
-	mov r9,r14
-	sub r9,r12
+	mov r9, r14
+	sub r9, r12
 
 	# Cümle_04FonksiyonÇağrısı[println(3) > -7]
 	mov rax,r9
 	call println
 
 	# Cümle_03Operatörİşlemi[1 * 2 > 3]
-	mov rax,r14
+	mov rax, r14
 	mul r12
-	mov r9,rax
+	mov r9, rax
 
 	# Cümle_04FonksiyonÇağrısı[println(3) > -8]
 	mov rax,r9
@@ -86,10 +125,10 @@ _start:
 	call println
 
 	# Cümle_03Operatörİşlemi[1 // 2 > 3]
-	mov rdx,0
-	mov rax,r14
+	mov rdx, 0
+	mov rax, r14
 	div r12
-	mov r9,rax
+	mov r9, rax
 
 	# Cümle_02DeğişkenSil[2]
 
