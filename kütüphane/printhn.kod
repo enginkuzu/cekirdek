@@ -1,7 +1,8 @@
 
 @arch x86-64
 @changed rax rdx ...
-println(değer:rax) {
+@sideeffect 1
+printhn(değer:rax) {
 	@asm-data
 "enter:
 	.octa	0

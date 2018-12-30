@@ -1,6 +1,6 @@
 # Yeni-Bir-Programlama-Dili
 
-Lütfen detaylar için wiki'yi ziyaret ediniz.
+Geliştirmelerle ilgili son durum : Örnek kaynak kodlar derlenebiliyor olsa da şu anda altyapı çalışmaları yapılmakta. Pek çok kısımda hatalar bulunabilir.
 
 Sürüm Notları :
 

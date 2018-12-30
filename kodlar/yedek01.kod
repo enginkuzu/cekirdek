@@ -1,0 +1,51 @@
+
+''bu birden fazla
+satırdan oluşan açıklama
+ifadesidir''
+
+sayı1:i64<255;
+sayı1.printhn; 'bu bir açıklama satırıdır
+
+sayı2<:15;
+sayı2.printhn; ''bu da satır içi açıklama ifadesidir'' sayı2.printhn;
+
+255>sayı3:i64;
+sayı3.printhn;
+
+15:>sayı4;
+sayı4.printhn;
+
+
+' sayı5 : i64 < -123750;
+' sayı6 <: -123750;
+' -340777 > sayı7 : i64;
+' -340777 :> sayı8;
+
+
+sayı1 > sayı2;
+sayı2 < sayı4;
+
+sayı1 + sayı2 > sayı3;	sayı3.printhn;
+sayı1 - sayı2 > sayı3;	sayı3.printhn;
+sayı3 < sayı1 * sayı2;	sayı3.printhn;
+
+sayı1.printhn;
+sayı2.printhn;
+sayı3 < sayı1 // sayı2;	sayı3.printhn;
+
+
+
+
+
+
+
+
+' Olası hatalar :
+' - Uygun olmayan değişken ismi
+' - Aynı isimde tekrar değişken tanımlamak
+' - Bilinmeyen değişken tipi
+' - Çok büyük veya küçük i64 değeri
+' - Tanımlanmamış değişken kullanmak
+' - Bilinmeyen operatör
+' - Bilinmeyen fonksiyon
+

@@ -9,7 +9,7 @@ import aşama3cümleler.Cümle_01DeğişkenYeni;
 import aşama3cümleler.Cümle_02DeğişkenSil;
 import aşama3cümleler.Cümle_03Operatörİşlemi;
 import aşama3cümleler.Cümle_04FonksiyonÇağrısı;
-import aşama3cümleler.Cümle_05SabitTanımlama;
+import aşama3cümleler.Cümle_05SabitAtama;
 import aşama3cümleler.Cümle_06DeğişkenAtama;
 import aşama3cümleler.Cümle_07Assembly;
 import aşama3cümleler.Cümle_08AssemblyData;
@@ -105,9 +105,9 @@ public class Aşama5MakineDili {
 			} else if (cümle instanceof Cümle_04FonksiyonÇağrısı) {
 				Cümle_04FonksiyonÇağrısı cümle04 = (Cümle_04FonksiyonÇağrısı) cümle;
 				sb.append("\tmov rax," + aktifDeğişkenler.get(cümle04.parametre) + "\n");
-				sb.append("\tcall println\n");
-			} else if (cümle instanceof Cümle_05SabitTanımlama) {
-				Cümle_05SabitTanımlama cümle05 = (Cümle_05SabitTanımlama) cümle;
+				sb.append("\tcall printhn\n");
+			} else if (cümle instanceof Cümle_05SabitAtama) {
+				Cümle_05SabitAtama cümle05 = (Cümle_05SabitAtama) cümle;
 				String saklaç = stack.pop();
 				aktifDeğişkenler.put(cümle05.değişkenNo, saklaç);
 				sb.append("\tmov " + saklaç + "," + cümle05.sabitVeri + "\n");

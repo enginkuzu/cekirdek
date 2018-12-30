@@ -1,5 +1,7 @@
 
 @arch x86-64
+@changed rax rdx ...
+@sideeffect 1
 exit() {
 	@asm
 	"xor rdi,rdi	# 0

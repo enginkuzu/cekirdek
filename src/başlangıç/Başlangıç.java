@@ -35,7 +35,7 @@ public class Başlangıç {
 			throw new Exception("Aşama1Oku : " + kütüphaneDosyası2 + " okunamadı !!!");
 		}
 
-		String kütüphaneDosyası3 = "kütüphane/println.kod";
+		String kütüphaneDosyası3 = "kütüphane/printhn.kod";
 		String kütüphane3 = Aşama1Oku.oku(kütüphaneDosyası3);
 		if (kütüphane3 == null) {
 			throw new Exception("Aşama1Oku : " + kütüphaneDosyası3 + " okunamadı !!!");

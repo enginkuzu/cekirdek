@@ -1,5 +1,6 @@
 
 @arch x86-64
+@sideeffect 0
 inline p1 (değer1:i64, +, değer2:i64) toplam:i64 {
 	@asm
 	"mov toplam, değer1
@@ -7,6 +8,7 @@ inline p1 (değer1:i64, +, değer2:i64) toplam:i64 {
 }
 
 @arch x86-64
+@sideeffect 0
 inline p1 (değer1:i64, -, değer2:i64) fark:i64 {
 	@asm
 	"mov fark, değer1
@@ -15,6 +17,7 @@ inline p1 (değer1:i64, -, değer2:i64) fark:i64 {
 
 @arch x86-64
 @changed rax rdx
+@sideeffect 0
 inline p2 (değer1:i64, *, değer2:i64) çarpım:i64 {
 	@asm
 	"mov rax, değer1
@@ -23,7 +26,8 @@ inline p2 (değer1:i64, *, değer2:i64) çarpım:i64 {
 }
 
 @arch x86-64
-@changed rax rdx
+@changed rax rdx ...
+@sideeffect 0
 inline p2 (değer1:i64, //, değer2:i64) bölüm:i64 {
 	@asm
 	"mov rdx, 0
