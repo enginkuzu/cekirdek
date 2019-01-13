@@ -2,7 +2,7 @@ package yardımcı;
 
 public class Değişkenler {
 
-	public static final String UYGULAMA_ADI_VE_SURUMU = "Yeni Bir Programlama Dili Derleyicisi sürüm 0.0.1";
+	public static final String UYGULAMA_ADI_VE_SURUMU = "Yeni Bir Programlama Dili Derleyicisi sürüm 0.0.2";
 
 	public enum SÖZCÜK {
 		TİP_00YOK,

@@ -26,7 +26,7 @@ inline p2 (değer1:i64, *, değer2:i64) çarpım:i64 {
 }
 
 @arch x86-64
-@changed rax rdx ...
+@changed rax rdx
 @sideeffect 0
 inline p2 (değer1:i64, //, değer2:i64) bölüm:i64 {
 	@asm

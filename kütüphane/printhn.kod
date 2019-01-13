@@ -1,6 +1,6 @@
 
 @arch x86-64
-@changed rax rdx ...
+@changed rax rdi rsi rdx rcx r11
 @sideeffect 1
 printhn(değer:rax) {
 	@asm-data

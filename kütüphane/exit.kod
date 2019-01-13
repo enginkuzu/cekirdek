@@ -1,6 +1,6 @@
 
 @arch x86-64
-@changed rax rdx ...
+@changed rax rdi rcx r11
 @sideeffect 1
 exit() {
 	@asm

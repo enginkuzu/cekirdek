@@ -1,17 +1,29 @@
 
-değer1 <: 111;
-değer2 <: 222;
+değer1 <: 11;
+değer2 <: 22;
+değer3 <: 33;
+değer4 <: 44;
+değer5 <: 55;
+
+sayı1 <: 0;
+sayı2 <: 0;
 
 '----------------
 
-sayı1 <: 64;
-
-sayı1 < değer1;
-sayı1 < değer2;
-
+sayı1 < değer2 + değer1;
+sayı1.printhn;
+sayı1 < değer2 - değer1;
+sayı1.printhn;
+sayı1 < değer2 * değer1;
+sayı1.printhn;
+sayı1 < değer2 // değer1;
 sayı1.printhn;
 
-sayı1 < değer1;
-sayı1 < değer2;
+sayı2 < sayı2 + değer1;
+sayı2 < sayı2 + değer2;
+sayı2 < sayı2 + değer3;
+sayı2 < sayı2 + değer4;
+sayı2 < sayı2 + değer5;
+sayı2.printhn;
 
 

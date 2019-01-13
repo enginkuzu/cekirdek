@@ -1,9 +1,10 @@
 
-syscall number : rax
-args : rdi rsi rdx r10 r8 r9
--CALL FROM KERNEL-
-destroyed : rcx r11
-retval : rax
+syscall number	: rax
+args			: rdi rsi rdx r10 r8 r9
+--- CALL FROM KERNEL ---
+destroyed		: rcx r11
+retval			: rax
+
 
 
 RBP RSP
