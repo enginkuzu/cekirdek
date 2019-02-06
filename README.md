@@ -6,6 +6,8 @@
 
 ### Sürüm Notları :
 
+v0.0.3 / 2019.02.06 : Yeni sözdizimleri eklendi. Testler eklenmeye başladı. Çok sayıda iyileştirme yapıldı.
+
 v0.0.2 / 2019.01.13 : Kütüphanelerin esnekliği, iyileştirme aşaması ve makina kodu üretimi ile ilgili altyapı çalışmaları. (Hata ve eksikleri ile beraber)
 
 v0.0.1 / 2018.12.11 : En basit haliyle örnek kaynak kod dosyası derlenebiliyor.
