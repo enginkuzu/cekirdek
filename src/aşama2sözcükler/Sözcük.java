@@ -15,12 +15,4 @@ public class Sözcük {
 		return tip.toString();
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Sözcük && this.tip != null) {
-			return this.tip.equals(((Sözcük) obj).tip);
-		}
-		return false;
-	}
-
 }

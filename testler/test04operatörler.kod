@@ -1,0 +1,15 @@
+
+sayı <: 7;
+
+sayı1 <: sayı + 1;
+sayı1.printhn;
+
+sayı2 <: sayı - 1;
+sayı2.printhn;
+
+sayı3 <: sayı * 2;
+sayı3.printhn;
+
+sayı4 <: sayı // 3;
+sayı4.printhn;
+

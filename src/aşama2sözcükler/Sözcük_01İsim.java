@@ -21,12 +21,4 @@ public class Sözcük_01İsim extends Sözcük {
 		return tip.toString() + "[" + isim + "]";
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Sözcük_01İsim) {
-			return this.isim.equals(((Sözcük_01İsim) obj).isim);
-		}
-		return false;
-	}
-
 }

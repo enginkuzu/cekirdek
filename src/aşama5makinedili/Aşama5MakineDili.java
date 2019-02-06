@@ -8,10 +8,11 @@ import java.util.Stack;
 import aşama3cümleler.Aşama3Çıktısı;
 import aşama3cümleler.Cümle;
 import aşama3cümleler.Cümle_01DeğişkenYeni;
-import aşama3cümleler.Cümle_02DeğişkenSil;
-import aşama3cümleler.Cümle_03Operatörİşlemi;
-import aşama3cümleler.Cümle_04FonksiyonÇağrısı;
-import aşama3cümleler.Cümle_05SabitAtama;
+import aşama3cümleler.Cümle_02GeçiciDeğişkenYeni;
+import aşama3cümleler.Cümle_03DeğişkenSil;
+import aşama3cümleler.Cümle_04Operatörİşlemi;
+import aşama3cümleler.Cümle_05FonksiyonÇağrısı;
+import aşama3cümleler.Cümle_10SabitAtama;
 import aşama3cümleler.Cümle_06DeğişkenAtama;
 import aşama3cümleler.Cümle_07Assembly;
 import aşama3cümleler.Cümle_08AssemblyData;
@@ -44,13 +45,13 @@ public class Aşama5MakineDili {
 		for (int i = aktifİndeks; i < çıktı.anaFonksiyon.cümleler.size(); i++) {
 			Cümle cümle = çıktı.anaFonksiyon.cümleler.get(i);
 			//
-			if (cümle instanceof Cümle_02DeğişkenSil) {
-				Cümle_02DeğişkenSil cümle02 = (Cümle_02DeğişkenSil) cümle;
+			if (cümle instanceof Cümle_03DeğişkenSil) {
+				Cümle_03DeğişkenSil cümle02 = (Cümle_03DeğişkenSil) cümle;
 				if (cümle02.değişkenNo == değişkenNo) {
 					return i;
 				}
-			} else if (cümle instanceof Cümle_03Operatörİşlemi) {
-				Cümle_03Operatörİşlemi cümle03 = (Cümle_03Operatörİşlemi) cümle;
+			} else if (cümle instanceof Cümle_04Operatörİşlemi) {
+				Cümle_04Operatörİşlemi cümle03 = (Cümle_04Operatörİşlemi) cümle;
 				if (cümle03.değişkenNo == değişkenNo) {
 					return i;
 				}
@@ -60,13 +61,13 @@ public class Aşama5MakineDili {
 				if (cümle03.parametreNo2 == değişkenNo) {
 					return i;
 				}
-			} else if (cümle instanceof Cümle_04FonksiyonÇağrısı) {
-				Cümle_04FonksiyonÇağrısı cümle04 = (Cümle_04FonksiyonÇağrısı) cümle;
+			} else if (cümle instanceof Cümle_05FonksiyonÇağrısı) {
+				Cümle_05FonksiyonÇağrısı cümle04 = (Cümle_05FonksiyonÇağrısı) cümle;
 				if (cümle04.parametre == değişkenNo) {
 					return i;
 				}
-			} else if (cümle instanceof Cümle_05SabitAtama) {
-				Cümle_05SabitAtama cümle05 = (Cümle_05SabitAtama) cümle;
+			} else if (cümle instanceof Cümle_10SabitAtama) {
+				Cümle_10SabitAtama cümle05 = (Cümle_10SabitAtama) cümle;
 				if (cümle05.değişkenNo == değişkenNo) {
 					return i;
 				}
@@ -180,16 +181,24 @@ public class Aşama5MakineDili {
 				saklaçtakiDeğişkenler.put(cümle01.değişkenNo,
 						new DeğişkenDetaySaklaç(cümle01.değişkenNo, saklaçStack.pop()));
 				işlemler.add(new İşlem_03AssemblyKomutu("\n\t# " + cümle + "\n"));
-			} else if (cümle instanceof Cümle_02DeğişkenSil) {
-				Cümle_02DeğişkenSil cümle02 = (Cümle_02DeğişkenSil) cümle;
+			} else if (cümle instanceof Cümle_02GeçiciDeğişkenYeni) {
+				Cümle_02GeçiciDeğişkenYeni cümle02 = (Cümle_02GeçiciDeğişkenYeni) cümle;
+				if (saklaçStack.isEmpty()) {
+					saklaçtaYerAç(çıktı, i);
+				}
+				saklaçtakiDeğişkenler.put(cümle02.değişkenNo,
+						new DeğişkenDetaySaklaç(cümle02.değişkenNo, saklaçStack.pop()));
+				işlemler.add(new İşlem_03AssemblyKomutu("\n\t# " + cümle + "\n"));
+			} else if (cümle instanceof Cümle_03DeğişkenSil) {
+				Cümle_03DeğişkenSil cümle02 = (Cümle_03DeğişkenSil) cümle;
 				işlemler.add(new İşlem_03AssemblyKomutu("\n\t# " + cümle + "\n"));
 				if (saklaçtakiDeğişkenler.containsKey(cümle02.değişkenNo)) {
 					saklaçStack.push(saklaçtakiDeğişkenler.remove(cümle02.değişkenNo).saklaçAdresi);
 				} else {
 					işlemler.add(new İşlem_03AssemblyKomutu("-TODO-(değişken yığıttan silinecek)-\n"));
 				}
-			} else if (cümle instanceof Cümle_03Operatörİşlemi) {
-				Cümle_03Operatörİşlemi cümle03 = (Cümle_03Operatörİşlemi) cümle;
+			} else if (cümle instanceof Cümle_04Operatörİşlemi) {
+				Cümle_04Operatörİşlemi cümle03 = (Cümle_04Operatörİşlemi) cümle;
 				String anahtar = çıktı.anaFonksiyon.değişkenNoMap.get(cümle03.parametreNo1).değişkenTipi
 						+ cümle03.operatör + çıktı.anaFonksiyon.değişkenNoMap.get(cümle03.parametreNo2).değişkenTipi;
 				Fonksiyon_01OperatörFonksiyon operatörFonksiyon = çıktı.operatörFonksiyonMap.get(anahtar);
@@ -220,8 +229,8 @@ public class Aşama5MakineDili {
 						saklaçtakiDeğişkenler.get(cümle03.değişkenNo).saklaçAdresi);
 				işlemler.add(new İşlem_03AssemblyKomutu("\n\t# " + cümle + "\n"));
 				işlemler.add(new İşlem_03AssemblyKomutu("\t" + assembly + "\n"));
-			} else if (cümle instanceof Cümle_04FonksiyonÇağrısı) {
-				Cümle_04FonksiyonÇağrısı cümle04 = (Cümle_04FonksiyonÇağrısı) cümle;
+			} else if (cümle instanceof Cümle_05FonksiyonÇağrısı) {
+				Cümle_05FonksiyonÇağrısı cümle04 = (Cümle_05FonksiyonÇağrısı) cümle;
 				if (!saklaçtakiDeğişkenler.containsKey(cümle04.parametre)) {
 					if (saklaçStack.isEmpty()) {
 						saklaçtaYerAç(çıktı, i);
@@ -232,8 +241,8 @@ public class Aşama5MakineDili {
 				işlemler.add(new İşlem_03AssemblyKomutu("\n\t# " + cümle + "\n"));
 				işlemler.add(new İşlem_03AssemblyKomutu("\tmov rax," + saklaç + "\n"));
 				işlemler.add(new İşlem_03AssemblyKomutu("\tcall printhn\n"));
-			} else if (cümle instanceof Cümle_05SabitAtama) {
-				Cümle_05SabitAtama cümle05 = (Cümle_05SabitAtama) cümle;
+			} else if (cümle instanceof Cümle_10SabitAtama) {
+				Cümle_10SabitAtama cümle05 = (Cümle_10SabitAtama) cümle;
 				if (!saklaçtakiDeğişkenler.containsKey(cümle05.değişkenNo)) {
 					if (saklaçStack.isEmpty()) {
 						saklaçtaYerAç(çıktı, i);

@@ -54,24 +54,33 @@ public class Fonksiyonlar {
 		BufferedReader hatalar = null;
 		try {
 			long zaman1 = System.currentTimeMillis();
-			String birSatırBilgi = null;
 			Runtime runtime = Runtime.getRuntime();
 			process = runtime.exec(parametreler);
 			çıktılar = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			hatalar = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+			//
+			int okunanByte;
+			char[] tampon = new char[1024];
 			KomutÇıktısı komutÇıktısı = new KomutÇıktısı();
-			while ((birSatırBilgi = çıktılar.readLine()) != null) {
-				komutÇıktısı.çıktı.add(birSatırBilgi);
-				if (detaylariGöster) {
-					System.out.println("Fonksiyonlar : komutÇalıştır() : " + birSatırBilgi);
-				}
+			//
+			StringBuilder normalÇıktı = new StringBuilder();
+			while ((okunanByte = çıktılar.read(tampon)) != -1) {
+				normalÇıktı.append(tampon, 0, okunanByte);
 			}
-			while ((birSatırBilgi = hatalar.readLine()) != null) {
-				komutÇıktısı.hata.add(birSatırBilgi);
-				if (detaylariGöster) {
-					System.out.println("Fonksiyonlar : komutÇalıştır() : " + birSatırBilgi);
-				}
+			komutÇıktısı.normalÇıktı = normalÇıktı.toString();
+			if (detaylariGöster) {
+				System.out.println("Fonksiyonlar : komutÇalıştır() : " + komutÇıktısı.normalÇıktı);
 			}
+			//
+			StringBuilder hataÇıktısı = new StringBuilder();
+			while ((okunanByte = hatalar.read(tampon)) != -1) {
+				hataÇıktısı.append(tampon, 0, okunanByte);
+			}
+			komutÇıktısı.hataÇıktısı = hataÇıktısı.toString();
+			if (detaylariGöster) {
+				System.err.println("Fonksiyonlar : komutÇalıştır() : " + komutÇıktısı.hataÇıktısı);
+			}
+			//
 			int sonlanmaKodu = process.waitFor();
 			long zaman2 = System.currentTimeMillis();
 			if (detaylariGöster) {

@@ -21,12 +21,4 @@ public class Sözcük_02Operatör extends Sözcük {
 		return tip.toString() + "[" + operatör + "]";
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Sözcük_02Operatör) {
-			return this.operatör.equals(((Sözcük_02Operatör) obj).operatör);
-		}
-		return false;
-	}
-
 }

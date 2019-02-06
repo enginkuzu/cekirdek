@@ -20,14 +20,4 @@ public class Cümle_01DeğişkenYeni extends Cümle {
 		return "Cümle_01DeğişkenYeni[" + değişkenİsmi + " " + değişkenTipi + " > " + değişkenNo + "]";
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Cümle_01DeğişkenYeni) {
-			return this.değişkenNo == ((Cümle_01DeğişkenYeni) obj).değişkenNo
-					&& this.değişkenİsmi.equals(((Cümle_01DeğişkenYeni) obj).değişkenİsmi)
-					&& this.değişkenTipi.equals(((Cümle_01DeğişkenYeni) obj).değişkenTipi);
-		}
-		return false;
-	}
-
 }

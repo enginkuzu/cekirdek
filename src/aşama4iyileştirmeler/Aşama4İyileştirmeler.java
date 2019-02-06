@@ -10,10 +10,11 @@ import java.util.Collections;
 import aşama3cümleler.Aşama3Çıktısı;
 import aşama3cümleler.Cümle;
 import aşama3cümleler.Cümle_01DeğişkenYeni;
-import aşama3cümleler.Cümle_02DeğişkenSil;
-import aşama3cümleler.Cümle_03Operatörİşlemi;
-import aşama3cümleler.Cümle_04FonksiyonÇağrısı;
-import aşama3cümleler.Cümle_05SabitAtama;
+import aşama3cümleler.Cümle_02GeçiciDeğişkenYeni;
+import aşama3cümleler.Cümle_03DeğişkenSil;
+import aşama3cümleler.Cümle_04Operatörİşlemi;
+import aşama3cümleler.Cümle_05FonksiyonÇağrısı;
+import aşama3cümleler.Cümle_10SabitAtama;
 import aşama3cümleler.Cümle_06DeğişkenAtama;
 import aşama3cümleler.Fonksiyon_01OperatörFonksiyon;
 import aşama3cümleler.Fonksiyon_02İsimliFonksiyon;
@@ -31,16 +32,19 @@ public class Aşama4İyileştirmeler {
 			if (cümle instanceof Cümle_01DeğişkenYeni) {
 				Cümle_01DeğişkenYeni cümle01 = (Cümle_01DeğişkenYeni) cümle;
 				map.put(cümle01.değişkenNo, new DeğişkenKullanımRaporu(cümle01.değişkenNo, i));
-			} else if (cümle instanceof Cümle_03Operatörİşlemi) {
-				Cümle_03Operatörİşlemi cümle03 = (Cümle_03Operatörİşlemi) cümle;
+			} else if (cümle instanceof Cümle_02GeçiciDeğişkenYeni) {
+				Cümle_02GeçiciDeğişkenYeni cümle02 = (Cümle_02GeçiciDeğişkenYeni) cümle;
+				map.put(cümle02.değişkenNo, new DeğişkenKullanımRaporu(cümle02.değişkenNo, i));
+			} else if (cümle instanceof Cümle_04Operatörİşlemi) {
+				Cümle_04Operatörİşlemi cümle03 = (Cümle_04Operatörİşlemi) cümle;
 				map.get(cümle03.parametreNo1).ekleOkuma(i);
 				map.get(cümle03.parametreNo2).ekleOkuma(i);
 				map.get(cümle03.değişkenNo).ekleYazma(-i);
-			} else if (cümle instanceof Cümle_04FonksiyonÇağrısı) {
-				Cümle_04FonksiyonÇağrısı cümle04 = (Cümle_04FonksiyonÇağrısı) cümle;
+			} else if (cümle instanceof Cümle_05FonksiyonÇağrısı) {
+				Cümle_05FonksiyonÇağrısı cümle04 = (Cümle_05FonksiyonÇağrısı) cümle;
 				map.get(cümle04.parametre).ekleOkuma(i);
-			} else if (cümle instanceof Cümle_05SabitAtama) {
-				Cümle_05SabitAtama cümle05 = (Cümle_05SabitAtama) cümle;
+			} else if (cümle instanceof Cümle_10SabitAtama) {
+				Cümle_10SabitAtama cümle05 = (Cümle_10SabitAtama) cümle;
 				map.get(cümle05.değişkenNo).ekleYazma(-i);
 			} else if (cümle instanceof Cümle_06DeğişkenAtama) {
 				Cümle_06DeğişkenAtama cümle06 = (Cümle_06DeğişkenAtama) cümle;
@@ -55,6 +59,7 @@ public class Aşama4İyileştirmeler {
 	private static void sonİşlemler(Aşama3Çıktısı çıktı, String dosyaAdı) {
 
 		StringBuilder stringBuilder = new StringBuilder();
+
 		for (Fonksiyon_01OperatörFonksiyon operatörFonksiyon : çıktı.operatörFonksiyonMap.values()) {
 			stringBuilder.append(operatörFonksiyon.toString());
 			stringBuilder.append("\n");
@@ -82,6 +87,7 @@ public class Aşama4İyileştirmeler {
 				stringBuilder.append("\n");
 			}
 		}
+
 		String metinÇıktı = stringBuilder.toString();
 		// System.out.print(metinÇıktı);
 		if (dosyaAdı != null) {
@@ -116,8 +122,8 @@ public class Aşama4İyileştirmeler {
 				for (int i : rapor.işlemler) {
 					int satirNo = -i;
 					Cümle cümle = çıktı.anaFonksiyon.cümleler.get(satirNo - 1);
-					if (cümle instanceof Cümle_03Operatörİşlemi) {
-						Cümle_03Operatörİşlemi cümle03 = (Cümle_03Operatörİşlemi) cümle;
+					if (cümle instanceof Cümle_04Operatörİşlemi) {
+						Cümle_04Operatörİşlemi cümle03 = (Cümle_04Operatörİşlemi) cümle;
 						incelemesiEksikOlanlar.add(cümle03.parametreNo1);
 						map.get(cümle03.parametreNo1).silOkuma(satirNo);
 						incelemesiEksikOlanlar.add(cümle03.parametreNo2);
@@ -144,8 +150,8 @@ public class Aşama4İyileştirmeler {
 					}
 					int satirNo = -i;
 					Cümle cümle = çıktı.anaFonksiyon.cümleler.get(satirNo - 1);
-					if (cümle instanceof Cümle_03Operatörİşlemi) {
-						Cümle_03Operatörİşlemi cümle03 = (Cümle_03Operatörİşlemi) cümle;
+					if (cümle instanceof Cümle_04Operatörİşlemi) {
+						Cümle_04Operatörİşlemi cümle03 = (Cümle_04Operatörİşlemi) cümle;
 						incelemesiEksikOlanlar.add(cümle03.parametreNo1);
 						map.get(cümle03.parametreNo1).silOkuma(satirNo);
 						incelemesiEksikOlanlar.add(cümle03.parametreNo2);
@@ -169,8 +175,8 @@ public class Aşama4İyileştirmeler {
 						if (işlemSıraNo < 0) {
 							int satirNo = -işlemSıraNo;
 							Cümle cümle = çıktı.anaFonksiyon.cümleler.get(satirNo - 1);
-							if (cümle instanceof Cümle_03Operatörİşlemi) {
-								Cümle_03Operatörİşlemi cümle03 = (Cümle_03Operatörİşlemi) cümle;
+							if (cümle instanceof Cümle_04Operatörİşlemi) {
+								Cümle_04Operatörİşlemi cümle03 = (Cümle_04Operatörİşlemi) cümle;
 								incelemesiEksikOlanlar.add(cümle03.parametreNo1);
 								map.get(cümle03.parametreNo1).silOkuma(satirNo);
 								incelemesiEksikOlanlar.add(cümle03.parametreNo2);
@@ -223,7 +229,7 @@ public class Aşama4İyileştirmeler {
 				break;
 			} else if (silinecekOlanlar.isEmpty()) {
 				for (Entry<Integer, Integer> entry : eklenecekler.entrySet()) {
-					çıktı.anaFonksiyon.cümleler.add(entry.getKey() - 1, new Cümle_02DeğişkenSil(entry.getValue()));
+					çıktı.anaFonksiyon.cümleler.add(entry.getKey() - 1, new Cümle_03DeğişkenSil(entry.getValue()));
 				}
 				eklenecekler.clear();
 			} else if (eklenecekler.isEmpty()) {
@@ -241,7 +247,7 @@ public class Aşama4İyileştirmeler {
 					çıktı.anaFonksiyon.cümleler.remove(silmeSatırNo - 1);
 				} else {
 					eklenecekler.remove(eklemeSatırNo);
-					çıktı.anaFonksiyon.cümleler.add(eklemeSatırNo - 1, new Cümle_02DeğişkenSil(eklemeDeğişkenNo));
+					çıktı.anaFonksiyon.cümleler.add(eklemeSatırNo - 1, new Cümle_03DeğişkenSil(eklemeDeğişkenNo));
 				}
 			}
 		}

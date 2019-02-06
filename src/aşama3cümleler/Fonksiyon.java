@@ -14,6 +14,7 @@ public abstract class Fonksiyon {
 	public int gerçekDeğişkenNo = 0;
 	public HashMap<Integer, Değişken> değişkenNoMap = new HashMap<Integer, Değişken>();
 	public HashMap<String, Değişken> değişkenİsimMap = new HashMap<String, Değişken>();
+
 	public HashMap<String, HashSet<String>> özellikMap = new HashMap<String, HashSet<String>>();
 
 	public ArrayList<Cümle> cümleler = new ArrayList<Cümle>();

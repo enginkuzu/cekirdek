@@ -2,8 +2,10 @@ package yardımcı;
 
 public class Değişkenler {
 
-	public static final String UYGULAMA_ADI_VE_SURUMU = "Yeni Bir Programlama Dili Derleyicisi sürüm 0.0.2";
-
+	public static final String UYGULAMA_ADI_VE_SURUMU = "Derleyici 0.0.3";
+	
+	public static boolean IS_TURKISH = "tr".equals(System.getProperty("user.language"));
+	
 	public enum SÖZCÜK {
 		TİP_00YOK,
 		TİP_01İSİM,
@@ -28,14 +30,15 @@ public class Değişkenler {
 	
 	public enum CÜMLE {
 		TİP_01DEĞİŞKENYENİ,
-		TİP_02DEĞİŞKENSİL,
-		TİP_03OPERATÖRİŞLEMİ,
-		TİP_04FUNKSİYONÇAĞRISI,
-		TİP_05SABİTATAMA,
+		TİP_02GEÇİCİDEĞİŞKENYENİ,
+		TİP_03DEĞİŞKENSİL,
+		TİP_04OPERATÖRİŞLEMİ,
+		TİP_05FUNKSİYONÇAĞRISI,
 		TİP_06DEĞİŞKENATAMA,
 		TİP_07ASSEMBLY,
 		TİP_08ASSEMBLYDATA,
-		TİP_09ASSEMBLYRODATA
+		TİP_09ASSEMBLYRODATA,
+		TİP_10SABİTATAMA
 	}
 	
 	public enum FONKSİYON {

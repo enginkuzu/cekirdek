@@ -11,17 +11,13 @@ public class Aşama2Sözcükler {
 	private static ArrayList<Sözcük> aktifCümle = null;
 	private static ArrayList<Sözcük[]> tümCümleler = null;
 
-	public static void sözcükEkle(Sözcük sözcük) throws Exception {
+	public static void sözcükEkle(Sözcük sözcük) {
 		if (sözcük.tip == SÖZCÜK.TİP_06SATIR_SONU) {
-			if (aktifCümle.size() > 0) {
-				aktifCümle.add(sözcük);
-				Sözcük[] cümle = new Sözcük[aktifCümle.size()];
-				aktifCümle.toArray(cümle);
-				tümCümleler.add(cümle);
-				aktifCümle = new ArrayList<Sözcük>();
-			} else {
-				throw new Exception("Gereksiz yere ';' kullanılmış");
-			}
+			aktifCümle.add(sözcük);
+			Sözcük[] cümle = new Sözcük[aktifCümle.size()];
+			aktifCümle.toArray(cümle);
+			tümCümleler.add(cümle);
+			aktifCümle = new ArrayList<Sözcük>();
 		} else {
 			if (öncekiSözcük.tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ && sözcük.tip == SÖZCÜK.TİP_10ATAMA_SAĞA) {
 				aktifCümle.remove(aktifCümle.size() - 1);
@@ -35,7 +31,9 @@ public class Aşama2Sözcükler {
 		öncekiSözcük = sözcük;
 	}
 
-	public static ArrayList<Sözcük[]> işle(String içerik, String dosyaAdı) throws Exception {
+	public static Object işle(String içerik, String dosyaAdı) {
+
+		StringBuilder hatalar = new StringBuilder();
 
 		öncekiSözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
 		aktifCümle = new ArrayList<Sözcük>();
@@ -75,7 +73,11 @@ public class Aşama2Sözcükler {
 						sözcükEkle(sözcük);
 						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_06SATIR_SONU));
+					if (aktifCümle.isEmpty()) {
+						hatalar.append("Gereksiz yere ';' kullanılmış\n");
+					} else {
+						sözcükEkle(new Sözcük(SÖZCÜK.TİP_06SATIR_SONU));
+					}
 				} else if (karakter == ':') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
@@ -159,7 +161,7 @@ public class Aşama2Sözcükler {
 						durum = 1;
 						sözcük = new Sözcük_02Operatör(karakter);
 					} else {
-						throw new Exception("Bilinmeyen Karakter : '" + karakter + "'");
+						hatalar.append("Bilinmeyen Karakter : '" + karakter + "'\n");
 					}
 				}
 			} else if (durum == 1) {
@@ -284,7 +286,7 @@ public class Aşama2Sözcükler {
 		}
 
 		if (durum != 0) {
-			throw new Exception("Anormal Sonlanma : Durum : " + durum);
+			hatalar.append("Anormal Sonlanma : Durum : " + durum + "\n");
 		}
 
 		StringBuilder stringBuilder = new StringBuilder();
@@ -299,6 +301,10 @@ public class Aşama2Sözcükler {
 		// System.out.print(çıktı);
 		if (dosyaAdı != null) {
 			Fonksiyonlar.dosyaKaydet(dosyaAdı + ".2.log", çıktı);
+		}
+
+		if (hatalar.length() > 0) {
+			return hatalar.toString();
 		}
 
 		return tümCümleler;

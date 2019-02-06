@@ -21,12 +21,4 @@ public class Sözcük_03TamSayı extends Sözcük {
 		return tip.toString() + "[" + sayı + "]";
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Sözcük_03TamSayı) {
-			return this.sayı.equals(((Sözcük_03TamSayı) obj).sayı);
-		}
-		return false;
-	}
-
 }

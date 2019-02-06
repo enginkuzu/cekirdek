@@ -1,0 +1,23 @@
+
+sayı1:i64 < 1;
+1 > sayı2:i64;
+
+sayı3 <: 2;
+2 :> sayı4;
+
+sayı3 < sayı1;
+sayı2 > sayı4;
+
+sayı5 <: 3;
+sayı5 < 1;
+
+3 :> sayı6;
+1 > sayı6;
+
+sayı1.printhn
+sayı2.printhn
+sayı3.printhn
+sayı4.printhn
+sayı5.printhn
+sayı6.printhn
+

@@ -18,13 +18,4 @@ public class Cümle_06DeğişkenAtama extends Cümle {
 		return "Cümle_06DeğişkenAtama[" + değişkenNoKaynak + " > " + değişkenNoHedef + "]";
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Cümle_06DeğişkenAtama) {
-			return this.değişkenNoKaynak == ((Cümle_06DeğişkenAtama) obj).değişkenNoKaynak
-					&& this.değişkenNoHedef == ((Cümle_06DeğişkenAtama) obj).değişkenNoHedef;
-		}
-		return false;
-	}
-
 }
