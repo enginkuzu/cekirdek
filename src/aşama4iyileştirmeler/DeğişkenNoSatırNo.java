@@ -11,10 +11,10 @@ public class DeğişkenNoSatırNo implements Comparable<DeğişkenNoSatırNo> {
 	}
 
 	@Override
-	public int compareTo(DeğişkenNoSatırNo other) {
-		if (this.satırNo > other.satırNo) {
+	public int compareTo(DeğişkenNoSatırNo diğerNesne) {
+		if (this.satırNo > diğerNesne.satırNo) {
 			return -1;
-		} else if (this.satırNo == other.satırNo) {
+		} else if (this.satırNo == diğerNesne.satırNo) {
 			return 0;
 		} else {
 			return 1;

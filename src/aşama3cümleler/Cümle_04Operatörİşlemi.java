@@ -10,7 +10,7 @@ public class Cümle_04Operatörİşlemi extends Cümle {
 	public int parametreNo2;
 
 	public Cümle_04Operatörİşlemi(int değişkenNo, String operatör, int parametreNo1, int parametreNo2) {
-		super(CÜMLE.TİP_04OPERATÖRİŞLEMİ);
+		super(CÜMLE.TİP_04OPERATÖR_İŞLEMİ);
 		this.değişkenNo = değişkenNo;
 		this.operatör = operatör;
 		this.parametreNo1 = parametreNo1;

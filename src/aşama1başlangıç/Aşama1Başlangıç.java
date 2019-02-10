@@ -1,11 +1,10 @@
-package başlangıç;
+package aşama1başlangıç;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
-import aşama1oku.Aşama1Oku;
 import aşama2sözcükler.Aşama2Sözcükler;
 import aşama2sözcükler.Sözcük;
 import aşama3cümleler.Aşama3Cümleler;
@@ -17,9 +16,10 @@ import sınıflar.KomutÇıktısı;
 import yardımcı.Değişkenler;
 import yardımcı.Fonksiyonlar;
 
-public class Başlangıç {
+public class Aşama1Başlangıç {
 
-	public Başlangıç() {
+	public Aşama1Başlangıç() {
+
 		File testKlasörü = new File("testler");
 		ArrayList<String> kodDosyaları = new ArrayList<String>();
 		HashSet<String> tümDosyalar = new HashSet<String>();
@@ -29,15 +29,16 @@ public class Başlangıç {
 			}
 			tümDosyalar.add(dosyaİsmi);
 		}
-		int i = 0;
-		int başarılı = 0;
-		int başarısız = 0;
 		Collections.sort(kodDosyaları);
-		for (String dosya : kodDosyaları) {
-			System.out.print("TEST : (" + ++i + "/" + kodDosyaları.size() + ") " + dosya + " ");
-			String dosyaİsmi = dosya.substring(0, dosya.length() - 4);
+
+		int testNo = 0;
+		int başarılıSayaç = 0;
+		int başarısızSayaç = 0;
+		for (String dosyaİsmiVeUzantısı : kodDosyaları) {
+			System.out.print("TEST : (" + ++testNo + "/" + kodDosyaları.size() + ") " + dosyaİsmiVeUzantısı + " ");
+			String dosyaİsmi = dosyaİsmiVeUzantısı.substring(0, dosyaİsmiVeUzantısı.length() - 4);
 			boolean başarılıMı = true;
-			String hatalar = derle("testler/" + dosya);
+			String hatalar = derle("testler/" + dosyaİsmiVeUzantısı);
 			if (hatalar != null) {
 				String hataÇıktıDosyası = dosyaİsmi + ".err";
 				if (tümDosyalar.contains(hataÇıktıDosyası)) {
@@ -49,7 +50,7 @@ public class Başlangıç {
 					başarılıMı = false;
 				}
 			} else {
-				String normalÇıktıDosyası = dosya + ".out";
+				String normalÇıktıDosyası = dosyaİsmiVeUzantısı + ".out";
 				if (tümDosyalar.contains(normalÇıktıDosyası)) {
 					KomutÇıktısı çıktı = Fonksiyonlar.komutÇalıştır(false, new String[] { "testler/" + dosyaİsmi });
 					String normalÇıktıDosyasıİçeriği = Fonksiyonlar.dosyaOku(new File("testler/" + normalÇıktıDosyası));
@@ -59,45 +60,51 @@ public class Başlangıç {
 				}
 			}
 			if (başarılıMı) {
-				başarılı++;
+				başarılıSayaç++;
 			} else {
-				başarısız++;
+				başarısızSayaç++;
 			}
 			System.out.println(başarılıMı ? "+" : "-");
 		}
-		System.out.println("TESTLER : " + başarılı + " başarılı, " + başarısız + " başarısız");
+		System.out.println("TESTLER : " + başarılıSayaç + " başarılı, " + başarısızSayaç + " başarısız");
 	}
 
-	public Başlangıç(String file) {
+	public Aşama1Başlangıç(String file) {
 		String hatalar = derle(file);
 		if (hatalar != null) {
 			System.out.println(hatalar);
 		}
 	}
 
+	private static String oku(String dosyaYoluVeAdı) {
+		File dosya = new File(dosyaYoluVeAdı);
+		String içerik = Fonksiyonlar.dosyaOku(dosya);
+		return içerik;
+	}
+
 	public String derle(String kaynakKodDosyası) {
 
 		String kütüphaneDosyası1 = "kütüphane/exit.kod";
-		String kütüphane1 = Aşama1Oku.oku(kütüphaneDosyası1);
+		String kütüphane1 = oku(kütüphaneDosyası1);
 		if (kütüphane1 == null) {
-			return "Aşama1Oku : " + kütüphaneDosyası1 + " okunamadı !!!";
+			return "Aşama1Başlangıç : " + kütüphaneDosyası1 + " okunamadı !!!";
 		}
 
 		String kütüphaneDosyası2 = "kütüphane/i64.kod";
-		String kütüphane2 = Aşama1Oku.oku(kütüphaneDosyası2);
+		String kütüphane2 = oku(kütüphaneDosyası2);
 		if (kütüphane2 == null) {
-			return "Aşama1Oku : " + kütüphaneDosyası2 + " okunamadı !!!";
+			return "Aşama1Başlangıç : " + kütüphaneDosyası2 + " okunamadı !!!";
 		}
 
 		String kütüphaneDosyası3 = "kütüphane/printhn.kod";
-		String kütüphane3 = Aşama1Oku.oku(kütüphaneDosyası3);
+		String kütüphane3 = oku(kütüphaneDosyası3);
 		if (kütüphane3 == null) {
-			return "Aşama1Oku : " + kütüphaneDosyası3 + " okunamadı !!!";
+			return "Aşama1Başlangıç : " + kütüphaneDosyası3 + " okunamadı !!!";
 		}
 
-		String kaynakKod = Aşama1Oku.oku(kaynakKodDosyası);
+		String kaynakKod = oku(kaynakKodDosyası);
 		if (kaynakKod == null) {
-			return "Aşama1Oku : " + kaynakKodDosyası + " okunamadı !!!";
+			return "Aşama1Başlangıç : " + kaynakKodDosyası + " okunamadı !!!";
 		}
 
 		Object sözcükler = Aşama2Sözcükler.işle(kütüphane1 + "\n" + kütüphane2 + "\n" + kütüphane3 + "\n" + kaynakKod,
@@ -115,7 +122,7 @@ public class Başlangıç {
 	}
 
 	private static void çalışmaParametreleriniEkranaYaz() {
-		if (Değişkenler.IS_TURKISH) {
+		if (Değişkenler.DİL_TÜRKÇE_Mİ) {
 			System.out.println("Kullanım: derleyici dosya");
 			System.out.println("Kullanım: derleyici [parametreler]");
 			System.out.println("  --help        Parametreleri görüntüle.");
@@ -133,7 +140,7 @@ public class Başlangıç {
 	}
 
 	private static void hiçParametreYok() {
-		if (Değişkenler.IS_TURKISH) {
+		if (Değişkenler.DİL_TÜRKÇE_Mİ) {
 			System.out.println("ölümcül hata: Hiçbir şey istenmemiş.");
 			System.out.println("detaylar için --help parametresini kullanınız.");
 		} else {
@@ -143,7 +150,7 @@ public class Başlangıç {
 	}
 
 	private static void hatalıParametreler() {
-		if (Değişkenler.IS_TURKISH) {
+		if (Değişkenler.DİL_TÜRKÇE_Mİ) {
 			System.out.println("ölümcül hata: Hatalı parametreler.");
 			System.out.println("detaylar için --help parametresini kullanınız.");
 		} else {
@@ -153,30 +160,30 @@ public class Başlangıç {
 	}
 
 	private static void sürümGörüntüle() {
-		System.out.println(Değişkenler.UYGULAMA_ADI_VE_SURUMU);
+		System.out.println(Değişkenler.UYGULAMA_ADI_VE_SÜRÜMÜ);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] parametreler) {
 
-		if (args.length > 1) {
-			String arg1 = args[0];
-			String arg2 = args[1];
-			if (arg1.equals("--lang")) {
-				Değişkenler.IS_TURKISH = arg2.equals("tr");
+		if (parametreler.length > 1) {
+			String p1 = parametreler[0];
+			String p2 = parametreler[1];
+			if (p1.equals("--lang")) {
+				Değişkenler.DİL_TÜRKÇE_Mİ = p2.equals("tr");
 			} else {
 				hatalıParametreler();
 			}
-		} else if (args.length == 1) {
-			String arg1 = args[0];
-			if (arg1.equals("--help")) {
+		} else if (parametreler.length == 1) {
+			String p1 = parametreler[0];
+			if (p1.equals("--help")) {
 				çalışmaParametreleriniEkranaYaz();
-			} else if (arg1.equals("--version")) {
+			} else if (p1.equals("--version")) {
 				sürümGörüntüle();
-			} else if (arg1.equals("--tests")) {
-				Değişkenler.IS_TURKISH = true;
-				new Başlangıç();
+			} else if (p1.equals("--tests")) {
+				Değişkenler.DİL_TÜRKÇE_Mİ = true;
+				new Aşama1Başlangıç();
 			} else {
-				new Başlangıç(arg1);
+				new Aşama1Başlangıç(p1);
 			}
 		} else {
 			hiçParametreYok();

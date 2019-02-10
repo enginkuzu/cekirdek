@@ -4,21 +4,21 @@ import yardımcı.Değişkenler.SÖZCÜK;
 
 public class Sözcük_04OndalıklıSayı extends Sözcük {
 
-	public String sayı = "";
+	public String ondalıklıSayı = "";
 
 	public Sözcük_04OndalıklıSayı(char karakter) {
 		super(SÖZCÜK.TİP_04ONDALIKLI_SAYI);
-		this.sayı = this.sayı + karakter;
+		this.ondalıklıSayı = this.ondalıklıSayı + karakter;
 	}
 
 	public Sözcük_04OndalıklıSayı(String sayı) {
 		super(SÖZCÜK.TİP_04ONDALIKLI_SAYI);
-		this.sayı = sayı;
+		this.ondalıklıSayı = sayı;
 	}
 
 	@Override
 	public String toString() {
-		return tip.toString() + "[" + sayı + "]";
+		return tip.toString() + "[" + ondalıklıSayı + "]";
 	}
 
 }

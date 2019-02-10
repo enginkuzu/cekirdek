@@ -24,7 +24,7 @@ public class DeğişkenKullanımRaporu {
 	public void silOkuma(Integer işlemSıraNo) {
 		okumaSayaç--;
 		if (!işlemler.remove(işlemSıraNo)) {
-			System.out.println("ERROR : DeğişkenKullanımRaporu.silOkuma() : işlemSıraNo = " + işlemSıraNo);
+			System.out.println("HATA : DeğişkenKullanımRaporu.silOkuma() : işlemSıraNo = " + işlemSıraNo);
 		}
 	}
 
@@ -36,7 +36,7 @@ public class DeğişkenKullanımRaporu {
 	public void silYazma(Integer işlemSıraNo) {
 		yazmaSayaç--;
 		if (!işlemler.remove(işlemSıraNo)) {
-			System.out.println("ERROR : DeğişkenKullanımRaporu.silYazma() : işlemSıraNo = " + işlemSıraNo);
+			System.out.println("HATA : DeğişkenKullanımRaporu.silYazma() : işlemSıraNo = " + işlemSıraNo);
 		}
 	}
 

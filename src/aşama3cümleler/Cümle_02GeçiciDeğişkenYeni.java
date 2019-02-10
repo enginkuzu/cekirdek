@@ -8,7 +8,7 @@ public class Cümle_02GeçiciDeğişkenYeni extends Cümle {
 	public String değişkenTipi;
 
 	public Cümle_02GeçiciDeğişkenYeni(int değişkenNo, String değişkenTipi) {
-		super(CÜMLE.TİP_02GEÇİCİDEĞİŞKENYENİ);
+		super(CÜMLE.TİP_02GEÇİCİ_DEĞİŞKEN_YENİ);
 		this.değişkenNo = değişkenNo;
 		this.değişkenTipi = değişkenTipi;
 	}

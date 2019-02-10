@@ -14,9 +14,9 @@ import aşama3cümleler.Cümle_04Operatörİşlemi;
 import aşama3cümleler.Cümle_05FonksiyonÇağrısı;
 import aşama3cümleler.Cümle_10SabitAtama;
 import aşama3cümleler.Cümle_06DeğişkenAtama;
-import aşama3cümleler.Cümle_07Assembly;
-import aşama3cümleler.Cümle_08AssemblyData;
-import aşama3cümleler.Cümle_09AssemblyRoData;
+import aşama3cümleler.Cümle_07MakineDiliKod;
+import aşama3cümleler.Cümle_08MakineDiliVeri;
+import aşama3cümleler.Cümle_09MakineDiliSabitVeri;
 import aşama3cümleler.Fonksiyon_01OperatörFonksiyon;
 import aşama3cümleler.Fonksiyon_02İsimliFonksiyon;
 import yardımcı.Fonksiyonlar;
@@ -71,25 +71,26 @@ public class Aşama5MakineDili {
 			}
 		}
 
-		işlemler.add(new İşlem_03AssemblyKomutu("-TODO-(saklaçİlkKullanımİndeksiniBul() fonksiyonu -1 döndü)-\n"));
+		işlemler.add(
+				new İşlem_03MakineDiliKomutu("-BİLİNMEYEN-(saklaçİlkKullanımİndeksiniBul() fonksiyonu -1 döndü)-\n"));
 		return -1;
 	}
 
 	private static void saklaçtaYerAç(Aşama3Çıktısı çıktı, int aktifİndeks) {
 
 		for (Iterator<DeğişkenDetaySaklaç> it = saklaçtakiDeğişkenler.values().iterator(); it.hasNext();) {
-			DeğişkenDetaySaklaç dd = it.next();
-			if (dd.ilkKullanımİndeksi < aktifİndeks) {
-				dd.ilkKullanımİndeksi = saklaçİlkKullanımİndeksiniBul(çıktı, aktifİndeks, dd.değişkenNo);
+			DeğişkenDetaySaklaç detay = it.next();
+			if (detay.ilkKullanımİndeksi < aktifİndeks) {
+				detay.ilkKullanımİndeksi = saklaçİlkKullanımİndeksiniBul(çıktı, aktifİndeks, detay.değişkenNo);
 			}
 		}
 
 		Iterator<DeğişkenDetaySaklaç> it = saklaçtakiDeğişkenler.values().iterator();
 		DeğişkenDetaySaklaç seçilenDeğişken = it.next();
 		while (it.hasNext()) {
-			DeğişkenDetaySaklaç dd = it.next();
-			if (dd.ilkKullanımİndeksi > seçilenDeğişken.ilkKullanımİndeksi) {
-				seçilenDeğişken = dd;
+			DeğişkenDetaySaklaç detay = it.next();
+			if (detay.ilkKullanımİndeksi > seçilenDeğişken.ilkKullanımİndeksi) {
+				seçilenDeğişken = detay;
 			}
 		}
 
@@ -98,17 +99,17 @@ public class Aşama5MakineDili {
 		saklaçtakiDeğişkenler.remove(seçilenDeğişken.değişkenNo);
 		yığıtAdres++;
 		işlemler.add(new İşlem_02SaklaçtanYığıta(seçilenDeğişken.saklaçAdresi, yığıtAdres));
-		DeğişkenDetayYığıt ddy = new DeğişkenDetayYığıt(seçilenDeğişken.değişkenNo, yığıtAdres,
+		DeğişkenDetayYığıt detay = new DeğişkenDetayYığıt(seçilenDeğişken.değişkenNo, yığıtAdres,
 				seçilenDeğişken.ilkKullanımİndeksi);
-		yığıttakiDeğişkenler.put(seçilenDeğişken.değişkenNo, ddy);
+		yığıttakiDeğişkenler.put(seçilenDeğişken.değişkenNo, detay);
 		// System.out.println("Yığıta > " + seçilenDeğişken.değişkenNo);
 	}
 
 	private static void değişkeniYığıttanSaklacaTaşı(int değişkenNo) {
-		DeğişkenDetayYığıt ddy = yığıttakiDeğişkenler.remove(değişkenNo);
+		DeğişkenDetayYığıt detay = yığıttakiDeğişkenler.remove(değişkenNo);
 		String saklaç = saklaçStack.pop();
-		işlemler.add(new İşlem_01YığıttanSaklaca(ddy.yığıtAdresi, saklaç));
-		saklaçtakiDeğişkenler.put(değişkenNo, new DeğişkenDetaySaklaç(değişkenNo, saklaç, ddy.ilkKullanımİndeksi));
+		işlemler.add(new İşlem_01YığıttanSaklaca(detay.yığıtAdresi, saklaç));
+		saklaçtakiDeğişkenler.put(değişkenNo, new DeğişkenDetaySaklaç(değişkenNo, saklaç, detay.ilkKullanımİndeksi));
 		// System.out.println("Saklaca < " + değişkenNo);
 	}
 
@@ -138,9 +139,9 @@ public class Aşama5MakineDili {
 		sb.append("\t.section\t.data\n\n");
 		for (Fonksiyon_02İsimliFonksiyon isimFonksiyon : çıktı.isimFonksiyonMap.values()) {
 			for (Cümle cümle : isimFonksiyon.cümleler) {
-				if (cümle instanceof Cümle_08AssemblyData) {
-					String assembly = ((Cümle_08AssemblyData) cümle).ifade;
-					sb.append("\t" + assembly + "\n");
+				if (cümle instanceof Cümle_08MakineDiliVeri) {
+					String veri = ((Cümle_08MakineDiliVeri) cümle).veri;
+					sb.append("\t" + veri + "\n");
 				}
 			}
 		}
@@ -149,9 +150,9 @@ public class Aşama5MakineDili {
 		sb.append("\t.section\t.rodata\n\n");
 		for (Fonksiyon_02İsimliFonksiyon isimFonksiyon : çıktı.isimFonksiyonMap.values()) {
 			for (Cümle cümle : isimFonksiyon.cümleler) {
-				if (cümle instanceof Cümle_09AssemblyRoData) {
-					String assembly = ((Cümle_09AssemblyRoData) cümle).ifade;
-					sb.append("\t" + assembly + "\n");
+				if (cümle instanceof Cümle_09MakineDiliSabitVeri) {
+					String sabitVeri = ((Cümle_09MakineDiliSabitVeri) cümle).sabitVeri;
+					sb.append("\t" + sabitVeri + "\n");
 				}
 			}
 		}
@@ -163,12 +164,12 @@ public class Aşama5MakineDili {
 			sb.append("\n\t.globl	" + isimFonksiyon.isim + "\n");
 			sb.append(isimFonksiyon.isim + ":\n");
 			for (Cümle cümle : isimFonksiyon.cümleler) {
-				if (cümle instanceof Cümle_07Assembly) {
-					String assembly = ((Cümle_07Assembly) cümle).ifade;
+				if (cümle instanceof Cümle_07MakineDiliKod) {
+					String kod = ((Cümle_07MakineDiliKod) cümle).kod;
 					if (isimFonksiyon.değişken1İsim != null && isimFonksiyon.değişken1Tip != null) {
-						assembly = assembly.replace(isimFonksiyon.değişken1İsim, isimFonksiyon.değişken1Tip);
+						kod = kod.replace(isimFonksiyon.değişken1İsim, isimFonksiyon.değişken1Tip);
 					}
-					sb.append("\t" + assembly + "\n");
+					sb.append("\t" + kod + "\n");
 				}
 			}
 		}
@@ -186,7 +187,7 @@ public class Aşama5MakineDili {
 				}
 				saklaçtakiDeğişkenler.put(cümle01.değişkenNo,
 						new DeğişkenDetaySaklaç(cümle01.değişkenNo, saklaçStack.pop()));
-				işlemler.add(new İşlem_03AssemblyKomutu("\n\t# " + cümle + "\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
 			} else if (cümle instanceof Cümle_02GeçiciDeğişkenYeni) {
 				Cümle_02GeçiciDeğişkenYeni cümle02 = (Cümle_02GeçiciDeğişkenYeni) cümle;
 				if (saklaçStack.isEmpty()) {
@@ -194,14 +195,14 @@ public class Aşama5MakineDili {
 				}
 				saklaçtakiDeğişkenler.put(cümle02.değişkenNo,
 						new DeğişkenDetaySaklaç(cümle02.değişkenNo, saklaçStack.pop()));
-				işlemler.add(new İşlem_03AssemblyKomutu("\n\t# " + cümle + "\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
 			} else if (cümle instanceof Cümle_03DeğişkenSil) {
 				Cümle_03DeğişkenSil cümle02 = (Cümle_03DeğişkenSil) cümle;
-				işlemler.add(new İşlem_03AssemblyKomutu("\n\t# " + cümle + "\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
 				if (saklaçtakiDeğişkenler.containsKey(cümle02.değişkenNo)) {
 					saklaçStack.push(saklaçtakiDeğişkenler.remove(cümle02.değişkenNo).saklaçAdresi);
 				} else {
-					işlemler.add(new İşlem_03AssemblyKomutu("-TODO-(değişken yığıttan silinecek)-\n"));
+					işlemler.add(new İşlem_03MakineDiliKomutu("-BİLİNMEYEN-(değişken yığıttan silinecek)-\n"));
 				}
 			} else if (cümle instanceof Cümle_04Operatörİşlemi) {
 				Cümle_04Operatörİşlemi cümle03 = (Cümle_04Operatörİşlemi) cümle;
@@ -226,15 +227,15 @@ public class Aşama5MakineDili {
 					}
 					değişkeniYığıttanSaklacaTaşı(cümle03.değişkenNo);
 				}
-				String assembly = ((Cümle_07Assembly) operatörFonksiyon.cümleler.get(0)).ifade;
-				assembly = assembly.replace(operatörFonksiyon.değişken1İsim,
+				String kod = ((Cümle_07MakineDiliKod) operatörFonksiyon.cümleler.get(0)).kod;
+				kod = kod.replace(operatörFonksiyon.değişken1İsim,
 						saklaçtakiDeğişkenler.get(cümle03.parametreNo1).saklaçAdresi);
-				assembly = assembly.replace(operatörFonksiyon.değişken2İsim,
+				kod = kod.replace(operatörFonksiyon.değişken2İsim,
 						saklaçtakiDeğişkenler.get(cümle03.parametreNo2).saklaçAdresi);
-				assembly = assembly.replace(operatörFonksiyon.sonuçİsim,
+				kod = kod.replace(operatörFonksiyon.sonuçİsim,
 						saklaçtakiDeğişkenler.get(cümle03.değişkenNo).saklaçAdresi);
-				işlemler.add(new İşlem_03AssemblyKomutu("\n\t# " + cümle + "\n"));
-				işlemler.add(new İşlem_03AssemblyKomutu("\t" + assembly + "\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("\t" + kod + "\n"));
 			} else if (cümle instanceof Cümle_05FonksiyonÇağrısı) {
 				Cümle_05FonksiyonÇağrısı cümle04 = (Cümle_05FonksiyonÇağrısı) cümle;
 				if (!saklaçtakiDeğişkenler.containsKey(cümle04.parametre)) {
@@ -244,9 +245,9 @@ public class Aşama5MakineDili {
 					değişkeniYığıttanSaklacaTaşı(cümle04.parametre);
 				}
 				String saklaç = saklaçtakiDeğişkenler.get(cümle04.parametre).saklaçAdresi;
-				işlemler.add(new İşlem_03AssemblyKomutu("\n\t# " + cümle + "\n"));
-				işlemler.add(new İşlem_03AssemblyKomutu("\tmov rax," + saklaç + "\n"));
-				işlemler.add(new İşlem_03AssemblyKomutu("\tcall printhn\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("\tmov rax," + saklaç + "\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("\tcall printhn\n"));
 			} else if (cümle instanceof Cümle_10SabitAtama) {
 				Cümle_10SabitAtama cümle05 = (Cümle_10SabitAtama) cümle;
 				if (!saklaçtakiDeğişkenler.containsKey(cümle05.değişkenNo)) {
@@ -256,8 +257,8 @@ public class Aşama5MakineDili {
 					değişkeniYığıttanSaklacaTaşı(cümle05.değişkenNo);
 				}
 				String saklaç = saklaçtakiDeğişkenler.get(cümle05.değişkenNo).saklaçAdresi;
-				işlemler.add(new İşlem_03AssemblyKomutu("\n\t# " + cümle + "\n"));
-				işlemler.add(new İşlem_03AssemblyKomutu("\tmov " + saklaç + "," + cümle05.sabitVeri + "\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("\tmov " + saklaç + "," + cümle05.sabitVeri + "\n"));
 			} else if (cümle instanceof Cümle_06DeğişkenAtama) {
 				Cümle_06DeğişkenAtama cümle06 = (Cümle_06DeğişkenAtama) cümle;
 				if (!saklaçtakiDeğişkenler.containsKey(cümle06.değişkenNoKaynak)) {
@@ -274,11 +275,11 @@ public class Aşama5MakineDili {
 				}
 				String saklaçKaynak = saklaçtakiDeğişkenler.get(cümle06.değişkenNoKaynak).saklaçAdresi;
 				String saklaçHedef = saklaçtakiDeğişkenler.get(cümle06.değişkenNoHedef).saklaçAdresi;
-				işlemler.add(new İşlem_03AssemblyKomutu("\n\t# " + cümle + "\n"));
-				işlemler.add(new İşlem_03AssemblyKomutu("\tmov " + saklaçHedef + "," + saklaçKaynak + "\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("\tmov " + saklaçHedef + "," + saklaçKaynak + "\n"));
 			} else {
-				işlemler.add(new İşlem_03AssemblyKomutu("\n\t# " + cümle + "\n"));
-				işlemler.add(new İşlem_03AssemblyKomutu("-TODO-(" + cümle + ")-\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu("-BİLİNMEYEN-(" + cümle + ")-\n"));
 			}
 			//
 			// System.out.println(cümle);
@@ -302,9 +303,9 @@ public class Aşama5MakineDili {
 				sb.append("\n");
 				sb.append("\t# Saklaç-Yığıt : " + işlem02);
 				sb.append("\tmov QWORD PTR -" + adres + "[rbp], " + işlem02.saklaç + "\n");
-			} else if (işlem instanceof İşlem_03AssemblyKomutu) {
-				İşlem_03AssemblyKomutu işlem03 = (İşlem_03AssemblyKomutu) işlem;
-				sb.append(işlem03.asssembly);
+			} else if (işlem instanceof İşlem_03MakineDiliKomutu) {
+				İşlem_03MakineDiliKomutu işlem03 = (İşlem_03MakineDiliKomutu) işlem;
+				sb.append(işlem03.komut);
 			}
 		}
 		sb.append("\tleave\n");

@@ -3,9 +3,6 @@ package aşama4iyileştirmeler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.Collections;
 
 import aşama3cümleler.Aşama3Çıktısı;
@@ -52,7 +49,7 @@ public class Aşama4İyileştirmeler {
 				Cümle_10SabitAtama cümle05 = (Cümle_10SabitAtama) cümle;
 				map.get(cümle05.değişkenNo).ekleYazma(-i);
 			} else {
-				System.out.println("TODO : " + cümle);
+				System.out.println("BİLİNMEYEN : " + cümle);
 			}
 		}
 
@@ -61,41 +58,39 @@ public class Aşama4İyileştirmeler {
 
 	private static void sonİşlemler(Aşama3Çıktısı çıktı, String dosyaAdı) {
 
-		StringBuilder stringBuilder = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
 		for (Fonksiyon_01OperatörFonksiyon operatörFonksiyon : çıktı.operatörFonksiyonMap.values()) {
-			stringBuilder.append(operatörFonksiyon.toString());
-			stringBuilder.append("\n");
+			sb.append(operatörFonksiyon.toString());
+			sb.append("\n");
 			for (Cümle cümle : operatörFonksiyon.cümleler) {
-				stringBuilder.append("\t");
-				stringBuilder.append(cümle.toString());
-				stringBuilder.append("\n");
+				sb.append("\t");
+				sb.append(cümle.toString());
+				sb.append("\n");
 			}
 		}
 		for (Fonksiyon_02İsimliFonksiyon isimFonksiyon : çıktı.isimFonksiyonMap.values()) {
-			stringBuilder.append(isimFonksiyon.toString());
-			stringBuilder.append("\n");
+			sb.append(isimFonksiyon.toString());
+			sb.append("\n");
 			for (Cümle cümle : isimFonksiyon.cümleler) {
-				stringBuilder.append("\t");
-				stringBuilder.append(cümle.toString());
-				stringBuilder.append("\n");
+				sb.append("\t");
+				sb.append(cümle.toString());
+				sb.append("\n");
 			}
 		}
 		{
-			stringBuilder.append(çıktı.anaFonksiyon.toString());
-			stringBuilder.append("\n");
+			sb.append(çıktı.anaFonksiyon.toString());
+			sb.append("\n");
 			for (Cümle cümle : çıktı.anaFonksiyon.cümleler) {
-				stringBuilder.append("\t");
-				stringBuilder.append(cümle.toString());
-				stringBuilder.append("\n");
+				sb.append("\t");
+				sb.append(cümle.toString());
+				sb.append("\n");
 			}
 		}
 
-		String metinÇıktı = stringBuilder.toString();
+		String metinÇıktı = sb.toString();
 		// System.out.print(metinÇıktı);
-		if (dosyaAdı != null) {
-			Fonksiyonlar.dosyaKaydet(dosyaAdı + ".4.log", metinÇıktı);
-		}
+		Fonksiyonlar.dosyaKaydet(dosyaAdı + ".4.log", metinÇıktı);
 	}
 
 	public static Aşama3Çıktısı işle(Aşama3Çıktısı çıktı, String dosyaAdı) {

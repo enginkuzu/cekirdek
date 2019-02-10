@@ -33,11 +33,11 @@ public class Aşama2Sözcükler {
 
 	public static Object işle(String içerik, String dosyaAdı) {
 
-		StringBuilder hatalar = new StringBuilder();
-
 		öncekiSözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
 		aktifCümle = new ArrayList<Sözcük>();
 		tümCümleler = new ArrayList<Sözcük[]>();
+
+		StringBuilder hatalar = new StringBuilder();
 
 		// durum 0 : Normal durum
 		// durum 1 : Operatör
@@ -114,26 +114,26 @@ public class Aşama2Sözcükler {
 						sözcükEkle(sözcük);
 						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_14AÇPARANTEZ));
+					sözcükEkle(new Sözcük(SÖZCÜK.TİP_14AÇ_PARANTEZ));
 				} else if (karakter == ')') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
 						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_15KAPAPARANTEZ));
+					sözcükEkle(new Sözcük(SÖZCÜK.TİP_15KAPA_PARANTEZ));
 				} else if (karakter == '{') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
 						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_16AÇSÜSLÜ));
+					sözcükEkle(new Sözcük(SÖZCÜK.TİP_16AÇ_SÜSLÜ));
 					sözcükEkle(new Sözcük(SÖZCÜK.TİP_06SATIR_SONU));
 				} else if (karakter == '}') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
 						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_17KAPASÜSLÜ));
+					sözcükEkle(new Sözcük(SÖZCÜK.TİP_17KAPA_SÜSLÜ));
 					sözcükEkle(new Sözcük(SÖZCÜK.TİP_06SATIR_SONU));
 				} else if (karakter == ',') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
@@ -188,11 +188,11 @@ public class Aşama2Sözcükler {
 			} else if (durum == 4) {
 				// durum 4,5,6 : Tam sayı ve ondalıklı sayı
 				if (Character.isDigit(karakter)) {
-					((Sözcük_03TamSayı) sözcük).sayı += karakter;
+					((Sözcük_03TamSayı) sözcük).tamSayı += karakter;
 				} else if (karakter == '.') {
 					durum = 5;
-					sözcük = new Sözcük_04OndalıklıSayı(((Sözcük_03TamSayı) sözcük).sayı);
-					((Sözcük_04OndalıklıSayı) sözcük).sayı += karakter;
+					sözcük = new Sözcük_04OndalıklıSayı(((Sözcük_03TamSayı) sözcük).tamSayı);
+					((Sözcük_04OndalıklıSayı) sözcük).ondalıklıSayı += karakter;
 				} else {
 					i--;
 					durum = 0;
@@ -201,17 +201,17 @@ public class Aşama2Sözcükler {
 				// durum 4,5,6 : Tam sayı ve ondalıklı sayı
 				if (Character.isDigit(karakter)) {
 					durum = 6;
-					((Sözcük_04OndalıklıSayı) sözcük).sayı += karakter;
+					((Sözcük_04OndalıklıSayı) sözcük).ondalıklıSayı += karakter;
 				} else {
 					i -= 2;
-					sözcük = new Sözcük_03TamSayı(((Sözcük_04OndalıklıSayı) sözcük).sayı.substring(0,
-							((Sözcük_04OndalıklıSayı) sözcük).sayı.length() - 1));
+					sözcük = new Sözcük_03TamSayı(((Sözcük_04OndalıklıSayı) sözcük).ondalıklıSayı.substring(0,
+							((Sözcük_04OndalıklıSayı) sözcük).ondalıklıSayı.length() - 1));
 					durum = 0;
 				}
 			} else if (durum == 6) {
 				// durum 4,5,6 : Tam sayı ve ondalıklı sayı
 				if (Character.isDigit(karakter)) {
-					((Sözcük_04OndalıklıSayı) sözcük).sayı += karakter;
+					((Sözcük_04OndalıklıSayı) sözcük).ondalıklıSayı += karakter;
 				} else {
 					i--;
 					durum = 0;
@@ -289,24 +289,20 @@ public class Aşama2Sözcükler {
 			hatalar.append("Anormal Sonlanma : Durum : " + durum + "\n");
 		}
 
-		StringBuilder stringBuilder = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		for (Sözcük[] cümle : tümCümleler) {
 			for (Sözcük kelime : cümle) {
-				stringBuilder.append(kelime.toString());
-				stringBuilder.append(" ");
+				sb.append(kelime.toString());
+				sb.append(" ");
 			}
-			stringBuilder.append("\n");
+			sb.append("\n");
 		}
-		String çıktı = stringBuilder.toString();
+		String çıktı = sb.toString();
 		// System.out.print(çıktı);
-		if (dosyaAdı != null) {
-			Fonksiyonlar.dosyaKaydet(dosyaAdı + ".2.log", çıktı);
-		}
-
+		Fonksiyonlar.dosyaKaydet(dosyaAdı + ".2.log", çıktı);
 		if (hatalar.length() > 0) {
 			return hatalar.toString();
 		}
-
 		return tümCümleler;
 	}
 

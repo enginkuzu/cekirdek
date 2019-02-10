@@ -6,7 +6,7 @@
 
 ### Sürüm Notları :
 
-v0.0.4 / 2019.02.10 : Testler eklendi. Bazı hata düzeltmeleri ve iyileştirmeler.
+v0.0.4 / 2019.02.10 : Testler eklendi. Bazı hata düzeltmeleri ve iyileştirmeler yapıldı.
 
 v0.0.3 / 2019.02.06 : Yeni sözdizimleri eklendi. Testler eklenmeye başlandı. Çok sayıda iyileştirme yapıldı.
 

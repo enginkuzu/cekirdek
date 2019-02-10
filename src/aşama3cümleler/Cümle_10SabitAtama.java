@@ -9,7 +9,7 @@ public class Cümle_10SabitAtama extends Cümle {
 	public String sabitVeriTipi;
 
 	public Cümle_10SabitAtama(int değişkenNo, String sabitVeri, String sabitVeriTipi) {
-		super(CÜMLE.TİP_10SABİTATAMA);
+		super(CÜMLE.TİP_10SABİT_ATAMA);
 		this.değişkenNo = değişkenNo;
 		this.sabitVeri = sabitVeri;
 		this.sabitVeriTipi = sabitVeriTipi;

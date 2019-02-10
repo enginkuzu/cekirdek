@@ -2,9 +2,9 @@ package yardımcı;
 
 public class Değişkenler {
 
-	public static final String UYGULAMA_ADI_VE_SURUMU = "Derleyici 0.0.4";
+	public static final String UYGULAMA_ADI_VE_SÜRÜMÜ = "Çekirdek sürüm 0.0.4";
 	
-	public static boolean IS_TURKISH = "tr".equals(System.getProperty("user.language"));
+	public static boolean DİL_TÜRKÇE_Mİ = "tr".equals(System.getProperty("user.language"));
 	
 	public enum SÖZCÜK {
 		TİP_00YOK,
@@ -21,24 +21,24 @@ public class Değişkenler {
 		TİP_11TANIMLAMA_SOLA,
 		TİP_12TANIMLAMA_SAĞA,
 		TİP_13ÖZELLİK,
-		TİP_14AÇPARANTEZ,
-		TİP_15KAPAPARANTEZ,
-		TİP_16AÇSÜSLÜ,
-		TİP_17KAPASÜSLÜ,
+		TİP_14AÇ_PARANTEZ,
+		TİP_15KAPA_PARANTEZ,
+		TİP_16AÇ_SÜSLÜ,
+		TİP_17KAPA_SÜSLÜ,
 		TİP_18VİRGÜL
 	}
 	
 	public enum CÜMLE {
-		TİP_01DEĞİŞKENYENİ,
-		TİP_02GEÇİCİDEĞİŞKENYENİ,
-		TİP_03DEĞİŞKENSİL,
-		TİP_04OPERATÖRİŞLEMİ,
-		TİP_05FUNKSİYONÇAĞRISI,
-		TİP_06DEĞİŞKENATAMA,
-		TİP_07ASSEMBLY,
-		TİP_08ASSEMBLYDATA,
-		TİP_09ASSEMBLYRODATA,
-		TİP_10SABİTATAMA
+		TİP_01DEĞİŞKEN_YENİ,
+		TİP_02GEÇİCİ_DEĞİŞKEN_YENİ,
+		TİP_03DEĞİŞKEN_SİL,
+		TİP_04OPERATÖR_İŞLEMİ,
+		TİP_05FUNKSİYON_ÇAĞRISI,
+		TİP_06DEĞİŞKEN_ATAMA,
+		TİP_07MAKİNE_DİLİ_KOD,
+		TİP_08MAKİNE_DİLİ_VERİ,
+		TİP_09MAKİNE_DİLİ_SABİT_VERİ,
+		TİP_10SABİT_ATAMA
 	}
 	
 	public enum FONKSİYON {

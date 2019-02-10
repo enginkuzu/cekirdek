@@ -45,8 +45,8 @@ public class Fonksiyonlar {
 		return false;
 	}
 
-	public static KomutÇıktısı komutÇalıştır(boolean detaylariGöster, String[] parametreler) {
-		if (detaylariGöster) {
+	public static KomutÇıktısı komutÇalıştır(boolean detaylariEkranaBas, String[] parametreler) {
+		if (detaylariEkranaBas) {
 			System.out.println("Fonksiyonlar : komutÇalıştır() : " + Arrays.toString(parametreler));
 		}
 		Process process = null;
@@ -68,7 +68,7 @@ public class Fonksiyonlar {
 				normalÇıktı.append(tampon, 0, okunanByte);
 			}
 			komutÇıktısı.normalÇıktı = normalÇıktı.toString();
-			if (detaylariGöster) {
+			if (detaylariEkranaBas) {
 				System.out.println("Fonksiyonlar : komutÇalıştır() : " + komutÇıktısı.normalÇıktı);
 			}
 			//
@@ -77,19 +77,19 @@ public class Fonksiyonlar {
 				hataÇıktısı.append(tampon, 0, okunanByte);
 			}
 			komutÇıktısı.hataÇıktısı = hataÇıktısı.toString();
-			if (detaylariGöster) {
+			if (detaylariEkranaBas) {
 				System.err.println("Fonksiyonlar : komutÇalıştır() : " + komutÇıktısı.hataÇıktısı);
 			}
 			//
 			int sonlanmaKodu = process.waitFor();
 			long zaman2 = System.currentTimeMillis();
-			if (detaylariGöster) {
+			if (detaylariEkranaBas) {
 				System.out.println("Fonksiyonlar : komutÇalıştır() : SONLANMA KODU : " + sonlanmaKodu + " ("
 						+ (zaman2 - zaman1) + " ms sürdü)");
 			}
 			return komutÇıktısı;
 		} catch (Exception ex) {
-			if (detaylariGöster) {
+			if (detaylariEkranaBas) {
 				System.out.println(
 						"Fonksiyonlar : komutÇalıştır() : " + Arrays.toString(parametreler) + " " + ex.toString());
 			}

@@ -8,7 +8,7 @@ public class Cümle_06DeğişkenAtama extends Cümle {
 	public int değişkenNoHedef;
 
 	public Cümle_06DeğişkenAtama(int değişkenNoKaynak, int değişkenNoHedef) {
-		super(CÜMLE.TİP_06DEĞİŞKENATAMA);
+		super(CÜMLE.TİP_06DEĞİŞKEN_ATAMA);
 		this.değişkenNoKaynak = değişkenNoKaynak;
 		this.değişkenNoHedef = değişkenNoHedef;
 	}
