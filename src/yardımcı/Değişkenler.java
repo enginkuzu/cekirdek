@@ -2,7 +2,7 @@ package yardımcı;
 
 public class Değişkenler {
 
-	public static final String UYGULAMA_ADI_VE_SURUMU = "Derleyici 0.0.3";
+	public static final String UYGULAMA_ADI_VE_SURUMU = "Derleyici 0.0.4";
 	
 	public static boolean IS_TURKISH = "tr".equals(System.getProperty("user.language"));
 	

@@ -2,6 +2,7 @@ package başlangıç;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 
 import aşama1oku.Aşama1Oku;
@@ -31,12 +32,14 @@ public class Başlangıç {
 		int i = 0;
 		int başarılı = 0;
 		int başarısız = 0;
+		Collections.sort(kodDosyaları);
 		for (String dosya : kodDosyaları) {
+			System.out.print("TEST : (" + ++i + "/" + kodDosyaları.size() + ") " + dosya + " ");
 			String dosyaİsmi = dosya.substring(0, dosya.length() - 4);
 			boolean başarılıMı = true;
 			String hatalar = derle("testler/" + dosya);
 			if (hatalar != null) {
-				String hataÇıktıDosyası = dosya + ".err";
+				String hataÇıktıDosyası = dosyaİsmi + ".err";
 				if (tümDosyalar.contains(hataÇıktıDosyası)) {
 					String hataÇıktıDosyasıİçeriği = Fonksiyonlar.dosyaOku(new File("testler/" + hataÇıktıDosyası));
 					if (!hataÇıktıDosyasıİçeriği.equals(hatalar)) {
@@ -60,8 +63,7 @@ public class Başlangıç {
 			} else {
 				başarısız++;
 			}
-			System.out.println(
-					"TEST " + (başarılıMı ? "+" : "-") + " : (" + ++i + "/" + kodDosyaları.size() + ") " + dosya);
+			System.out.println(başarılıMı ? "+" : "-");
 		}
 		System.out.println("TESTLER : " + başarılı + " başarılı, " + başarısız + " başarısız");
 	}

@@ -42,10 +42,8 @@ sayı3 < sayı1 // sayı2;	sayı3.printhn;
 
 ' Olası hatalar :
 ' - Uygun olmayan değişken ismi
-' - Aynı isimde tekrar değişken tanımlamak
 ' - Bilinmeyen değişken tipi
 ' - Çok büyük veya küçük i64 değeri
-' - Tanımlanmamış değişken kullanmak
 ' - Bilinmeyen operatör
 ' - Bilinmeyen fonksiyon
 

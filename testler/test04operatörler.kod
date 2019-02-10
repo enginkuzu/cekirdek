@@ -1,15 +1,37 @@
 
 sayı <: 7;
 
-sayı1 <: sayı + 1;
-sayı1.printhn;
+sayı01 <: sayı + 1;
+sayı02 <: sayı - 1;
+sayı03 <: sayı * 2;
+sayı04 <: sayı // 3;
 
-sayı2 <: sayı - 1;
-sayı2.printhn;
+sayı01.printhn;
+sayı02.printhn;
+sayı03.printhn;
+sayı04.printhn;
 
-sayı3 <: sayı * 2;
-sayı3.printhn;
+sayı11 <: sayı + sayı;
+sayı12 <: 123 + sayı;
+sayı13 <: sayı + 123;
+sayı14 <: 123 + 123;
+sayı + sayı :> sayı15;
+123 + sayı :> sayı16;
+sayı + 123 :> sayı17;
+123 + 123 :> sayı18;
 
-sayı4 <: sayı // 3;
-sayı4.printhn;
+sayı11 < sayı + sayı;
+sayı12 < 123 + sayı;
+sayı13 < sayı + 123;
+sayı14 < 123 + 123;
+sayı + sayı > sayı11;
+123 + sayı > sayı12;
+sayı + 123 > sayı13;
+123 + 123 > sayı14;
+
+sayı11.printhn;
+sayı12.printhn;
+sayı13.printhn;
+sayı14.printhn;
+
 

@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class DeğişkenKullanımRaporu {
 
-	public int değişkenId;
+	public int değişkenNo;
 	public int yeniIndeks; // İşlem Sıra Numarası
 	//
 	public int okumaSayaç = 0;
 	public int yazmaSayaç = 0;
 	public ArrayList<Integer> işlemler = new ArrayList<Integer>(); // İşlem Sıra Numarası : Okuma +, Yazma -
 
-	public DeğişkenKullanımRaporu(int değişkenId, int yeniIndeks) {
-		this.değişkenId = değişkenId;
+	public DeğişkenKullanımRaporu(int değişkenNo, int yeniIndeks) {
+		this.değişkenNo = değişkenNo;
 		this.yeniIndeks = yeniIndeks;
 	}
 
@@ -42,7 +42,7 @@ public class DeğişkenKullanımRaporu {
 
 	@Override
 	public String toString() {
-		return "[" + değişkenId + "],oku:" + okumaSayaç + ",yaz:" + yazmaSayaç + "," + işlemler;
+		return "değişkenNo[" + değişkenNo + "],oku:" + okumaSayaç + ",yaz:" + yazmaSayaç + ",işlemler" + işlemler;
 	}
 
 }

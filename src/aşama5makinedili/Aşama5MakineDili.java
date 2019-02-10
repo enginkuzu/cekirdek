@@ -23,22 +23,11 @@ import yardımcı.Fonksiyonlar;
 
 public class Aşama5MakineDili {
 
-	private static final Stack<String> saklaçStack = new Stack<String>() {
-		{
-			// push("r10");
-			// push("r8");
-			// push("r9");
-			// push("rbx");
-			push("r12");
-			push("r13");
-			push("r14");
-			push("r15");
-		}
-	};
-	private static int yığıtAdres = 0;
-	private static final HashMap<Integer, DeğişkenDetaySaklaç> saklaçtakiDeğişkenler = new HashMap<Integer, DeğişkenDetaySaklaç>();
-	private static final HashMap<Integer, DeğişkenDetayYığıt> yığıttakiDeğişkenler = new HashMap<Integer, DeğişkenDetayYığıt>();
-	private static final ArrayList<İşlem> işlemler = new ArrayList<İşlem>();
+	private static Stack<String> saklaçStack;
+	private static int yığıtAdres;
+	private static HashMap<Integer, DeğişkenDetaySaklaç> saklaçtakiDeğişkenler;
+	private static HashMap<Integer, DeğişkenDetayYığıt> yığıttakiDeğişkenler;
+	private static ArrayList<İşlem> işlemler;
 
 	private static int saklaçİlkKullanımİndeksiniBul(Aşama3Çıktısı çıktı, int aktifİndeks, int değişkenNo) {
 
@@ -124,6 +113,23 @@ public class Aşama5MakineDili {
 	}
 
 	public static void işle(Aşama3Çıktısı çıktı, String dosyaAdı) {
+
+		saklaçStack = new Stack<String>() {
+			{
+				// push("r10");
+				// push("r8");
+				// push("r9");
+				// push("rbx");
+				push("r12");
+				push("r13");
+				push("r14");
+				push("r15");
+			}
+		};
+		yığıtAdres = 0;
+		saklaçtakiDeğişkenler = new HashMap<Integer, DeğişkenDetaySaklaç>();
+		yığıttakiDeğişkenler = new HashMap<Integer, DeğişkenDetayYığıt>();
+		işlemler = new ArrayList<İşlem>();
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("\t.intel_syntax noprefix\n");

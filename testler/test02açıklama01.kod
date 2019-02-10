@@ -1,0 +1,12 @@
+
+'Bu bir açıklama ifadesidir
+
+sayı<:7; 'Bu bir başka açıklama ifadesidir
+
+''Bu çok
+satırlı bir
+açıklama ifadesidir''
+
+sayı.printhn; ''Satır içi açıklama da yapılabilir'' sayı.printhn;
+
+

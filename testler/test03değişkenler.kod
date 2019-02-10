@@ -14,10 +14,21 @@ sayı5 < 1;
 3 :> sayı6;
 1 > sayı6;
 
-sayı1.printhn
-sayı2.printhn
-sayı3.printhn
-sayı4.printhn
-sayı5.printhn
-sayı6.printhn
+sayı7:i64 < sayı1;
+sayı2 > sayı8:i64;
+
+sayı9 <: sayı1;
+sayı2 :> sayı10;
+
+sayı1.printhn;
+sayı2.printhn;
+sayı3.printhn;
+sayı4.printhn;
+sayı5.printhn;
+sayı6.printhn;
+sayı7.printhn;
+sayı8.printhn;
+sayı9.printhn;
+sayı10.printhn;
+
 

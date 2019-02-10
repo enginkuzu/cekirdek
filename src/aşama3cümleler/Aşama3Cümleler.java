@@ -140,6 +140,8 @@ public class Aşama3Cümleler {
 				} else {
 					Sözcük_03TamSayı tamsayı = (Sözcük_03TamSayı) cümle[0];
 					aktifFonksiyon.geçiciDeğişkenNo--;
+					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDeğişkenNo,
+							new Değişken(aktifFonksiyon.geçiciDeğişkenNo, null, "i64"));
 					Cümle_02GeçiciDeğişkenYeni komut1 = new Cümle_02GeçiciDeğişkenYeni(aktifFonksiyon.geçiciDeğişkenNo,
 							"i64");
 					aktifFonksiyon.cümleler.add(komut1);
@@ -149,6 +151,8 @@ public class Aşama3Cümleler {
 					değişkenNo = komut.değişkenNo;
 				}
 				aktifFonksiyon.geçiciDeğişkenNo--;
+				aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDeğişkenNo,
+						new Değişken(aktifFonksiyon.geçiciDeğişkenNo, null, "i64"));
 				Cümle_02GeçiciDeğişkenYeni komut1 = new Cümle_02GeçiciDeğişkenYeni(aktifFonksiyon.geçiciDeğişkenNo,
 						"i64");
 				aktifFonksiyon.cümleler.add(komut1);
@@ -162,13 +166,18 @@ public class Aşama3Cümleler {
 					&& cümle[5].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// sayı:i64 < sayı1;
 				// sayı:i64 < 123;
+				String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
+				if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
+					hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsim + " !!!\n");
+					continue;
+				}
 				aktifFonksiyon.gerçekDeğişkenNo++;
-				Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, ((Sözcük_01İsim) cümle[0]).isim,
+				Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, değişkenİsim,
 						((Sözcük_01İsim) cümle[2]).isim);
 				aktifFonksiyon.değişkenNoMap.put(değişken.değişkenNo, değişken);
-				aktifFonksiyon.değişkenİsimMap.put(değişken.değişkenİsim, değişken);
-				aktifFonksiyon.cümleler.add(
-						new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişken.değişkenİsim, değişken.değişkenTipi));
+				aktifFonksiyon.değişkenİsimMap.put(değişkenİsim, değişken);
+				aktifFonksiyon.cümleler
+						.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipi));
 				if (cümle[4].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim = ((Sözcük_01İsim) cümle[4]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
@@ -187,13 +196,18 @@ public class Aşama3Cümleler {
 					&& cümle[5].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// sayı1 > sayı:i64;
 				// 123 > sayı:i64;
+				String değişkenİsim = ((Sözcük_01İsim) cümle[2]).isim;
+				if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
+					hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsim + " !!!\n");
+					continue;
+				}
 				aktifFonksiyon.gerçekDeğişkenNo++;
-				Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, ((Sözcük_01İsim) cümle[2]).isim,
+				Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, değişkenİsim,
 						((Sözcük_01İsim) cümle[4]).isim);
 				aktifFonksiyon.değişkenNoMap.put(değişken.değişkenNo, değişken);
-				aktifFonksiyon.değişkenİsimMap.put(değişken.değişkenİsim, değişken);
-				aktifFonksiyon.cümleler.add(
-						new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişken.değişkenİsim, değişken.değişkenTipi));
+				aktifFonksiyon.değişkenİsimMap.put(değişkenİsim, değişken);
+				aktifFonksiyon.cümleler
+						.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipi));
 				if (cümle[0].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim = ((Sözcük_01İsim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
@@ -212,13 +226,17 @@ public class Aşama3Cümleler {
 					&& cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// sayı <: sayı1;
 				// sayı <: 123;
+				String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
+				if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
+					hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsim + " !!!\n");
+					continue;
+				}
 				aktifFonksiyon.gerçekDeğişkenNo++;
-				Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, ((Sözcük_01İsim) cümle[0]).isim,
-						"i64");
+				Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, değişkenİsim, "i64");
 				aktifFonksiyon.değişkenNoMap.put(değişken.değişkenNo, değişken);
-				aktifFonksiyon.değişkenİsimMap.put(değişken.değişkenİsim, değişken);
-				aktifFonksiyon.cümleler.add(
-						new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişken.değişkenİsim, değişken.değişkenTipi));
+				aktifFonksiyon.değişkenİsimMap.put(değişkenİsim, değişken);
+				aktifFonksiyon.cümleler
+						.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipi));
 				if (cümle[2].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim = ((Sözcük_01İsim) cümle[2]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
@@ -236,13 +254,17 @@ public class Aşama3Cümleler {
 					&& cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// sayı1 :> sayı;
 				// 123 :> sayı;
+				String değişkenİsim = ((Sözcük_01İsim) cümle[2]).isim;
+				if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
+					hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsim + " !!!\n");
+					continue;
+				}
 				aktifFonksiyon.gerçekDeğişkenNo++;
-				Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, ((Sözcük_01İsim) cümle[2]).isim,
-						"i64");
+				Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, değişkenİsim, "i64");
 				aktifFonksiyon.değişkenNoMap.put(değişken.değişkenNo, değişken);
-				aktifFonksiyon.değişkenİsimMap.put(değişken.değişkenİsim, değişken);
-				aktifFonksiyon.cümleler.add(
-						new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişken.değişkenİsim, değişken.değişkenTipi));
+				aktifFonksiyon.değişkenİsimMap.put(değişkenİsim, değişken);
+				aktifFonksiyon.cümleler
+						.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipi));
 				if (cümle[0].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim = ((Sözcük_01İsim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
@@ -274,13 +296,17 @@ public class Aşama3Cümleler {
 					}
 					değişkenNo0 = aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo;
 				} else {
+					String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
+					if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
+						hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsim + " !!!\n");
+						continue;
+					}
 					aktifFonksiyon.gerçekDeğişkenNo++;
-					Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, ((Sözcük_01İsim) cümle[0]).isim,
-							"i64");
+					Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, değişkenİsim, "i64");
 					aktifFonksiyon.değişkenNoMap.put(değişken.değişkenNo, değişken);
-					aktifFonksiyon.değişkenİsimMap.put(değişken.değişkenİsim, değişken);
-					aktifFonksiyon.cümleler.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişken.değişkenİsim,
-							değişken.değişkenTipi));
+					aktifFonksiyon.değişkenİsimMap.put(değişkenİsim, değişken);
+					aktifFonksiyon.cümleler
+							.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipi));
 					değişkenNo0 = değişken.değişkenNo;
 				}
 				int değişkenNo1;
@@ -294,6 +320,8 @@ public class Aşama3Cümleler {
 				} else {
 					Sözcük_03TamSayı tamsayı = (Sözcük_03TamSayı) cümle[2];
 					aktifFonksiyon.geçiciDeğişkenNo--;
+					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDeğişkenNo,
+							new Değişken(aktifFonksiyon.geçiciDeğişkenNo, null, "i64"));
 					Cümle_02GeçiciDeğişkenYeni komut1 = new Cümle_02GeçiciDeğişkenYeni(aktifFonksiyon.geçiciDeğişkenNo,
 							"i64");
 					aktifFonksiyon.cümleler.add(komut1);
@@ -313,6 +341,8 @@ public class Aşama3Cümleler {
 				} else {
 					Sözcük_03TamSayı tamsayı = (Sözcük_03TamSayı) cümle[4];
 					aktifFonksiyon.geçiciDeğişkenNo--;
+					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDeğişkenNo,
+							new Değişken(aktifFonksiyon.geçiciDeğişkenNo, null, "i64"));
 					Cümle_02GeçiciDeğişkenYeni komut1 = new Cümle_02GeçiciDeğişkenYeni(aktifFonksiyon.geçiciDeğişkenNo,
 							"i64");
 					aktifFonksiyon.cümleler.add(komut1);
@@ -341,13 +371,17 @@ public class Aşama3Cümleler {
 					}
 					değişkenNo0 = aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo;
 				} else {
+					String değişkenİsim = ((Sözcük_01İsim) cümle[4]).isim;
+					if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
+						hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsim + " !!!\n");
+						continue;
+					}
 					aktifFonksiyon.gerçekDeğişkenNo++;
-					Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, ((Sözcük_01İsim) cümle[4]).isim,
-							"i64");
+					Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, değişkenİsim, "i64");
 					aktifFonksiyon.değişkenNoMap.put(değişken.değişkenNo, değişken);
-					aktifFonksiyon.değişkenİsimMap.put(değişken.değişkenİsim, değişken);
-					aktifFonksiyon.cümleler.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişken.değişkenİsim,
-							değişken.değişkenTipi));
+					aktifFonksiyon.değişkenİsimMap.put(değişkenİsim, değişken);
+					aktifFonksiyon.cümleler
+							.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipi));
 					değişkenNo0 = değişken.değişkenNo;
 				}
 				int değişkenNo1;
@@ -360,6 +394,8 @@ public class Aşama3Cümleler {
 				} else {
 					Sözcük_03TamSayı tamsayı = (Sözcük_03TamSayı) cümle[0];
 					aktifFonksiyon.geçiciDeğişkenNo--;
+					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDeğişkenNo,
+							new Değişken(aktifFonksiyon.geçiciDeğişkenNo, null, "i64"));
 					Cümle_02GeçiciDeğişkenYeni komut1 = new Cümle_02GeçiciDeğişkenYeni(aktifFonksiyon.geçiciDeğişkenNo,
 							"i64");
 					aktifFonksiyon.cümleler.add(komut1);
@@ -378,6 +414,8 @@ public class Aşama3Cümleler {
 				} else {
 					Sözcük_03TamSayı tamsayı = (Sözcük_03TamSayı) cümle[2];
 					aktifFonksiyon.geçiciDeğişkenNo--;
+					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDeğişkenNo,
+							new Değişken(aktifFonksiyon.geçiciDeğişkenNo, null, "i64"));
 					Cümle_02GeçiciDeğişkenYeni komut1 = new Cümle_02GeçiciDeğişkenYeni(aktifFonksiyon.geçiciDeğişkenNo,
 							"i64");
 					aktifFonksiyon.cümleler.add(komut1);

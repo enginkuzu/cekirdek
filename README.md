@@ -6,7 +6,9 @@
 
 ### Sürüm Notları :
 
-v0.0.3 / 2019.02.06 : Yeni sözdizimleri eklendi. Testler eklenmeye başladı. Çok sayıda iyileştirme yapıldı.
+v0.0.4 / 2019.02.10 : Testler eklendi. Bazı hata düzeltmeleri ve iyileştirmeler.
+
+v0.0.3 / 2019.02.06 : Yeni sözdizimleri eklendi. Testler eklenmeye başlandı. Çok sayıda iyileştirme yapıldı.
 
 v0.0.2 / 2019.01.13 : Kütüphanelerin esnekliği, iyileştirme aşaması ve makina kodu üretimi ile ilgili altyapı çalışmaları. (Hata ve eksikleri ile beraber)
 

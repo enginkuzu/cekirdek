@@ -1,17 +1,16 @@
 
- sayı < : 1 ;  
+ sayı1 < : 1 ;  
 
-sayı<:1;
+sayı2<:2;
 
-sayı
+sayı3
 <:
-1
+3
 ;
 
-sayı
+sayı1
 .
 printhn
 ;
-
 
 
