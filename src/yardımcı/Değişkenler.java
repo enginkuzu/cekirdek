@@ -1,5 +1,8 @@
 package yardımcı;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class Değişkenler {
 
 	public static final String UYGULAMA_ADI_VE_SÜRÜMÜ = "Çekirdek sürüm 0.0.4";
@@ -50,5 +53,18 @@ public class Değişkenler {
 	public enum SAKLAÇ {
 		RAX, RBX, RCX, RDX, RBP, RSI, RDI, RSP, R8, R9, R10, R11, R12, R13, R14, R15
 	}
+	
+	public static final HashSet<String> ANAHTAR_KELIMELER = new HashSet<String>() {{
+	    add("i64");
+	}};
+	
+	public static final int ID_i64 = 7;
+	public static final String STRING_i64 = "i64";
+	public static final HashMap<Integer, String> TİP_MAP_ID_STR = new HashMap<Integer, String>(){{
+		put(ID_i64, STRING_i64);
+	}};
+	public static final HashMap<String, Integer> TİP_MAP_STR_ID = new HashMap<String, Integer>(){{
+		put(STRING_i64, ID_i64);
+	}};
 
 }

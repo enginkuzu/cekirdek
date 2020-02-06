@@ -4,12 +4,12 @@ public class Değişken {
 
 	public int değişkenNo;
 	public String değişkenİsim;
-	public String değişkenTipi;
+	public int değişkenTipiId;
 
-	public Değişken(int değişkenNo, String değişkenİsim, String değişkenTipi) {
+	public Değişken(int değişkenNo, String değişkenİsim, int değişkenTipiId) {
 		this.değişkenNo = değişkenNo;
 		this.değişkenİsim = değişkenİsim;
-		this.değişkenTipi = değişkenTipi;
+		this.değişkenTipiId = değişkenTipiId;
 	}
 
 }

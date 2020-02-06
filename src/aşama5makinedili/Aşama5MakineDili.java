@@ -206,8 +206,8 @@ public class Aşama5MakineDili {
 				}
 			} else if (cümle instanceof Cümle_04Operatörİşlemi) {
 				Cümle_04Operatörİşlemi cümle03 = (Cümle_04Operatörİşlemi) cümle;
-				String anahtar = çıktı.anaFonksiyon.değişkenNoMap.get(cümle03.parametreNo1).değişkenTipi
-						+ cümle03.operatör + çıktı.anaFonksiyon.değişkenNoMap.get(cümle03.parametreNo2).değişkenTipi;
+				String anahtar = çıktı.anaFonksiyon.değişkenNoMap.get(cümle03.parametreNo1).değişkenTipiId
+						+ cümle03.operatör + çıktı.anaFonksiyon.değişkenNoMap.get(cümle03.parametreNo2).değişkenTipiId;
 				Fonksiyon_01OperatörFonksiyon operatörFonksiyon = çıktı.operatörFonksiyonMap.get(anahtar);
 				if (!saklaçtakiDeğişkenler.containsKey(cümle03.parametreNo1)) {
 					if (saklaçStack.isEmpty()) {
