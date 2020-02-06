@@ -20,7 +20,7 @@ public class Aşama6Çıktı {
 		}
 
 		KomutÇıktısı çıktı2 = Fonksiyonlar.komutÇalıştır(false,
-				new String[] { "ld", "-nostartfiles", "-s", dosyaAdı + ".o", "-o", dosyaAdı });
+				new String[] { "ld", "-nostartfiles", "-s", dosyaAdı + ".o", "-o", dosyaAdı + ".bin" });
 		if (!çıktı2.hataÇıktısı.isEmpty()) {
 			System.out.println(çıktı2.hataÇıktısı);
 			return çıktı2.hataÇıktısı;

@@ -1,4 +1,4 @@
-# Yeni-Bir-Programlama-Dili
+# Çekirdek Programlama Dili
 
 ### Geliştirmelerle ilgili son durum :
 

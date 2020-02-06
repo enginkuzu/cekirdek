@@ -52,7 +52,8 @@ public class Aşama1Başlangıç {
 			} else {
 				String normalÇıktıDosyası = dosyaİsmiVeUzantısı + ".out";
 				if (tümDosyalar.contains(normalÇıktıDosyası)) {
-					KomutÇıktısı çıktı = Fonksiyonlar.komutÇalıştır(false, new String[] { "testler/" + dosyaİsmi });
+					KomutÇıktısı çıktı = Fonksiyonlar.komutÇalıştır(false,
+							new String[] { "testler/" + dosyaİsmi + ".bin" });
 					String normalÇıktıDosyasıİçeriği = Fonksiyonlar.dosyaOku(new File("testler/" + normalÇıktıDosyası));
 					if (!normalÇıktıDosyasıİçeriği.equals(çıktı.normalÇıktı)) {
 						başarılıMı = false;

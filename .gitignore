@@ -1,2 +1,6 @@
 hs_err_pid*
 /bin/
+/testler/*.log
+/testler/*.s
+/testler/*.o
+/testler/*.bin
