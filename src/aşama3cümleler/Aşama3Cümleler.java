@@ -33,6 +33,10 @@ public class Aşama3Cümleler {
 		hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsmi + " !!!\n");
 	}
 
+	private static void hata04_DeğişkenİsmiUygunDeğil(String değişkenİsmi) {
+		hatalar.append("Değişken İsmi Uygun Değil : " + değişkenİsmi + " !!!\n");
+	}
+
 	public static Object işle(ArrayList<Sözcük[]> tümCümleler, String dosyaAdı) {
 
 		operatörFonksiyonMap = new HashMap<>();
@@ -190,7 +194,10 @@ public class Aşama3Cümleler {
 				// sayı:i64 < 123;
 				String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
 				String değişkenTipi = ((Sözcük_01İsim) cümle[2]).isim;
-				if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
+				if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsim)) {
+					hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
+					continue;
+				} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
 					hata03_DeğişkenİsimÇakışması(değişkenİsim);
 					continue;
 				} else if (!Değişkenler.TİP_MAP_STR_ID.containsKey(değişkenTipi)) {
@@ -224,7 +231,10 @@ public class Aşama3Cümleler {
 				// 123 > sayı:i64;
 				String değişkenİsim = ((Sözcük_01İsim) cümle[2]).isim;
 				String değişkenTipi = ((Sözcük_01İsim) cümle[4]).isim;
-				if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
+				if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsim)) {
+					hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
+					continue;
+				} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
 					hata03_DeğişkenİsimÇakışması(değişkenİsim);
 					continue;
 				} else if (!Değişkenler.TİP_MAP_STR_ID.containsKey(değişkenTipi)) {
@@ -257,7 +267,10 @@ public class Aşama3Cümleler {
 				// sayı <: sayı1;
 				// sayı <: 123;
 				String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
-				if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
+				if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsim)) {
+					hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
+					continue;
+				} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
 					hata03_DeğişkenİsimÇakışması(değişkenİsim);
 					continue;
 				}
@@ -285,7 +298,10 @@ public class Aşama3Cümleler {
 				// sayı1 :> sayı;
 				// 123 :> sayı;
 				String değişkenİsim = ((Sözcük_01İsim) cümle[2]).isim;
-				if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
+				if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsim)) {
+					hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
+					continue;
+				} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
 					hata03_DeğişkenİsimÇakışması(değişkenİsim);
 					continue;
 				}
@@ -327,7 +343,10 @@ public class Aşama3Cümleler {
 					değişkenNo0 = aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo;
 				} else {
 					String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
-					if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
+					if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsim)) {
+						hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
+						continue;
+					} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
 						hata03_DeğişkenİsimÇakışması(değişkenİsim);
 						continue;
 					}
@@ -402,7 +421,10 @@ public class Aşama3Cümleler {
 					değişkenNo0 = aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo;
 				} else {
 					String değişkenİsim = ((Sözcük_01İsim) cümle[4]).isim;
-					if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
+					if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsim)) {
+						hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
+						continue;
+					} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
 						hata03_DeğişkenİsimÇakışması(değişkenİsim);
 						continue;
 					}
