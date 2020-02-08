@@ -19,6 +19,19 @@ public class Aşama3Cümleler {
 	private static HashMap<String, Fonksiyon_02İsimliFonksiyon> isimFonksiyonMap;
 	private static Fonksiyon_03AnaFonksiyon anaFonksiyon;
 	private static Fonksiyon aktifFonksiyon;
+	private static StringBuilder hatalar;
+
+	private static void hata01_BilinmeyenDeğişkenTipi(String değişkenTipi) {
+		hatalar.append("Bilinmeyen Değişken Tipi : " + değişkenTipi + " !!!\n");
+	}
+
+	private static void hata02_TanımsızDeğişken(String değişkenİsmi) {
+		hatalar.append("Tanımsız Değişken : " + değişkenİsmi + " !!!\n");
+	}
+
+	private static void hata03_DeğişkenİsimÇakışması(String değişkenİsmi) {
+		hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsmi + " !!!\n");
+	}
 
 	public static Object işle(ArrayList<Sözcük[]> tümCümleler, String dosyaAdı) {
 
@@ -26,8 +39,7 @@ public class Aşama3Cümleler {
 		isimFonksiyonMap = new HashMap<>();
 		anaFonksiyon = new Fonksiyon_03AnaFonksiyon();
 		aktifFonksiyon = anaFonksiyon;
-
-		StringBuilder hatalar = new StringBuilder();
+		hatalar = new StringBuilder();
 
 		for (Sözcük[] cümle : tümCümleler) {
 			if (cümle[0].tip == SÖZCÜK.TİP_13ÖZELLİK && cümle[cümle.length - 1].tip == SÖZCÜK.TİP_06SATIR_SONU) {
@@ -49,10 +61,10 @@ public class Aşama3Cümleler {
 				String değişken1Tip = ((Sözcük_01İsim) cümle[5]).isim;
 				String değişken2Tip = ((Sözcük_01İsim) cümle[11]).isim;
 				if (!Değişkenler.TİP_MAP_STR_ID.containsKey(değişken1Tip)) {
-					hatalar.append("Bilinmeyen Değişken Tipi : " + değişken1Tip + " !!!\n");
+					hata01_BilinmeyenDeğişkenTipi(değişken1Tip);
 					continue;
 				} else if (!Değişkenler.TİP_MAP_STR_ID.containsKey(değişken2Tip)) {
-					hatalar.append("Bilinmeyen Değişken Tipi : " + değişken2Tip + " !!!\n");
+					hata01_BilinmeyenDeğişkenTipi(değişken2Tip);
 					continue;
 				}
 				Fonksiyon_01OperatörFonksiyon operatörFonksiyon = new Fonksiyon_01OperatörFonksiyon();
@@ -89,9 +101,9 @@ public class Aşama3Cümleler {
 				String isimKaynak = ((Sözcük_01İsim) cümle[2]).isim;
 				String isimHedef = ((Sözcük_01İsim) cümle[0]).isim;
 				if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimKaynak)) {
-					hatalar.append("Tanımsız Değişken : " + isimKaynak + " !!!\n");
+					hata02_TanımsızDeğişken(isimKaynak);
 				} else if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
-					hatalar.append("Tanımsız Değişken : " + isimHedef + " !!!\n");
+					hata02_TanımsızDeğişken(isimHedef);
 				} else {
 					aktifFonksiyon.cümleler
 							.add(new Cümle_06DeğişkenAtama(aktifFonksiyon.değişkenİsimMap.get(isimKaynak).değişkenNo,
@@ -103,9 +115,9 @@ public class Aşama3Cümleler {
 				String isimKaynak = ((Sözcük_01İsim) cümle[0]).isim;
 				String isimHedef = ((Sözcük_01İsim) cümle[2]).isim;
 				if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimKaynak)) {
-					hatalar.append("Tanımsız Değişken : " + isimKaynak + " !!!\n");
+					hata02_TanımsızDeğişken(isimKaynak);
 				} else if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
-					hatalar.append("Tanımsız Değişken : " + isimHedef + " !!!\n");
+					hata02_TanımsızDeğişken(isimHedef);
 				} else {
 					aktifFonksiyon.cümleler
 							.add(new Cümle_06DeğişkenAtama(aktifFonksiyon.değişkenİsimMap.get(isimKaynak).değişkenNo,
@@ -117,7 +129,7 @@ public class Aşama3Cümleler {
 				// 123 > sayı2;
 				String isimHedef = ((Sözcük_01İsim) cümle[2]).isim;
 				if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
-					hatalar.append("Tanımsız Değişken : " + isimHedef + " !!!\n");
+					hata02_TanımsızDeğişken(isimHedef);
 				} else {
 					aktifFonksiyon.cümleler
 							.add(new Cümle_10SabitAtama(aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo,
@@ -128,7 +140,7 @@ public class Aşama3Cümleler {
 				// sayı2 < 123;
 				String isimHedef = ((Sözcük_01İsim) cümle[0]).isim;
 				if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
-					hatalar.append("Tanımsız Değişken : " + isimHedef + " !!!\n");
+					hata02_TanımsızDeğişken(isimHedef);
 				} else {
 					aktifFonksiyon.cümleler
 							.add(new Cümle_10SabitAtama(aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo,
@@ -143,7 +155,7 @@ public class Aşama3Cümleler {
 				if (cümle[0].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim = ((Sözcük_01İsim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
-						hatalar.append("Tanımsız Değişken : " + isim + " !!!\n");
+						hata02_TanımsızDeğişken(isim);
 						continue;
 					}
 					değişkenNo = aktifFonksiyon.değişkenİsimMap.get(isim).değişkenNo;
@@ -179,10 +191,10 @@ public class Aşama3Cümleler {
 				String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
 				String değişkenTipi = ((Sözcük_01İsim) cümle[2]).isim;
 				if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
-					hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsim + " !!!\n");
+					hata03_DeğişkenİsimÇakışması(değişkenİsim);
 					continue;
 				} else if (!Değişkenler.TİP_MAP_STR_ID.containsKey(değişkenTipi)) {
-					hatalar.append("Bilinmeyen Değişken Tipi : " + değişkenTipi + " !!!\n");
+					hata01_BilinmeyenDeğişkenTipi(değişkenTipi);
 					continue;
 				}
 				aktifFonksiyon.gerçekDeğişkenNo++;
@@ -195,7 +207,7 @@ public class Aşama3Cümleler {
 				if (cümle[4].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim = ((Sözcük_01İsim) cümle[4]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
-						hatalar.append("Tanımsız Değişken : " + isim + " !!!\n");
+						hata02_TanımsızDeğişken(isim);
 						continue;
 					}
 					int değişkenNo = aktifFonksiyon.değişkenİsimMap.get(isim).değişkenNo;
@@ -213,10 +225,10 @@ public class Aşama3Cümleler {
 				String değişkenİsim = ((Sözcük_01İsim) cümle[2]).isim;
 				String değişkenTipi = ((Sözcük_01İsim) cümle[4]).isim;
 				if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
-					hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsim + " !!!\n");
+					hata03_DeğişkenİsimÇakışması(değişkenİsim);
 					continue;
 				} else if (!Değişkenler.TİP_MAP_STR_ID.containsKey(değişkenTipi)) {
-					hatalar.append("Bilinmeyen Değişken Tipi : " + değişkenTipi + " !!!\n");
+					hata01_BilinmeyenDeğişkenTipi(değişkenTipi);
 					continue;
 				}
 				aktifFonksiyon.gerçekDeğişkenNo++;
@@ -229,7 +241,7 @@ public class Aşama3Cümleler {
 				if (cümle[0].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim = ((Sözcük_01İsim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
-						hatalar.append("Tanımsız Değişken : " + isim + " !!!\n");
+						hata02_TanımsızDeğişken(isim);
 						continue;
 					}
 					int değişkenNo = aktifFonksiyon.değişkenİsimMap.get(isim).değişkenNo;
@@ -246,7 +258,7 @@ public class Aşama3Cümleler {
 				// sayı <: 123;
 				String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
 				if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
-					hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsim + " !!!\n");
+					hata03_DeğişkenİsimÇakışması(değişkenİsim);
 					continue;
 				}
 				aktifFonksiyon.gerçekDeğişkenNo++;
@@ -258,7 +270,7 @@ public class Aşama3Cümleler {
 				if (cümle[2].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim = ((Sözcük_01İsim) cümle[2]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
-						hatalar.append("Tanımsız Değişken : " + isim + " !!!\n");
+						hata02_TanımsızDeğişken(isim);
 						continue;
 					}
 					int değişkenNo = aktifFonksiyon.değişkenİsimMap.get(isim).değişkenNo;
@@ -274,7 +286,7 @@ public class Aşama3Cümleler {
 				// 123 :> sayı;
 				String değişkenİsim = ((Sözcük_01İsim) cümle[2]).isim;
 				if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
-					hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsim + " !!!\n");
+					hata03_DeğişkenİsimÇakışması(değişkenİsim);
 					continue;
 				}
 				aktifFonksiyon.gerçekDeğişkenNo++;
@@ -286,7 +298,7 @@ public class Aşama3Cümleler {
 				if (cümle[0].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim = ((Sözcük_01İsim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
-						hatalar.append("Tanımsız Değişken : " + isim + " !!!\n");
+						hata02_TanımsızDeğişken(isim);
 						continue;
 					}
 					int değişkenNo = aktifFonksiyon.değişkenİsimMap.get(isim).değişkenNo;
@@ -309,14 +321,14 @@ public class Aşama3Cümleler {
 				if (cümle[1].tip == SÖZCÜK.TİP_09ATAMA_SOLA) {
 					String isimHedef = ((Sözcük_01İsim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
-						hatalar.append("Tanımsız Değişken : " + isimHedef + " !!!\n");
+						hata02_TanımsızDeğişken(isimHedef);
 						continue;
 					}
 					değişkenNo0 = aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo;
 				} else {
 					String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
 					if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
-						hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsim + " !!!\n");
+						hata03_DeğişkenİsimÇakışması(değişkenİsim);
 						continue;
 					}
 					aktifFonksiyon.gerçekDeğişkenNo++;
@@ -331,7 +343,7 @@ public class Aşama3Cümleler {
 				if (cümle[2].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim1 = ((Sözcük_01İsim) cümle[2]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim1)) {
-						hatalar.append("Tanımsız Değişken : " + isim1 + " !!!\n");
+						hata02_TanımsızDeğişken(isim1);
 						continue;
 					}
 					değişkenNo1 = aktifFonksiyon.değişkenİsimMap.get(isim1).değişkenNo;
@@ -352,7 +364,7 @@ public class Aşama3Cümleler {
 				if (cümle[4].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim2 = ((Sözcük_01İsim) cümle[4]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim2)) {
-						hatalar.append("Tanımsız Değişken : " + isim2 + " !!!\n");
+						hata02_TanımsızDeğişken(isim2);
 						continue;
 					}
 					değişkenNo2 = aktifFonksiyon.değişkenİsimMap.get(isim2).değişkenNo;
@@ -384,14 +396,14 @@ public class Aşama3Cümleler {
 				if (cümle[3].tip == SÖZCÜK.TİP_10ATAMA_SAĞA) {
 					String isimHedef = ((Sözcük_01İsim) cümle[4]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
-						hatalar.append("Tanımsız Değişken : " + isimHedef + " !!!\n");
+						hata02_TanımsızDeğişken(isimHedef);
 						continue;
 					}
 					değişkenNo0 = aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo;
 				} else {
 					String değişkenİsim = ((Sözcük_01İsim) cümle[4]).isim;
 					if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
-						hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsim + " !!!\n");
+						hata03_DeğişkenİsimÇakışması(değişkenİsim);
 						continue;
 					}
 					aktifFonksiyon.gerçekDeğişkenNo++;
@@ -406,7 +418,7 @@ public class Aşama3Cümleler {
 				if (cümle[0].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim1 = ((Sözcük_01İsim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim1)) {
-						hatalar.append("Tanımsız Değişken : " + isim1 + " !!!\n");
+						hata02_TanımsızDeğişken(isim1);
 					}
 					değişkenNo1 = aktifFonksiyon.değişkenİsimMap.get(isim1).değişkenNo;
 				} else {
@@ -426,7 +438,7 @@ public class Aşama3Cümleler {
 				if (cümle[2].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim2 = ((Sözcük_01İsim) cümle[2]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim2)) {
-						hatalar.append("Tanımsız Değişken : " + isim2 + " !!!\n");
+						hata02_TanımsızDeğişken(isim2);
 					}
 					değişkenNo2 = aktifFonksiyon.değişkenİsimMap.get(isim2).değişkenNo;
 				} else {
