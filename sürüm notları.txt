@@ -1,0 +1,22 @@
+
+v0.1 2020.0?.??
+	* TODO
+	* TODO
+	* TODO
+
+v0.0.4 2019.02.10
+	* Testler eklendi.
+	* Bazı hata düzeltmeleri ve iyileştirmeler yapıldı.
+
+v0.0.3 2019.02.06
+	* Yeni sözdizimleri eklendi.
+	* Testler eklenmeye başlandı.
+	* Çok sayıda iyileştirme yapıldı.
+
+v0.0.2 2019.01.13
+	* Kütüphanelerin esnekliği ile ilgili altyapı çalışmaları.
+	* İyileştirme (optimizasyon) aşaması ile ilgili altyapı çalışmaları.
+	* Makina kodu üretimi ile ilgili altyapı çalışmaları.
+
+v0.0.1 2018.12.11
+	* En basit haliyle örnek kaynak kod dosyası derlenebiliyor.

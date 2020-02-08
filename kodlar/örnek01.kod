@@ -1,0 +1,3 @@
+sayı : i64 < 1;
+sayı < sayı + sayı;
+sayı.printhn;

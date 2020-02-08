@@ -1,5 +1,9 @@
 hs_err_pid*
 /bin/
+/kodlar/*.log
+/kodlar/*.s
+/kodlar/*.o
+/kodlar/*.bin
 /testler/*.log
 /testler/*.s
 /testler/*.o
