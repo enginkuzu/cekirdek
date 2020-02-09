@@ -15,13 +15,18 @@ import sınıflar.KomutÇıktısı;
 public class Fonksiyonlar {
 
 	/*
-	 * public static Long parseLong(String str) { try { return Long.parseLong(str);
-	 * } catch (NumberFormatException ex) { return null; } }
-	 * 
 	 * public static boolean isInteger(String letterDigit) { char[] charArray =
 	 * letterDigit.toCharArray(); for (char c : charArray) { if (c < '0' || c > '9')
 	 * { return false; } } return true; }
 	 */
+
+	public static Long parseLong(String str) {
+		try {
+			return Long.parseLong(str);
+		} catch (NumberFormatException ex) {
+			return null;
+		}
+	}
 
 	public static String dosyaOku(File dosya) {
 		try {
