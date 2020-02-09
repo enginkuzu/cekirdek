@@ -37,6 +37,10 @@ public class Aşama3Cümleler {
 		hatalar.append("Değişken İsmi Uygun Değil : " + değişkenİsmi + " !!!\n");
 	}
 
+	private static void hata04_TanımsızOperatör(String operatörKullanımı) {
+		hatalar.append("Tanımsız Operatör : " + operatörKullanımı + " !!!\n");
+	}
+
 	private static boolean değişkenİsmiKontrol(String değişkenİsmi) {
 		// İlk karakter : _, a-z, A-Z
 		// Diğer karakterler : _, a-z, A-Z, 0-9
@@ -378,13 +382,16 @@ public class Aşama3Cümleler {
 					değişkenNo0 = değişken.değişkenNo;
 				}
 				int değişkenNo1;
+				int değişkenNo1TipId;
 				if (cümle[2].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim1 = ((Sözcük_01İsim) cümle[2]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim1)) {
 						hata02_TanımsızDeğişken(isim1);
 						continue;
 					}
-					değişkenNo1 = aktifFonksiyon.değişkenİsimMap.get(isim1).değişkenNo;
+					Değişken değişken = aktifFonksiyon.değişkenİsimMap.get(isim1);
+					değişkenNo1 = değişken.değişkenNo;
+					değişkenNo1TipId = değişken.değişkenTipiId;
 				} else {
 					Sözcük_03TamSayı tamsayı = (Sözcük_03TamSayı) cümle[2];
 					aktifFonksiyon.geçiciDeğişkenNo--;
@@ -397,15 +404,19 @@ public class Aşama3Cümleler {
 							Değişkenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut);
 					değişkenNo1 = komut.değişkenNo;
+					değişkenNo1TipId = komut.sabitVeriTipiId;
 				}
 				int değişkenNo2;
+				int değişkenNo2TipId;
 				if (cümle[4].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim2 = ((Sözcük_01İsim) cümle[4]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim2)) {
 						hata02_TanımsızDeğişken(isim2);
 						continue;
 					}
-					değişkenNo2 = aktifFonksiyon.değişkenİsimMap.get(isim2).değişkenNo;
+					Değişken değişken = aktifFonksiyon.değişkenİsimMap.get(isim2);
+					değişkenNo2 = değişken.değişkenNo;
+					değişkenNo2TipId = değişken.değişkenTipiId;
 				} else {
 					Sözcük_03TamSayı tamsayı = (Sözcük_03TamSayı) cümle[4];
 					aktifFonksiyon.geçiciDeğişkenNo--;
@@ -418,9 +429,17 @@ public class Aşama3Cümleler {
 							Değişkenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut);
 					değişkenNo2 = komut.değişkenNo;
+					değişkenNo2TipId = komut.sabitVeriTipiId;
 				}
-				aktifFonksiyon.cümleler.add(new Cümle_04Operatörİşlemi(değişkenNo0,
-						((Sözcük_02Operatör) cümle[3]).operatör, değişkenNo1, değişkenNo2));
+				String operatör = ((Sözcük_02Operatör) cümle[3]).operatör;
+				String anahtar = değişkenNo1TipId + operatör + değişkenNo2TipId;
+				if (!operatörFonksiyonMap.containsKey(anahtar)) {
+					hata04_TanımsızOperatör(Değişkenler.TİP_MAP_ID_STR.get(değişkenNo1TipId) + " " + operatör + " "
+							+ Değişkenler.TİP_MAP_ID_STR.get(değişkenNo2TipId));
+					continue;
+				}
+				aktifFonksiyon.cümleler
+						.add(new Cümle_04Operatörİşlemi(değişkenNo0, operatör, değişkenNo1, değişkenNo2));
 			} else if (cümle.length == 6 && (cümle[0].tip == SÖZCÜK.TİP_01İSİM || cümle[0].tip == SÖZCÜK.TİP_03TAM_SAYI)
 					&& cümle[1].tip == SÖZCÜK.TİP_02OPERATÖR
 					&& (cümle[2].tip == SÖZCÜK.TİP_01İSİM || cümle[2].tip == SÖZCÜK.TİP_03TAM_SAYI)
@@ -456,12 +475,15 @@ public class Aşama3Cümleler {
 					değişkenNo0 = değişken.değişkenNo;
 				}
 				int değişkenNo1;
+				int değişkenNo1TipId;
 				if (cümle[0].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim1 = ((Sözcük_01İsim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim1)) {
 						hata02_TanımsızDeğişken(isim1);
 					}
-					değişkenNo1 = aktifFonksiyon.değişkenİsimMap.get(isim1).değişkenNo;
+					Değişken değişken = aktifFonksiyon.değişkenİsimMap.get(isim1);
+					değişkenNo1 = değişken.değişkenNo;
+					değişkenNo1TipId = değişken.değişkenTipiId;
 				} else {
 					Sözcük_03TamSayı tamsayı = (Sözcük_03TamSayı) cümle[0];
 					aktifFonksiyon.geçiciDeğişkenNo--;
@@ -474,14 +496,18 @@ public class Aşama3Cümleler {
 							Değişkenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut);
 					değişkenNo1 = komut.değişkenNo;
+					değişkenNo1TipId = komut.sabitVeriTipiId;
 				}
 				int değişkenNo2;
+				int değişkenNo2TipId;
 				if (cümle[2].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim2 = ((Sözcük_01İsim) cümle[2]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim2)) {
 						hata02_TanımsızDeğişken(isim2);
 					}
-					değişkenNo2 = aktifFonksiyon.değişkenİsimMap.get(isim2).değişkenNo;
+					Değişken değişken = aktifFonksiyon.değişkenİsimMap.get(isim2);
+					değişkenNo2 = değişken.değişkenNo;
+					değişkenNo2TipId = değişken.değişkenTipiId;
 				} else {
 					Sözcük_03TamSayı tamsayı = (Sözcük_03TamSayı) cümle[2];
 					aktifFonksiyon.geçiciDeğişkenNo--;
@@ -494,9 +520,17 @@ public class Aşama3Cümleler {
 							Değişkenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut);
 					değişkenNo2 = komut.değişkenNo;
+					değişkenNo2TipId = komut.sabitVeriTipiId;
 				}
-				aktifFonksiyon.cümleler.add(new Cümle_04Operatörİşlemi(değişkenNo0,
-						((Sözcük_02Operatör) cümle[1]).operatör, değişkenNo1, değişkenNo2));
+				String operatör = ((Sözcük_02Operatör) cümle[1]).operatör;
+				String anahtar = değişkenNo1TipId + operatör + değişkenNo2TipId;
+				if (!operatörFonksiyonMap.containsKey(anahtar)) {
+					hata04_TanımsızOperatör(Değişkenler.TİP_MAP_ID_STR.get(değişkenNo1TipId) + " " + operatör + " "
+							+ Değişkenler.TİP_MAP_ID_STR.get(değişkenNo2TipId));
+					continue;
+				}
+				aktifFonksiyon.cümleler
+						.add(new Cümle_04Operatörİşlemi(değişkenNo0, operatör, değişkenNo1, değişkenNo2));
 			} else {
 				hatalar.append("BİLİNMEYEN : ");
 				for (Sözcük c : cümle) {
