@@ -37,6 +37,25 @@ public class Aşama3Cümleler {
 		hatalar.append("Değişken İsmi Uygun Değil : " + değişkenİsmi + " !!!\n");
 	}
 
+	private static boolean değişkenİsmiKontrol(String değişkenİsmi) {
+		// İlk karakter : _, a-z, A-Z
+		// Diğer karakterler : _, a-z, A-Z, 0-9
+		char ch = değişkenİsmi.charAt(0);
+		if (!(ch == '_' || Character.isLetter(ch))) {
+			return true;
+		}
+		for (int i = 1; i < değişkenİsmi.length(); i++) {
+			ch = değişkenİsmi.charAt(i);
+			if (!(ch == '_' || Character.isLetterOrDigit(ch))) {
+				return true;
+			}
+		}
+		if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsmi)) {
+			return true;
+		}
+		return false;
+	}
+
 	public static Object işle(ArrayList<Sözcük[]> tümCümleler, String dosyaAdı) {
 
 		operatörFonksiyonMap = new HashMap<>();
@@ -194,7 +213,7 @@ public class Aşama3Cümleler {
 				// sayı:i64 < 123;
 				String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
 				String değişkenTipi = ((Sözcük_01İsim) cümle[2]).isim;
-				if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsim)) {
+				if (değişkenİsmiKontrol(değişkenİsim)) {
 					hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
 					continue;
 				} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
@@ -231,7 +250,7 @@ public class Aşama3Cümleler {
 				// 123 > sayı:i64;
 				String değişkenİsim = ((Sözcük_01İsim) cümle[2]).isim;
 				String değişkenTipi = ((Sözcük_01İsim) cümle[4]).isim;
-				if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsim)) {
+				if (değişkenİsmiKontrol(değişkenİsim)) {
 					hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
 					continue;
 				} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
@@ -267,7 +286,7 @@ public class Aşama3Cümleler {
 				// sayı <: sayı1;
 				// sayı <: 123;
 				String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
-				if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsim)) {
+				if (değişkenİsmiKontrol(değişkenİsim)) {
 					hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
 					continue;
 				} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
@@ -298,7 +317,7 @@ public class Aşama3Cümleler {
 				// sayı1 :> sayı;
 				// 123 :> sayı;
 				String değişkenİsim = ((Sözcük_01İsim) cümle[2]).isim;
-				if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsim)) {
+				if (değişkenİsmiKontrol(değişkenİsim)) {
 					hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
 					continue;
 				} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
@@ -343,7 +362,7 @@ public class Aşama3Cümleler {
 					değişkenNo0 = aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo;
 				} else {
 					String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
-					if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsim)) {
+					if (değişkenİsmiKontrol(değişkenİsim)) {
 						hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
 						continue;
 					} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
@@ -421,7 +440,7 @@ public class Aşama3Cümleler {
 					değişkenNo0 = aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo;
 				} else {
 					String değişkenİsim = ((Sözcük_01İsim) cümle[4]).isim;
-					if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsim)) {
+					if (değişkenİsmiKontrol(değişkenİsim)) {
 						hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
 						continue;
 					} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
