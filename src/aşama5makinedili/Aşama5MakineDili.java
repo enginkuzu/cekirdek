@@ -166,8 +166,8 @@ public class Aşama5MakineDili {
 			for (Cümle cümle : isimFonksiyon.cümleler) {
 				if (cümle instanceof Cümle_07MakineDiliKod) {
 					String kod = ((Cümle_07MakineDiliKod) cümle).kod;
-					if (isimFonksiyon.değişken1İsim != null && isimFonksiyon.değişken1Tip != null) {
-						kod = kod.replace(isimFonksiyon.değişken1İsim, isimFonksiyon.değişken1Tip);
+					if (isimFonksiyon.değişken1İsim != null && isimFonksiyon.değişken1TipAssembly != null) {
+						kod = kod.replace(isimFonksiyon.değişken1İsim, isimFonksiyon.değişken1TipAssembly);
 					}
 					sb.append("\t" + kod + "\n");
 				}

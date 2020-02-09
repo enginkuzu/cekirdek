@@ -6,7 +6,8 @@ public class Fonksiyon_02İsimliFonksiyon extends Fonksiyon {
 
 	public String isim;
 	public String değişken1İsim;
-	public String değişken1Tip;
+	public String değişken1TipAssembly;
+	public int değişken1TipId;
 
 	public Fonksiyon_02İsimliFonksiyon() {
 		super(FONKSİYON.TİP_02İSİMLİFONKSİYON);
@@ -14,7 +15,7 @@ public class Fonksiyon_02İsimliFonksiyon extends Fonksiyon {
 
 	@Override
 	public String toString() {
-		return "Fonksiyon_02İsimliFonksiyon[" + isim + "]";
+		return "Fonksiyon_02İsimliFonksiyon[" + isim + "(" + değişken1İsim + " : " + değişken1TipId + ")]";
 	}
 
 }

@@ -42,7 +42,11 @@ public class Aşama3Cümleler {
 	}
 
 	private static void hata05_SayıVeriTipineSığmıyor(String sayı, String veriTipi) {
-		hatalar.append("Sayı Veri Tipine Sığmıyor : " + sayı + " : " + veriTipi + " !!!!\n");
+		hatalar.append("Sayı Veri Tipine Sığmıyor : " + sayı + " : " + veriTipi + " !!!\n");
+	}
+
+	private static void hata06_TanımsızFonksiyon(String fonksiyonİsmi) {
+		hatalar.append("Tanımsız Fonksiyon : " + fonksiyonİsmi + " !!!\n");
 	}
 
 	private static boolean değişkenİsmiKontrol(String değişkenİsmi) {
@@ -84,10 +88,12 @@ public class Aşama3Cümleler {
 				isimFonksiyon.isim = ((Sözcük_01İsim) cümle[0]).isim;
 				if (cümle.length > 5 && cümle[5].tip == SÖZCÜK.TİP_15KAPA_PARANTEZ) {
 					isimFonksiyon.değişken1İsim = ((Sözcük_01İsim) cümle[2]).isim;
-					isimFonksiyon.değişken1Tip = ((Sözcük_01İsim) cümle[4]).isim;
+					isimFonksiyon.değişken1TipAssembly = ((Sözcük_01İsim) cümle[4]).isim;
+					isimFonksiyon.değişken1TipId = Değişkenler.ID_i64;
 				}
 				aktifFonksiyon = isimFonksiyon;
-				isimFonksiyonMap.put(isimFonksiyon.isim, isimFonksiyon);
+				String anahtar = isimFonksiyon.isim + " " + isimFonksiyon.değişken1TipId;
+				isimFonksiyonMap.put(anahtar, isimFonksiyon);
 			} else if (cümle[0].tip == SÖZCÜK.TİP_01İSİM && ((Sözcük_01İsim) cümle[0]).isim.equals("inline")) {
 				String değişken1Tip = ((Sözcük_01İsim) cümle[5]).isim;
 				String değişken2Tip = ((Sözcük_01İsim) cümle[11]).isim;
@@ -213,6 +219,12 @@ public class Aşama3Cümleler {
 					aktifFonksiyon.cümleler.add(komut);
 					değişkenNo = komut.değişkenNo;
 				}
+				String fonksiyonİsmi = ((Sözcük_01İsim) cümle[2]).isim;
+				String anahtar = fonksiyonİsmi + " " + değişkenNo;
+				if (!isimFonksiyonMap.containsKey(anahtar)) {
+					hata06_TanımsızFonksiyon(fonksiyonİsmi);
+					continue;
+				}
 				aktifFonksiyon.geçiciDeğişkenNo--;
 				aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDeğişkenNo,
 						new Değişken(aktifFonksiyon.geçiciDeğişkenNo, null, Değişkenler.ID_i64));
@@ -220,7 +232,7 @@ public class Aşama3Cümleler {
 						Değişkenler.ID_i64);
 				aktifFonksiyon.cümleler.add(komut1);
 				Cümle_05FonksiyonÇağrısı komut = new Cümle_05FonksiyonÇağrısı(aktifFonksiyon.geçiciDeğişkenNo,
-						((Sözcük_01İsim) cümle[2]).isim, değişkenNo);
+						fonksiyonİsmi, değişkenNo);
 				aktifFonksiyon.cümleler.add(komut);
 			} else if (cümle.length == 6 && cümle[0].tip == SÖZCÜK.TİP_01İSİM
 					&& cümle[1].tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ && cümle[2].tip == SÖZCÜK.TİP_01İSİM

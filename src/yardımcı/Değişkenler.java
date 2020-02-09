@@ -54,6 +54,25 @@ public class Değişkenler {
 		RAX, RBX, RCX, RDX, RBP, RSI, RDI, RSP, R8, R9, R10, R11, R12, R13, R14, R15
 	}
 	
+	public static final HashSet<String> SAKLAÇLAR_64BİT = new HashSet<String>() {{
+		add("RAX");
+		add("RBX");
+		add("RCX");
+		add("RDX");
+		add("RBP");
+		add("RSI");
+		add("RDI");
+		add("RSP");
+		add("R8");
+		add("R9");
+		add("R10");
+		add("R11");
+		add("R12");
+		add("R13");
+		add("R14");
+		add("R15");
+	}};
+	
 	public static final HashSet<String> ANAHTAR_KELIMELER = new HashSet<String>() {{
 	    add("i64");
 	}};
