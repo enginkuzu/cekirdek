@@ -195,13 +195,16 @@ public class Aşama3Cümleler {
 				// sayı1.printhn;
 				// 123.printhn;
 				int değişkenNo;
+				int değişkenTipiId;
 				if (cümle[0].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim = ((Sözcük_01İsim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
 						hata02_TanımsızDeğişken(isim);
 						continue;
 					}
-					değişkenNo = aktifFonksiyon.değişkenİsimMap.get(isim).değişkenNo;
+					Değişken değişken = aktifFonksiyon.değişkenİsimMap.get(isim);
+					değişkenNo = değişken.değişkenNo;
+					değişkenTipiId = değişken.değişkenTipiId;
 				} else {
 					String tamSayı = ((Sözcük_03TamSayı) cümle[0]).tamSayı;
 					if (Fonksiyonlar.parseLong(tamSayı) == null) {
@@ -218,9 +221,10 @@ public class Aşama3Cümleler {
 							Değişkenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut);
 					değişkenNo = komut.değişkenNo;
+					değişkenTipiId = komut.sabitVeriTipiId;
 				}
 				String fonksiyonİsmi = ((Sözcük_01İsim) cümle[2]).isim;
-				String anahtar = fonksiyonİsmi + " " + değişkenNo;
+				String anahtar = fonksiyonİsmi + " " + değişkenTipiId;
 				if (!isimFonksiyonMap.containsKey(anahtar)) {
 					hata06_TanımsızFonksiyon(fonksiyonİsmi);
 					continue;
