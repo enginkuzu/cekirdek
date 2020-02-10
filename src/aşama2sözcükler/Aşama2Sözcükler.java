@@ -193,6 +193,9 @@ public class Aşama2Sözcükler {
 					durum = 5;
 					sözcük = new Sözcük_04OndalıklıSayı(((Sözcük_03TamSayı) sözcük).tamSayı);
 					((Sözcük_04OndalıklıSayı) sözcük).ondalıklıSayı += karakter;
+				} else if (karakter == '_' || Character.isLetter(karakter)) {
+					durum = 3;
+					sözcük = new Sözcük_01İsim(((Sözcük_03TamSayı) sözcük).tamSayı + karakter);
 				} else {
 					i--;
 					durum = 0;

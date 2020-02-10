@@ -50,14 +50,9 @@ public class Aşama3Cümleler {
 	}
 
 	private static boolean değişkenİsmiKontrol(String değişkenİsmi) {
-		// İlk karakter : _, a-z, A-Z
-		// Diğer karakterler : _, a-z, A-Z, 0-9
-		char ch = değişkenİsmi.charAt(0);
-		if (!(ch == '_' || Character.isLetter(ch))) {
-			return true;
-		}
-		for (int i = 1; i < değişkenİsmi.length(); i++) {
-			ch = değişkenİsmi.charAt(i);
+		// Tüm karakterler : _, a-z, A-Z, 0-9
+		for (int i = 0; i < değişkenİsmi.length(); i++) {
+			char ch = değişkenİsmi.charAt(i);
 			if (!(ch == '_' || Character.isLetterOrDigit(ch))) {
 				return true;
 			}
