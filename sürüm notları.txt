@@ -1,8 +1,16 @@
 
-v0.1 2020.0?.??
-	* TODO
-	* TODO
-	* TODO
+v0.1.0 2020.02.11
+	* Programlama dili için isim belirlendi. (Çekirdek Programlama Dili)
+	* Kaynak kod lisansı için GPL-3.0 seçildi.
+	* Dilin tasarımı ile ilgili detaylar Wiki'ye eklendi.
+	* Gerekli sözcük (lexer) ve cümle (parser) işleme aşamaları geliştirildi. 
+	* En temel seviyedeki iyileştirmeler (optimizations) eklendi.
+	* Assembly ile geliştiriyor olduğumuz esnek kütüphaneler ile ilgili geliştirmeler.
+	* Saklaç (register) ve yığıt (stack) kullanımına dair geliştirmeler.
+	* Birim testleri (unit tests) eklendi.
+	* Derleme aşaması ile ilgili bilgilendirici hata mesajları eklendi.
+	* Kontrol amaçlı olarak her derleme aşamasının çıktısı kaynak kod dosyası ile aynı klasöre kaydediliyor.
+	* Derleyicinin kullanımı README.md dosyasında kısaca belirtildi.
 
 v0.0.4 2019.02.10
 	* Testler eklendi.
