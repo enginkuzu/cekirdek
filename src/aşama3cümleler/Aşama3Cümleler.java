@@ -134,13 +134,14 @@ public class Aşama3Cümleler {
 				String isimHedef = ((Sözcük_01İsim) cümle[0]).isim;
 				if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimKaynak)) {
 					hata02_TanımsızDeğişken(isimKaynak);
+					continue;
 				} else if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
 					hata02_TanımsızDeğişken(isimHedef);
-				} else {
-					aktifFonksiyon.cümleler
-							.add(new Cümle_06DeğişkenAtama(aktifFonksiyon.değişkenİsimMap.get(isimKaynak).değişkenNo,
-									aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo));
+					continue;
 				}
+				aktifFonksiyon.cümleler
+						.add(new Cümle_06DeğişkenAtama(aktifFonksiyon.değişkenİsimMap.get(isimKaynak).değişkenNo,
+								aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo));
 			} else if (cümle.length == 4 && cümle[0].tip == SÖZCÜK.TİP_01İSİM && cümle[1].tip == SÖZCÜK.TİP_10ATAMA_SAĞA
 					&& cümle[2].tip == SÖZCÜK.TİP_01İSİM && cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// sayı1 > sayı2;
@@ -148,13 +149,14 @@ public class Aşama3Cümleler {
 				String isimHedef = ((Sözcük_01İsim) cümle[2]).isim;
 				if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimKaynak)) {
 					hata02_TanımsızDeğişken(isimKaynak);
+					continue;
 				} else if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
 					hata02_TanımsızDeğişken(isimHedef);
-				} else {
-					aktifFonksiyon.cümleler
-							.add(new Cümle_06DeğişkenAtama(aktifFonksiyon.değişkenİsimMap.get(isimKaynak).değişkenNo,
-									aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo));
+					continue;
 				}
+				aktifFonksiyon.cümleler
+						.add(new Cümle_06DeğişkenAtama(aktifFonksiyon.değişkenİsimMap.get(isimKaynak).değişkenNo,
+								aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo));
 			} else if (cümle.length == 4 && cümle[0].tip == SÖZCÜK.TİP_03TAM_SAYI
 					&& cümle[1].tip == SÖZCÜK.TİP_10ATAMA_SAĞA && cümle[2].tip == SÖZCÜK.TİP_01İSİM
 					&& cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
@@ -533,6 +535,7 @@ public class Aşama3Cümleler {
 					String isim1 = ((Sözcük_01İsim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim1)) {
 						hata02_TanımsızDeğişken(isim1);
+						continue;
 					}
 					Değişken değişken = aktifFonksiyon.değişkenİsimMap.get(isim1);
 					değişkenNo1 = değişken.değişkenNo;
@@ -561,6 +564,7 @@ public class Aşama3Cümleler {
 					String isim2 = ((Sözcük_01İsim) cümle[2]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim2)) {
 						hata02_TanımsızDeğişken(isim2);
+						continue;
 					}
 					Değişken değişken = aktifFonksiyon.değişkenİsimMap.get(isim2);
 					değişkenNo2 = değişken.değişkenNo;
