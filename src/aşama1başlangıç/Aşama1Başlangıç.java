@@ -35,7 +35,6 @@ public class Aşama1Başlangıç {
 		int başarılıSayaç = 0;
 		int başarısızSayaç = 0;
 		for (String dosyaİsmiVeUzantısı : kodDosyaları) {
-			System.out.print("TEST : (" + ++testNo + "/" + kodDosyaları.size() + ") " + dosyaİsmiVeUzantısı + " ");
 			String dosyaİsmi = dosyaİsmiVeUzantısı.substring(0, dosyaİsmiVeUzantısı.length() - 4);
 			boolean başarılıMı = true;
 			String hatalar = derle("testler/" + dosyaİsmiVeUzantısı);
@@ -65,7 +64,8 @@ public class Aşama1Başlangıç {
 			} else {
 				başarısızSayaç++;
 			}
-			System.out.println(başarılıMı ? "+" : "-");
+			System.out.println("TEST " + ++testNo + "/" + kodDosyaları.size() + " : " + (başarılıMı ? "+" : "-") + " "
+					+ dosyaİsmiVeUzantısı + " ");
 		}
 		System.out.println("TESTLER : " + başarılıSayaç + " başarılı, " + başarısızSayaç + " başarısız");
 	}
