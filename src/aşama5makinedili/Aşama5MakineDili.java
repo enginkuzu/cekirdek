@@ -19,6 +19,7 @@ import aşama3cümleler.Cümle_08MakineDiliVeri;
 import aşama3cümleler.Cümle_09MakineDiliSabitVeri;
 import aşama3cümleler.Fonksiyon_01OperatörFonksiyon;
 import aşama3cümleler.Fonksiyon_02İsimliFonksiyon;
+import yardımcı.Değişkenler;
 import yardımcı.Fonksiyonlar;
 
 public class Aşama5MakineDili {
@@ -156,6 +157,17 @@ public class Aşama5MakineDili {
 				}
 			}
 		}
+		for (int i = 0; i < çıktı.anaFonksiyon.cümleler.size(); i++) {
+			Cümle cümle = çıktı.anaFonksiyon.cümleler.get(i);
+			if (cümle instanceof Cümle_10SabitAtama) {
+				Cümle_10SabitAtama cümle10 = (Cümle_10SabitAtama) cümle;
+				if (cümle10.sabitVeriTipiId == Değişkenler.ID_str) {
+					sb.append("\t.str_" + cümle10.değişkenNo + ":\n");
+					sb.append("\t.byte " + cümle10.sabitVeri.getBytes().length + "\n");
+					sb.append("\t.string \"" + cümle10.sabitVeri + "\"\n");
+				}
+			}
+		}
 		sb.append("\n");
 
 		sb.append("\t.section\t.text\n");
@@ -258,7 +270,12 @@ public class Aşama5MakineDili {
 				}
 				String saklaç = saklaçtakiDeğişkenler.get(cümle05.değişkenNo).saklaçAdresi;
 				işlemler.add(new İşlem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
-				işlemler.add(new İşlem_03MakineDiliKomutu("\tmov " + saklaç + "," + cümle05.sabitVeri + "\n"));
+				if (cümle05.sabitVeriTipiId == Değişkenler.ID_i64) {
+					işlemler.add(new İşlem_03MakineDiliKomutu("\tmov " + saklaç + "," + cümle05.sabitVeri + "\n"));
+				} else if (cümle05.sabitVeriTipiId == Değişkenler.ID_str) {
+					işlemler.add(new İşlem_03MakineDiliKomutu(
+							"\tmov " + saklaç + "," + ".str_" + cümle05.değişkenNo + "\n"));
+				}
 			} else if (cümle instanceof Cümle_06DeğişkenAtama) {
 				Cümle_06DeğişkenAtama cümle06 = (Cümle_06DeğişkenAtama) cümle;
 				if (!saklaçtakiDeğişkenler.containsKey(cümle06.değişkenNoKaynak)) {

@@ -7,7 +7,8 @@ import yardımcı.Değişkenler.SÖZCÜK;
 
 public class Aşama2Sözcükler {
 
-	private static Sözcük öncekiSözcük = null;
+	private static Sözcük ikiÖncekiSözcük = null;
+	private static Sözcük birÖncekiSözcük = null;
 	private static ArrayList<Sözcük> aktifCümle = null;
 	private static ArrayList<Sözcük[]> tümCümleler = null;
 
@@ -19,21 +20,28 @@ public class Aşama2Sözcükler {
 			tümCümleler.add(cümle);
 			aktifCümle = new ArrayList<Sözcük>();
 		} else {
-			if (öncekiSözcük.tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ && sözcük.tip == SÖZCÜK.TİP_10ATAMA_SAĞA) {
+			if (birÖncekiSözcük.tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ && sözcük.tip == SÖZCÜK.TİP_10ATAMA_SAĞA) {
 				aktifCümle.remove(aktifCümle.size() - 1);
 				sözcük = new Sözcük(SÖZCÜK.TİP_12TANIMLAMA_SAĞA);
-			} else if (öncekiSözcük.tip == SÖZCÜK.TİP_09ATAMA_SOLA && sözcük.tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ) {
+			} else if (birÖncekiSözcük.tip == SÖZCÜK.TİP_09ATAMA_SOLA && sözcük.tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ) {
 				aktifCümle.remove(aktifCümle.size() - 1);
 				sözcük = new Sözcük(SÖZCÜK.TİP_11TANIMLAMA_SOLA);
+			} else if (ikiÖncekiSözcük.tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ && birÖncekiSözcük.tip == SÖZCÜK.TİP_02OPERATÖR
+					&& sözcük.tip == SÖZCÜK.TİP_01İSİM) {
+				aktifCümle.remove(aktifCümle.size() - 1);
+				((Sözcük_01İsim) sözcük).isim = ((Sözcük_02Operatör) birÖncekiSözcük).operatör
+						+ ((Sözcük_01İsim) sözcük).isim;
 			}
 			aktifCümle.add(sözcük);
 		}
-		öncekiSözcük = sözcük;
+		ikiÖncekiSözcük = birÖncekiSözcük;
+		birÖncekiSözcük = sözcük;
 	}
 
 	public static Object işle(String içerik, String dosyaAdı) {
 
-		öncekiSözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+		ikiÖncekiSözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+		birÖncekiSözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
 		aktifCümle = new ArrayList<Sözcük>();
 		tümCümleler = new ArrayList<Sözcük[]>();
 

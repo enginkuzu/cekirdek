@@ -1,8 +1,8 @@
 
-isim : str < "Engin";
-soyisim : str < "Kuzu";
+str1 : str < "Çekirdek";
+str2 : str < "Dili";
 
-isimSoyisim <: isim + soyisim;
-isimSoyisim.printn;
+str3 <: str1 + str2;
+str3.printn;
 
 
