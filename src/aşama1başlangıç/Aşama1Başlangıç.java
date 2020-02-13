@@ -85,31 +85,24 @@ public class Aşama1Başlangıç {
 
 	public String derle(String kaynakKodDosyası) {
 
-		String kütüphaneDosyası1 = "kütüphane/exit.kod";
-		String kütüphane1 = oku(kütüphaneDosyası1);
-		if (kütüphane1 == null) {
-			return "Aşama1Başlangıç : " + kütüphaneDosyası1 + " okunamadı !!!";
+		StringBuilder sb = new StringBuilder();
+		String kütüphaneler[] = { "mem_alloc.kod", "exit.kod", "i64.kod", "str.kod", "printhn.kod", "printn.kod" };
+		for (int i = 0; i < kütüphaneler.length; i++) {
+			String kütüphaneDosyası = "kütüphane/" + kütüphaneler[i];
+			String kütüphaneKaynakKodu = oku(kütüphaneDosyası);
+			if (kütüphaneKaynakKodu == null) {
+				return "Aşama1Başlangıç : " + kütüphaneDosyası + " okunamadı !!!";
+			}
+			sb.append(kütüphaneKaynakKodu);
+			sb.append("\n");
 		}
-
-		String kütüphaneDosyası2 = "kütüphane/i64.kod";
-		String kütüphane2 = oku(kütüphaneDosyası2);
-		if (kütüphane2 == null) {
-			return "Aşama1Başlangıç : " + kütüphaneDosyası2 + " okunamadı !!!";
-		}
-
-		String kütüphaneDosyası3 = "kütüphane/printhn.kod";
-		String kütüphane3 = oku(kütüphaneDosyası3);
-		if (kütüphane3 == null) {
-			return "Aşama1Başlangıç : " + kütüphaneDosyası3 + " okunamadı !!!";
-		}
-
 		String kaynakKod = oku(kaynakKodDosyası);
 		if (kaynakKod == null) {
 			return "Aşama1Başlangıç : " + kaynakKodDosyası + " okunamadı !!!";
 		}
+		sb.append(kaynakKod);
 
-		Object sözcükler = Aşama2Sözcükler.işle(kütüphane1 + "\n" + kütüphane2 + "\n" + kütüphane3 + "\n" + kaynakKod,
-				kaynakKodDosyası);
+		Object sözcükler = Aşama2Sözcükler.işle(sb.toString(), kaynakKodDosyası);
 		if (sözcükler instanceof String) {
 			return (String) sözcükler;
 		}

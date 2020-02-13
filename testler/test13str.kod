@@ -1,0 +1,8 @@
+
+isim : str < "Engin";
+soyisim : str < "Kuzu";
+
+isimSoyisim <: isim + soyisim;
+isimSoyisim.printn;
+
+

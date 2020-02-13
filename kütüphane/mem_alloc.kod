@@ -1,0 +1,29 @@
+
+@arch x86-64
+@sideeffect 0
+mem_alloc_init() {
+	@asm
+	"";
+}
+
+@arch x86-64
+@sideeffect 0
+mem_alloc_destroy() {
+	@asm
+	"";
+}
+
+@arch x86-64
+@sideeffect 0
+mem_alloc_get() {
+	@asm
+	"";
+}
+
+@arch x86-64
+@sideeffect 0
+mem_alloc_free() {
+	@asm
+	"";
+}
+

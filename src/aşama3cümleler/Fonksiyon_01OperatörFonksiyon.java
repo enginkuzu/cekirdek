@@ -26,7 +26,7 @@ public class Fonksiyon_01OperatörFonksiyon extends Fonksiyon {
 	@Override
 	public String toString() {
 		return "Fonksiyon_01OperatörFonksiyon[" + Değişkenler.TİP_MAP_ID_STR.get(değişken1TipId) + " " + operatör + " "
-				+ Değişkenler.TİP_MAP_ID_STR.get(değişken2TipId) + "]";
+				+ Değişkenler.TİP_MAP_ID_STR.get(değişken2TipId) + "] " + sonuçTip;
 	}
 
 }

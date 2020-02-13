@@ -1,0 +1,7 @@
+
+@arch x86-64
+printn(değer:rax) {
+	@asm
+	"";
+}
+

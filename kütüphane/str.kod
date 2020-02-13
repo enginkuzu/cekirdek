@@ -1,0 +1,8 @@
+
+@arch x86-64
+@sideeffect 0
+inline p1 (metin1:str, +, metin2:str) metin1ve2:+str {
+	@asm
+	"";
+}
+

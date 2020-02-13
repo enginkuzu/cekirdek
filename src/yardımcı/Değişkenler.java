@@ -5,7 +5,7 @@ import java.util.HashSet;
 
 public class Değişkenler {
 
-	public static final String UYGULAMA_ADI_VE_SÜRÜMÜ = "Çekirdek sürüm 0.1.0";
+	public static final String UYGULAMA_ADI_VE_SÜRÜMÜ = "Çekirdek sürüm 0.1.1";
 	
 	public static boolean DİL_TÜRKÇE_Mİ = "tr".equals(System.getProperty("user.language"));
 	
@@ -78,12 +78,16 @@ public class Değişkenler {
 	}};
 	
 	public static final int ID_i64 = 7;
+	public static final int ID_str = 15;
 	public static final String STRING_i64 = "i64";
+	public static final String STRING_str = "str";
 	public static final HashMap<Integer, String> TİP_MAP_ID_STR = new HashMap<Integer, String>(){{
 		put(ID_i64, STRING_i64);
+		put(ID_str, STRING_str);
 	}};
 	public static final HashMap<String, Integer> TİP_MAP_STR_ID = new HashMap<String, Integer>(){{
 		put(STRING_i64, ID_i64);
+		put(STRING_str, ID_str);
 	}};
 
 }
