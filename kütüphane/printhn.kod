@@ -2,7 +2,7 @@
 @arch x86-64
 @changed rax rdi rsi rdx rcx r11
 @sideeffect 1
-printhn(değer:rax) {
+printhn(değer:i64:rax) {
 	@asm-data
 "enter:
 	.octa	0

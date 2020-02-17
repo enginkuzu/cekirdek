@@ -8,7 +8,10 @@ import yardımcı.Değişkenler.FONKSİYON;
 
 public abstract class Fonksiyon {
 
+	private static int sonFonksiyonId = 0;
+
 	public FONKSİYON fonksiyon;
+	public int fonksiyonId;
 
 	public int geçiciDeğişkenNo = 0;
 	public int gerçekDeğişkenNo = 0;
@@ -21,6 +24,7 @@ public abstract class Fonksiyon {
 
 	public Fonksiyon(FONKSİYON fonksiyon) {
 		this.fonksiyon = fonksiyon;
+		this.fonksiyonId = ++sonFonksiyonId;
 	}
 
 }

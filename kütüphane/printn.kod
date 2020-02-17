@@ -1,6 +1,12 @@
 
 @arch x86-64
-printn(değer:rax) {
+printn(değer:str:rax) {
+	@asm
+	"";
+}
+
+@arch x86-64
+printn(değer:+str:rax) {
 	@asm
 	"";
 }

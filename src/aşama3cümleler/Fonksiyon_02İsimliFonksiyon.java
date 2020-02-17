@@ -6,8 +6,8 @@ public class Fonksiyon_02İsimliFonksiyon extends Fonksiyon {
 
 	public String isim;
 	public String değişken1İsim;
-	public String değişken1TipAssembly;
 	public int değişken1TipId;
+	public String değişken1TipAssembly;
 
 	public Fonksiyon_02İsimliFonksiyon() {
 		super(FONKSİYON.TİP_02İSİMLİFONKSİYON);

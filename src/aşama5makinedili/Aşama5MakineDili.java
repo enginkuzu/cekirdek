@@ -173,8 +173,8 @@ public class Aşama5MakineDili {
 		sb.append("\t.section\t.text\n");
 
 		for (Fonksiyon_02İsimliFonksiyon isimFonksiyon : çıktı.isimFonksiyonMap.values()) {
-			sb.append("\n\t.globl	" + isimFonksiyon.isim + "\n");
-			sb.append(isimFonksiyon.isim + ":\n");
+			sb.append("\n\t.globl\tfn_" + isimFonksiyon.fonksiyonId + "_" + isimFonksiyon.isim + "\n");
+			sb.append("fn_" + isimFonksiyon.fonksiyonId + "_" + isimFonksiyon.isim + ":\n");
 			for (Cümle cümle : isimFonksiyon.cümleler) {
 				if (cümle instanceof Cümle_07MakineDiliKod) {
 					String kod = ((Cümle_07MakineDiliKod) cümle).kod;
@@ -186,7 +186,7 @@ public class Aşama5MakineDili {
 			}
 		}
 
-		sb.append("\n\t.globl	_start\n");
+		sb.append("\n\t.globl\t_start\n");
 		sb.append("_start:\n");
 
 		for (int i = 0; i < çıktı.anaFonksiyon.cümleler.size(); i++) {
@@ -259,7 +259,8 @@ public class Aşama5MakineDili {
 				String saklaç = saklaçtakiDeğişkenler.get(cümle04.parametre).saklaçAdresi;
 				işlemler.add(new İşlem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
 				işlemler.add(new İşlem_03MakineDiliKomutu("\tmov rax," + saklaç + "\n"));
-				işlemler.add(new İşlem_03MakineDiliKomutu("\tcall printhn\n"));
+				işlemler.add(new İşlem_03MakineDiliKomutu(
+						"\tcall fn_" + cümle04.fonksiyonId + "_" + cümle04.fonksiyon + "\n"));
 			} else if (cümle instanceof Cümle_10SabitAtama) {
 				Cümle_10SabitAtama cümle05 = (Cümle_10SabitAtama) cümle;
 				if (!saklaçtakiDeğişkenler.containsKey(cümle05.değişkenNo)) {
@@ -302,9 +303,12 @@ public class Aşama5MakineDili {
 			// System.out.println(cümle);
 		}
 
+		int fonksiyonIdMemAllocInit = çıktı.isimFonksiyonMap.get("mem_alloc_init 0").fonksiyonId;
+
 		sb.append("\tpush rbp\n");
 		sb.append("\tmov rbp, rsp\n");
 		sb.append("\tsub rsp, " + (yığıtAdres * 8) + "\n");
+		sb.append("\tcall fn_" + fonksiyonIdMemAllocInit + "_mem_alloc_init\n");
 		for (Iterator<İşlem> it = işlemler.iterator(); it.hasNext();) {
 			İşlem işlem = it.next();
 			//
@@ -327,8 +331,12 @@ public class Aşama5MakineDili {
 		}
 		sb.append("\tleave\n");
 
+		int fonksiyonIdMemAllocDestroy = çıktı.isimFonksiyonMap.get("mem_alloc_destroy 0").fonksiyonId;
+		int fonksiyonIdExit = çıktı.isimFonksiyonMap.get("exit 0").fonksiyonId;
+
 		sb.append("\n");
-		sb.append("\tcall exit\n");
+		sb.append("\tcall fn_" + fonksiyonIdMemAllocDestroy + "_mem_alloc_destroy\n");
+		sb.append("\tcall fn_" + fonksiyonIdExit + "_exit\n");
 		sb.append("\tret\n");
 
 		Fonksiyonlar.dosyaKaydet(dosyaAdı + ".5.s", sb.toString());
