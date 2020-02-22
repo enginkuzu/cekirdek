@@ -2,15 +2,29 @@
 @arch x86-64
 @sideeffect 0
 mem_alloc_init() {
+	@asm-bssdata
+	"heap:
+		.quad";
 	@asm
-	"";
+	"xor r9,r9					#
+	mov r8,-1					#
+	mov r10,34					#
+	mov rdx,3					#
+	mov rsi,2*1024*1024*1024	#
+	xor rdi,rdi					#
+	mov rax,9					# system call : mmap (9)
+	syscall						# Call the kernel
+	mov [heap],rax";
 }
 
 @arch x86-64
 @sideeffect 0
 mem_alloc_destroy() {
 	@asm
-	"";
+	"mov rsi,2*1024*1024*1024		#
+	mov rdi,[heap]					#
+	mov rax,11						# system call : munmap (11)
+	syscall							# Call the kernel";
 }
 
 @arch x86-64

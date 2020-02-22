@@ -1,11 +1,13 @@
 
 @arch x86-64
+@sideeffect 1
 printn(değer:str:rax) {
 	@asm
 	"";
 }
 
 @arch x86-64
+@sideeffect 1
 printn(değer:+str:rax) {
 	@asm
 	"";

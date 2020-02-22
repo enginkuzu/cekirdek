@@ -12,11 +12,12 @@ import aşama3cümleler.Cümle_02GeçiciDeğişkenYeni;
 import aşama3cümleler.Cümle_03DeğişkenSil;
 import aşama3cümleler.Cümle_04Operatörİşlemi;
 import aşama3cümleler.Cümle_05FonksiyonÇağrısı;
-import aşama3cümleler.Cümle_10SabitAtama;
+import aşama3cümleler.Cümle_11SabitAtama;
 import aşama3cümleler.Cümle_06DeğişkenAtama;
 import aşama3cümleler.Cümle_07MakineDiliKod;
 import aşama3cümleler.Cümle_08MakineDiliVeri;
 import aşama3cümleler.Cümle_09MakineDiliSabitVeri;
+import aşama3cümleler.Cümle_10MakineDiliSembol;
 import aşama3cümleler.Fonksiyon_01OperatörFonksiyon;
 import aşama3cümleler.Fonksiyon_02İsimliFonksiyon;
 import yardımcı.Değişkenler;
@@ -56,8 +57,8 @@ public class Aşama5MakineDili {
 				if (cümle04.parametre == değişkenNo) {
 					return i;
 				}
-			} else if (cümle instanceof Cümle_10SabitAtama) {
-				Cümle_10SabitAtama cümle05 = (Cümle_10SabitAtama) cümle;
+			} else if (cümle instanceof Cümle_11SabitAtama) {
+				Cümle_11SabitAtama cümle05 = (Cümle_11SabitAtama) cümle;
 				if (cümle05.değişkenNo == değişkenNo) {
 					return i;
 				}
@@ -159,12 +160,23 @@ public class Aşama5MakineDili {
 		}
 		for (int i = 0; i < çıktı.anaFonksiyon.cümleler.size(); i++) {
 			Cümle cümle = çıktı.anaFonksiyon.cümleler.get(i);
-			if (cümle instanceof Cümle_10SabitAtama) {
-				Cümle_10SabitAtama cümle10 = (Cümle_10SabitAtama) cümle;
-				if (cümle10.sabitVeriTipiId == Değişkenler.ID_str) {
-					sb.append("\t.str_" + cümle10.değişkenNo + ":\n");
-					sb.append("\t.byte " + cümle10.sabitVeri.getBytes().length + "\n");
-					sb.append("\t.string \"" + cümle10.sabitVeri + "\"\n");
+			if (cümle instanceof Cümle_11SabitAtama) {
+				Cümle_11SabitAtama cümle11 = (Cümle_11SabitAtama) cümle;
+				if (cümle11.sabitVeriTipiId == Değişkenler.ID_str) {
+					sb.append("\t.str_" + cümle11.değişkenNo + ":\n");
+					sb.append("\t.byte " + cümle11.sabitVeri.getBytes().length + "\n");
+					sb.append("\t.string \"" + cümle11.sabitVeri + "\"\n");
+				}
+			}
+		}
+		sb.append("\n");
+
+		sb.append("\t.section\t.bss\n\n");
+		for (Fonksiyon_02İsimliFonksiyon isimFonksiyon : çıktı.isimFonksiyonMap.values()) {
+			for (Cümle cümle : isimFonksiyon.cümleler) {
+				if (cümle instanceof Cümle_10MakineDiliSembol) {
+					String sembol = ((Cümle_10MakineDiliSembol) cümle).sembol;
+					sb.append("\t" + sembol + "\n");
 				}
 			}
 		}
@@ -261,8 +273,8 @@ public class Aşama5MakineDili {
 				işlemler.add(new İşlem_03MakineDiliKomutu("\tmov rax," + saklaç + "\n"));
 				işlemler.add(new İşlem_03MakineDiliKomutu(
 						"\tcall fn_" + cümle04.fonksiyonId + "_" + cümle04.fonksiyon + "\n"));
-			} else if (cümle instanceof Cümle_10SabitAtama) {
-				Cümle_10SabitAtama cümle05 = (Cümle_10SabitAtama) cümle;
+			} else if (cümle instanceof Cümle_11SabitAtama) {
+				Cümle_11SabitAtama cümle05 = (Cümle_11SabitAtama) cümle;
 				if (!saklaçtakiDeğişkenler.containsKey(cümle05.değişkenNo)) {
 					if (saklaçStack.isEmpty()) {
 						saklaçtaYerAç(çıktı, i);

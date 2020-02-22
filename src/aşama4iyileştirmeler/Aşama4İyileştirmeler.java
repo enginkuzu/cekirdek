@@ -12,8 +12,9 @@ import aşama3cümleler.Cümle_02GeçiciDeğişkenYeni;
 import aşama3cümleler.Cümle_03DeğişkenSil;
 import aşama3cümleler.Cümle_04Operatörİşlemi;
 import aşama3cümleler.Cümle_05FonksiyonÇağrısı;
-import aşama3cümleler.Cümle_10SabitAtama;
+import aşama3cümleler.Cümle_11SabitAtama;
 import aşama3cümleler.Cümle_06DeğişkenAtama;
+import aşama3cümleler.Cümle_10MakineDiliSembol;
 import aşama3cümleler.Fonksiyon_01OperatörFonksiyon;
 import aşama3cümleler.Fonksiyon_02İsimliFonksiyon;
 import yardımcı.Fonksiyonlar;
@@ -45,11 +46,11 @@ public class Aşama4İyileştirmeler {
 				Cümle_06DeğişkenAtama cümle06 = (Cümle_06DeğişkenAtama) cümle;
 				map.get(cümle06.değişkenNoKaynak).ekleOkuma(i);
 				map.get(cümle06.değişkenNoHedef).ekleYazma(-i);
-			} else if (cümle instanceof Cümle_10SabitAtama) {
-				Cümle_10SabitAtama cümle05 = (Cümle_10SabitAtama) cümle;
+			} else if (cümle instanceof Cümle_11SabitAtama) {
+				Cümle_11SabitAtama cümle05 = (Cümle_11SabitAtama) cümle;
 				map.get(cümle05.değişkenNo).ekleYazma(-i);
 			} else {
-				System.out.println("BİLİNMEYEN : " + cümle);
+				System.out.println("BİLİNMEYEN OPTİMİZASYON : " + cümle);
 			}
 		}
 
@@ -132,8 +133,8 @@ public class Aşama4İyileştirmeler {
 						Cümle_06DeğişkenAtama cümle06 = (Cümle_06DeğişkenAtama) cümle;
 						incelemesiEksikOlanlar.add(cümle06.değişkenNoKaynak);
 						map.get(cümle06.değişkenNoKaynak).silOkuma(satirNo);
-					} else if (cümle instanceof Cümle_10SabitAtama) {
-						// Cümle_10SabitAtama cümle10 = (Cümle_10SabitAtama) cümle;
+					} else if (cümle instanceof Cümle_11SabitAtama) {
+						// Cümle_11SabitAtama cümle11 = (Cümle_11SabitAtama) cümle;
 					}
 					silinecekOlanSatırlar.add(satirNo);
 					// System.out.println("SİL : " + çıktı.anaFonksiyon.cümleler.get(satirNo - 1));
@@ -166,8 +167,8 @@ public class Aşama4İyileştirmeler {
 						Cümle_06DeğişkenAtama cümle06 = (Cümle_06DeğişkenAtama) cümle;
 						incelemesiEksikOlanlar.add(cümle06.değişkenNoKaynak);
 						map.get(cümle06.değişkenNoKaynak).silOkuma(satirNo);
-					} else if (cümle instanceof Cümle_10SabitAtama) {
-						// Cümle_10SabitAtama cümle10 = (Cümle_10SabitAtama) cümle;
+					} else if (cümle instanceof Cümle_11SabitAtama) {
+						// Cümle_11SabitAtama cümle11 = (Cümle_11SabitAtama) cümle;
 					}
 					rapor.silYazma(-satirNo);
 					silinecekOlanSatırlar.add(satirNo);
@@ -197,8 +198,8 @@ public class Aşama4İyileştirmeler {
 								Cümle_06DeğişkenAtama cümle06 = (Cümle_06DeğişkenAtama) cümle;
 								incelemesiEksikOlanlar.add(cümle06.değişkenNoKaynak);
 								map.get(cümle06.değişkenNoKaynak).silOkuma(satirNo);
-							} else if (cümle instanceof Cümle_10SabitAtama) {
-								// Cümle_10SabitAtama cümle10 = (Cümle_10SabitAtama) cümle;
+							} else if (cümle instanceof Cümle_11SabitAtama) {
+								// Cümle_11SabitAtama cümle11 = (Cümle_11SabitAtama) cümle;
 							}
 							rapor.silYazma(-satirNo);
 							silinecekOlanSatırlar.add(satirNo);

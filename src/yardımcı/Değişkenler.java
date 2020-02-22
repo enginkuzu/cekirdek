@@ -41,7 +41,8 @@ public class Değişkenler {
 		TİP_07MAKİNE_DİLİ_KOD,
 		TİP_08MAKİNE_DİLİ_VERİ,
 		TİP_09MAKİNE_DİLİ_SABİT_VERİ,
-		TİP_10SABİT_ATAMA
+		TİP_10MAKİNE_DİLİ_SEMBOL,
+		TİP_11SABİT_ATAMA
 	}
 	
 	public enum FONKSİYON {
