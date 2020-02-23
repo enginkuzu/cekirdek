@@ -5,7 +5,7 @@ import java.util.HashSet;
 
 public class Değişkenler {
 
-	public static final String UYGULAMA_ADI_VE_SÜRÜMÜ = "Çekirdek sürüm 0.1.1";
+	public static final String UYGULAMA_ADI_VE_SÜRÜMÜ = "Çekirdek sürüm 0.1.2";
 	
 	public static boolean DİL_TÜRKÇE_Mİ = "tr".equals(System.getProperty("user.language"));
 	
