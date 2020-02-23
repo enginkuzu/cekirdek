@@ -86,7 +86,7 @@ public class Aşama1Başlangıç {
 	public String derle(String kaynakKodDosyası) {
 
 		StringBuilder sb = new StringBuilder();
-		String kütüphaneler[] = { "mem_alloc.kod", "exit.kod", "i64.kod", "str.kod", "printhn.kod", "printn.kod" };
+		String kütüphaneler[] = { "mem.kod", "exit.kod", "i64.kod", "str.kod", "printhn.kod", "printn.kod" };
 		for (int i = 0; i < kütüphaneler.length; i++) {
 			String kütüphaneDosyası = "kütüphane/" + kütüphaneler[i];
 			String kütüphaneKaynakKodu = oku(kütüphaneDosyası);
