@@ -1,10 +1,10 @@
 
 str1 : str < "Çekirdek";
 str2 : str < "Dili";
+
 str1.printn;
 str2.printn;
 
 str3 <: str1 + str2;
 str3.printn;
-
 

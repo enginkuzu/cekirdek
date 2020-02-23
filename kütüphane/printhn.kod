@@ -2,6 +2,7 @@
 @arch x86-64
 @changed rax rdi rsi rdx rcx r11
 @sideeffect 1
+@functionid 2
 printhn(değer:i64:rax) {
 	@asm-data
 "printhn_enter:

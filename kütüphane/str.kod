@@ -1,8 +1,34 @@
 
 @arch x86-64
 @sideeffect 0
-inline p1 (metin1:str, +, metin2:str) metin1ve2:+str {
+inline p1 (metin1:str, +, metin2:str) metin3:+str {
 	@asm
-	"";
+	"xor rax, rax
+	xor rbx, rbx
+	mov al, [metin1]
+	mov bl, [metin2]
+	add bl, al
+	mov rcx, rbx
+	call fn1
+	mov metin3, rax
+	mov [rax], cl
+	# -----
+	mov rbx, metin1
+	mov cl, [metin1]
+.basa1:
+	inc rbx
+	inc rax
+	mov dl, [rbx]
+	mov [rax], dl
+	loop .basa1
+	# -----
+	mov rbx, metin2
+	mov cl, [metin2]
+.basa2:
+	inc rbx
+	inc rax
+	mov dl, [rbx]
+	mov [rax], dl
+	loop .basa2";
 }
 

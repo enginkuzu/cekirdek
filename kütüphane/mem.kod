@@ -12,13 +12,12 @@ mem_alloc_init() {
 	mov r8, -1					#
 	mov r10, 34					#
 	mov rdx, 3					#
-	mov rsi, 1*1024*1024		#
+	mov rsi, 1*1024*1024		# 1 MByte
 	xor rdi, rdi				#
 	mov rax, 9					# system call : mmap (9)
 	syscall						# Call the kernel
 	mov [heap], rax
-	xor rax, rax
-	mov[heap_free], rax
+	mov [heap_free], rax
 	ret";
 }
 
@@ -26,7 +25,7 @@ mem_alloc_init() {
 @sideeffect 0
 mem_alloc_destroy() {
 	@asm
-	"mov rsi, 1*1024*1024			#
+	"mov rsi, 1*1024*1024			# 1 MByte
 	mov rdi, [heap]					#
 	mov rax, 11						# system call : munmap (11)
 	syscall							# Call the kernel
@@ -35,9 +34,13 @@ mem_alloc_destroy() {
 
 @arch x86-64
 @sideeffect 0
-mem_alloc_get() {
+@functionid 1
+mem_alloc_get(boy:i64:rbx) adres:i64:rax {
 	@asm
-	"ret";
+	"mov adres, [heap_free]
+	add boy, adres
+	mov [heap_free], boy
+	ret";
 }
 
 @arch x86-64
