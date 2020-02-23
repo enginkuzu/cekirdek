@@ -75,7 +75,8 @@ public class Değişkenler {
 	}};
 	
 	public static final HashSet<String> ANAHTAR_KELIMELER = new HashSet<String>() {{
-	    add("i64");
+		add("i64");
+		add("str");
 	}};
 	
 	public static final int ID_i64 = 7;
