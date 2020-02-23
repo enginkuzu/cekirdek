@@ -1,9 +1,5 @@
 # Çekirdek Programlama Dili
 
-### Geliştirmelerle ilgili son durum :
-
-Örnek kaynak kodlar derlenebiliyor olsa da şu anda çok sayıda altyapı çalışması yapılmakta. Pek çok kısımda hatalar bulunabilir. İlk kararlı sürüm için v0.1'i bekleyiniz...
-
 ### Önemli Not :
 
 Proje (v1.0 sürümüne kadar) Java ile geliştirildiği için derleme yapmak için sisteminizde openjdk-8-jre paketi yüklü olmalıdır.
