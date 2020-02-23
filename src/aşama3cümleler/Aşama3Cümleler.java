@@ -91,6 +91,16 @@ public class Aşama3Cümleler {
 					isimFonksiyon.değişken1TipId = Değişkenler.TİP_MAP_STR_ID.get(değişkenTipi);
 					isimFonksiyon.değişken1TipAssembly = ((Sözcük_01İsim) cümle[6]).isim;
 				}
+				if (cümle.length > 5 && cümle[cümle.length - 8].tip == SÖZCÜK.TİP_15KAPA_PARANTEZ) {
+					String sonuçDeğişkenTipi = ((Sözcük_01İsim) cümle[cümle.length - 5]).isim;
+					if (!Değişkenler.TİP_MAP_STR_ID.containsKey(sonuçDeğişkenTipi)) {
+						hata01_BilinmeyenDeğişkenTipi(sonuçDeğişkenTipi);
+						continue;
+					}
+					isimFonksiyon.sonuçİsim = ((Sözcük_01İsim) cümle[cümle.length - 7]).isim;
+					isimFonksiyon.sonuçTipId = Değişkenler.TİP_MAP_STR_ID.get(sonuçDeğişkenTipi);
+					isimFonksiyon.sonuçTipAssembly = ((Sözcük_01İsim) cümle[cümle.length - 3]).isim;
+				}
 				aktifFonksiyon = isimFonksiyon;
 				String anahtar = isimFonksiyon.isim + " " + isimFonksiyon.değişken1TipId;
 				isimFonksiyonMap.put(anahtar, isimFonksiyon);
