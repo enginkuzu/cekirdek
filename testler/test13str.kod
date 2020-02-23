@@ -1,4 +1,9 @@
 
+sayı : i64 < 1;
+sayı < sayı + sayı;
+sayı.printhn;
+
+
 str1 : str < "Çekirdek";
 str2 : str < "Dili";
 str1.printn;

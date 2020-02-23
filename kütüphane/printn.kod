@@ -3,13 +3,20 @@
 @sideeffect 1
 printn(değer:str:rax) {
 	@asm
-	"";
+	"xor rdx, rdx
+	mov dl, [değer]	# 
+	mov	rsi, değer	#
+	inc rsi			# 
+	mov rdi, 1		# file descriptor : 1 - standard output
+	mov rax, 1		# system call : write (1)
+	syscall			# Call the kernel
+	ret";
 }
 
 @arch x86-64
 @sideeffect 1
 printn(değer:+str:rax) {
 	@asm
-	"";
+	"ret";
 }
 

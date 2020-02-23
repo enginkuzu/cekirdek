@@ -287,7 +287,7 @@ public class Aşama5MakineDili {
 					işlemler.add(new İşlem_03MakineDiliKomutu("\tmov " + saklaç + "," + cümle05.sabitVeri + "\n"));
 				} else if (cümle05.sabitVeriTipiId == Değişkenler.ID_str) {
 					işlemler.add(new İşlem_03MakineDiliKomutu(
-							"\tmov " + saklaç + "," + ".str_" + cümle05.değişkenNo + "\n"));
+							"\tlea " + saklaç + "," + ".str_" + cümle05.değişkenNo + "\n"));
 				}
 			} else if (cümle instanceof Cümle_06DeğişkenAtama) {
 				Cümle_06DeğişkenAtama cümle06 = (Cümle_06DeğişkenAtama) cümle;
