@@ -24,7 +24,10 @@ public abstract class Fonksiyon {
 
 	public Fonksiyon(FONKSİYON fonksiyon) {
 		this.fonksiyon = fonksiyon;
-		this.fonksiyonId = ++sonFonksiyonId;
+	}
+
+	public int yeniFonksiyonIdGetir() {
+		return --sonFonksiyonId;
 	}
 
 }

@@ -20,6 +20,14 @@ public class Fonksiyonlar {
 	 * { return false; } } return true; }
 	 */
 
+	public static Integer parseInt(String str) {
+		try {
+			return Integer.parseInt(str);
+		} catch (NumberFormatException ex) {
+			return null;
+		}
+	}
+
 	public static Long parseLong(String str) {
 		try {
 			return Long.parseLong(str);

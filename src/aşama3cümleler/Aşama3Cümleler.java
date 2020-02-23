@@ -79,7 +79,7 @@ public class Aşama3Cümleler {
 				}
 				aktifFonksiyon.özellikMap.put(((Sözcük_01İsim) cümle[1]).isim, özellikSet);
 			} else if (cümle[1].tip == SÖZCÜK.TİP_14AÇ_PARANTEZ) {
-				Fonksiyon_02İsimliFonksiyon isimFonksiyon = new Fonksiyon_02İsimliFonksiyon();
+				Fonksiyon_02İsimliFonksiyon isimFonksiyon = new Fonksiyon_02İsimliFonksiyon(aktifFonksiyon.özellikMap);
 				isimFonksiyon.isim = ((Sözcük_01İsim) cümle[0]).isim;
 				if (cümle.length > 5 && cümle[7].tip == SÖZCÜK.TİP_15KAPA_PARANTEZ) {
 					isimFonksiyon.değişken1İsim = ((Sözcük_01İsim) cümle[2]).isim;
@@ -101,6 +101,7 @@ public class Aşama3Cümleler {
 					isimFonksiyon.sonuçTipId = Değişkenler.TİP_MAP_STR_ID.get(sonuçDeğişkenTipi);
 					isimFonksiyon.sonuçTipAssembly = ((Sözcük_01İsim) cümle[cümle.length - 3]).isim;
 				}
+				aktifFonksiyon.özellikMap = new HashMap<>();
 				aktifFonksiyon = isimFonksiyon;
 				String anahtar = isimFonksiyon.isim + " " + isimFonksiyon.değişken1TipId;
 				isimFonksiyonMap.put(anahtar, isimFonksiyon);
@@ -114,8 +115,8 @@ public class Aşama3Cümleler {
 					hata01_BilinmeyenDeğişkenTipi(değişken2Tip);
 					continue;
 				}
-				Fonksiyon_01OperatörFonksiyon operatörFonksiyon = new Fonksiyon_01OperatörFonksiyon();
-				operatörFonksiyon.özellikMap = aktifFonksiyon.özellikMap;
+				Fonksiyon_01OperatörFonksiyon operatörFonksiyon = new Fonksiyon_01OperatörFonksiyon(
+						aktifFonksiyon.özellikMap);
 				operatörFonksiyon.inline = true;
 				operatörFonksiyon.öncelik = ((Sözcük_01İsim) cümle[1]).isim.equals("p1") ? 1 : 2;
 				operatörFonksiyon.değişken1İsim = ((Sözcük_01İsim) cümle[3]).isim;
@@ -211,7 +212,6 @@ public class Aşama3Cümleler {
 				// 123.printhn;
 				int değişkenNo;
 				int değişkenTipiId;
-				int fonksiyonId;
 				if (cümle[0].tip == SÖZCÜK.TİP_01İSİM) {
 					String isim = ((Sözcük_01İsim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {

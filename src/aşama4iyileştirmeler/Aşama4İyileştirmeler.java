@@ -14,7 +14,6 @@ import aşama3cümleler.Cümle_04Operatörİşlemi;
 import aşama3cümleler.Cümle_05FonksiyonÇağrısı;
 import aşama3cümleler.Cümle_11SabitAtama;
 import aşama3cümleler.Cümle_06DeğişkenAtama;
-import aşama3cümleler.Cümle_10MakineDiliSembol;
 import aşama3cümleler.Fonksiyon_01OperatörFonksiyon;
 import aşama3cümleler.Fonksiyon_02İsimliFonksiyon;
 import yardımcı.Fonksiyonlar;

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import yardımcı.Değişkenler;
+import yardımcı.Fonksiyonlar;
 import yardımcı.Değişkenler.FONKSİYON;
 
 public class Fonksiyon_01OperatörFonksiyon extends Fonksiyon {
@@ -19,8 +20,15 @@ public class Fonksiyon_01OperatörFonksiyon extends Fonksiyon {
 	public String sonuçİsim;
 	public String sonuçTip;
 
-	public Fonksiyon_01OperatörFonksiyon() {
+	public Fonksiyon_01OperatörFonksiyon(HashMap<String, HashSet<String>> özellikMap) {
 		super(FONKSİYON.TİP_01OPERATÖRFONKSİYON);
+		this.özellikMap = özellikMap;
+		//
+		if (özellikMap.containsKey("functionid")) {
+			this.fonksiyonId = Fonksiyonlar.parseInt(özellikMap.get("functionid").iterator().next());
+		} else {
+			this.fonksiyonId = yeniFonksiyonIdGetir();
+		}
 	}
 
 	@Override

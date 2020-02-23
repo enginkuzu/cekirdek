@@ -1,10 +1,15 @@
 package aşama3cümleler;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 import yardımcı.Değişkenler;
 import yardımcı.Değişkenler.FONKSİYON;
+import yardımcı.Fonksiyonlar;
 
 public class Fonksiyon_02İsimliFonksiyon extends Fonksiyon {
 
+	public HashMap<String, HashSet<String>> özellikMap;
 	public String isim;
 	public String değişken1İsim;
 	public int değişken1TipId;
@@ -13,8 +18,15 @@ public class Fonksiyon_02İsimliFonksiyon extends Fonksiyon {
 	public int sonuçTipId;
 	public String sonuçTipAssembly;
 
-	public Fonksiyon_02İsimliFonksiyon() {
+	public Fonksiyon_02İsimliFonksiyon(HashMap<String, HashSet<String>> özellikMap) {
 		super(FONKSİYON.TİP_02İSİMLİFONKSİYON);
+		this.özellikMap = özellikMap;
+		//
+		if (özellikMap.containsKey("functionid")) {
+			this.fonksiyonId = Fonksiyonlar.parseInt(özellikMap.get("functionid").iterator().next());
+		} else {
+			this.fonksiyonId = yeniFonksiyonIdGetir();
+		}
 	}
 
 	@Override
