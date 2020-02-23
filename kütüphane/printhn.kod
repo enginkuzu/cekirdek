@@ -4,7 +4,7 @@
 @sideeffect 1
 printhn(değer:i64:rax) {
 	@asm-data
-"enter:
+"printhn_enter:
 	.octa	0
 	.byte	10";
 	@asm-rodata
@@ -17,13 +17,13 @@ döngü:
 	mov rdx, değer
 	and rdx, 0x0F
 	mov dil, [.hex+rdx]
-	mov [enter+rcx], dil
+	mov [printhn_enter+rcx], dil
 	inc rcx
 	cmp rcx, 16
 	jnz döngü
 
 	mov rdx, 17		# 
-	lea	rsi, enter	# 
+	lea	rsi, printhn_enter	# 
 	mov rdi, 1		# file descriptor : 1 - standard output
 	mov rax, 1		# system call : write (1)
 	syscall			# Call the kernel
