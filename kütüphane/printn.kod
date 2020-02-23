@@ -3,7 +3,7 @@
 @sideeffect 1
 printn(değer:str:rax) {
 	@asm-data
-"printn_enter:
+"printn_enter1:
 	.byte	10";
 	@asm
 	"xor rdx, rdx
@@ -15,7 +15,7 @@ printn(değer:str:rax) {
 	syscall			# Call the kernel
 	
 	mov rdx, 1		# 
-	lea	rsi, printn_enter	# 
+	lea	rsi, printn_enter1	# 
 	mov rdi, 1		# file descriptor : 1 - standard output
 	mov rax, 1		# system call : write (1)
 	syscall			# Call the kernel
@@ -26,7 +26,24 @@ printn(değer:str:rax) {
 @arch x86-64
 @sideeffect 1
 printn(değer:+str:rax) {
+	@asm-data
+"printn_enter2:
+	.byte	10";
 	@asm
-	"ret";
+	"xor rdx, rdx
+	mov dl, [değer]	# 
+	mov	rsi, değer	#
+	inc rsi			# 
+	mov rdi, 1		# file descriptor : 1 - standard output
+	mov rax, 1		# system call : write (1)
+	syscall			# Call the kernel
+	
+	mov rdx, 1		# 
+	lea	rsi, printn_enter2	# 
+	mov rdi, 1		# file descriptor : 1 - standard output
+	mov rax, 1		# system call : write (1)
+	syscall			# Call the kernel
+	
+	ret";
 }
 

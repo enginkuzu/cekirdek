@@ -4,17 +4,21 @@
 mem_alloc_init() {
 	@asm-bssdata
 	"heap:
+		.quad
+	heap_free:
 		.quad";
 	@asm
-	"xor r9,r9					#
-	mov r8,-1					#
-	mov r10,34					#
-	mov rdx,3					#
-	mov rsi,1*1024*1024			#
-	xor rdi,rdi					#
-	mov rax,9					# system call : mmap (9)
+	"xor r9, r9					#
+	mov r8, -1					#
+	mov r10, 34					#
+	mov rdx, 3					#
+	mov rsi, 1*1024*1024		#
+	xor rdi, rdi				#
+	mov rax, 9					# system call : mmap (9)
 	syscall						# Call the kernel
-	mov [heap],rax
+	mov [heap], rax
+	xor rax, rax
+	mov[heap_free], rax
 	ret";
 }
 
@@ -22,9 +26,9 @@ mem_alloc_init() {
 @sideeffect 0
 mem_alloc_destroy() {
 	@asm
-	"mov rsi,1*1024*1024			#
-	mov rdi,[heap]					#
-	mov rax,11						# system call : munmap (11)
+	"mov rsi, 1*1024*1024			#
+	mov rdi, [heap]					#
+	mov rax, 11						# system call : munmap (11)
 	syscall							# Call the kernel
 	ret";
 }

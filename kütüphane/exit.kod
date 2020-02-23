@@ -4,8 +4,8 @@
 @sideeffect 1
 exit() {
 	@asm
-	"xor rdi,rdi	# 0
-	mov rax,60	# exit (60)
+	"xor rdi, rdi	# 0
+	mov rax, 60		# exit (60)
 	syscall
 	ret";
 }
