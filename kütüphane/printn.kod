@@ -1,6 +1,7 @@
 
 @arch x86-64
 @sideeffect 1
+@changed rax rdi rsi rdx rcx r11
 printn(değer:str:rax) {
 	@asm-data
 "printn_enter1:
@@ -25,6 +26,7 @@ printn(değer:str:rax) {
 
 @arch x86-64
 @sideeffect 1
+@changed rax rdi rsi rdx rcx r11
 printn(değer:+str:rax) {
 	@asm-data
 "printn_enter2:

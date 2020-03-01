@@ -1,6 +1,7 @@
 
 @arch x86-64
 @sideeffect 0
+@changed rax rdi rsi rdx r10 r8 r9 rcx r11
 mem_alloc_init() {
 	@asm-bssdata
 	"heap:
@@ -23,6 +24,7 @@ mem_alloc_init() {
 
 @arch x86-64
 @sideeffect 0
+@changed rax rdi rsi rcx r11
 mem_alloc_destroy() {
 	@asm
 	"mov rsi, 1*1024*1024			# 1 MByte
@@ -35,7 +37,8 @@ mem_alloc_destroy() {
 @arch x86-64
 @sideeffect 0
 @functionid 1
-mem_alloc_get(boy:i64:rbx) adres:i64:rax {
+@changed rax
+mem_alloc_get(boy:i64:rax) adres:i64:rbx {
 	@asm
 	"mov adres, [heap_free]
 	add boy, adres

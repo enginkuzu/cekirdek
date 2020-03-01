@@ -1,34 +1,35 @@
 
 @arch x86-64
 @sideeffect 0
+@changed rax rbx rcx rdx
 inline p1 (metin1:str, +, metin2:str) metin3:+str {
 	@asm
 	"xor rax, rax
 	xor rbx, rbx
-	mov al, [metin1]
-	mov bl, [metin2]
-	add bl, al
-	mov rcx, rbx
-	call fn1
-	mov metin3, rax
-	mov [rax], cl
+	mov bl, [metin1]
+	mov al, [metin2]
+	add al, bl
+	mov rcx, rax
+	call fn1		# mem_alloc_get
+	mov metin3, rbx
+	mov [rbx], cl
 	# -----
-	mov rbx, metin1
+	mov rax, metin1
 	mov cl, [metin1]
 .basa1:
-	inc rbx
 	inc rax
-	mov dl, [rbx]
-	mov [rax], dl
+	inc rbx
+	mov dl, [rax]
+	mov [rbx], dl
 	loop .basa1
 	# -----
-	mov rbx, metin2
+	mov rax, metin2
 	mov cl, [metin2]
 .basa2:
-	inc rbx
 	inc rax
-	mov dl, [rbx]
-	mov [rax], dl
+	inc rbx
+	mov dl, [rax]
+	mov [rbx], dl
 	loop .basa2";
 }
 
