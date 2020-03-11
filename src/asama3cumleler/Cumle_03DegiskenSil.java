@@ -1,19 +1,19 @@
-package aşama3cümleler;
+package asama3cumleler;
 
-import yardımcı.Değişkenler.CÜMLE;
+import yardimci.Degiskenler.CÜMLE;
 
-public class Cümle_03DeğişkenSil extends Cümle {
+public class Cumle_03DegiskenSil extends Cumle {
 
 	public int değişkenNo;
 
-	public Cümle_03DeğişkenSil(int değişkenNo) {
+	public Cumle_03DegiskenSil(int değişkenNo) {
 		super(CÜMLE.TİP_03DEĞİŞKEN_SİL);
 		this.değişkenNo = değişkenNo;
 	}
 
 	@Override
 	public String toString() {
-		return "Cümle_03DeğişkenSil[" + değişkenNo + "]";
+		return "Cumle_03DegiskenSil[" + değişkenNo + "]";
 	}
 
 }

@@ -1,4 +1,4 @@
-package yardımcı;
+package yardimci;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-import sınıflar.KomutÇıktısı;
+import siniflar.KomutCiktisi;
 
 public class Fonksiyonlar {
 
@@ -58,7 +58,7 @@ public class Fonksiyonlar {
 		return false;
 	}
 
-	public static KomutÇıktısı komutÇalıştır(boolean detaylariEkranaBas, String[] parametreler) {
+	public static KomutCiktisi komutÇalıştır(boolean detaylariEkranaBas, String[] parametreler) {
 		if (detaylariEkranaBas) {
 			System.out.println("Fonksiyonlar : komutÇalıştır() : " + Arrays.toString(parametreler));
 		}
@@ -74,7 +74,7 @@ public class Fonksiyonlar {
 			//
 			int okunanByte;
 			char[] tampon = new char[1024];
-			KomutÇıktısı komutÇıktısı = new KomutÇıktısı();
+			KomutCiktisi komutÇıktısı = new KomutCiktisi();
 			//
 			StringBuilder normalÇıktı = new StringBuilder();
 			while ((okunanByte = çıktılar.read(tampon)) != -1) {

@@ -1,6 +1,6 @@
-package sınıflar;
+package siniflar;
 
-public class KomutÇıktısı {
+public class KomutCiktisi {
 
 	public String normalÇıktı;
 	public String hataÇıktısı;

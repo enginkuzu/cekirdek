@@ -1,8 +1,8 @@
-package aşama4iyileştirmeler;
+package asama4iyilestirmeler;
 
 import java.util.ArrayList;
 
-public class DeğişkenKullanımRaporu {
+public class DegiskenKullanimRaporu {
 
 	public int değişkenNo;
 	public int yeniIndeks; // İşlem Sıra Numarası
@@ -11,7 +11,7 @@ public class DeğişkenKullanımRaporu {
 	public int yazmaSayaç = 0;
 	public ArrayList<Integer> işlemler = new ArrayList<Integer>(); // İşlem Sıra Numarası : Okuma +, Yazma -
 
-	public DeğişkenKullanımRaporu(int değişkenNo, int yeniIndeks) {
+	public DegiskenKullanimRaporu(int değişkenNo, int yeniIndeks) {
 		this.değişkenNo = değişkenNo;
 		this.yeniIndeks = yeniIndeks;
 	}
@@ -24,7 +24,7 @@ public class DeğişkenKullanımRaporu {
 	public void silOkuma(Integer işlemSıraNo) {
 		okumaSayaç--;
 		if (!işlemler.remove(işlemSıraNo)) {
-			System.out.println("HATA : DeğişkenKullanımRaporu.silOkuma() : işlemSıraNo = " + işlemSıraNo);
+			System.out.println("HATA : DegiskenKullanimRaporu.silOkuma() : işlemSıraNo = " + işlemSıraNo);
 		}
 	}
 
@@ -36,7 +36,7 @@ public class DeğişkenKullanımRaporu {
 	public void silYazma(Integer işlemSıraNo) {
 		yazmaSayaç--;
 		if (!işlemler.remove(işlemSıraNo)) {
-			System.out.println("HATA : DeğişkenKullanımRaporu.silYazma() : işlemSıraNo = " + işlemSıraNo);
+			System.out.println("HATA : DegiskenKullanimRaporu.silYazma() : işlemSıraNo = " + işlemSıraNo);
 		}
 	}
 

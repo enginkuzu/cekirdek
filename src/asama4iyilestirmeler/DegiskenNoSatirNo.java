@@ -1,17 +1,17 @@
-package aşama4iyileştirmeler;
+package asama4iyilestirmeler;
 
-public class DeğişkenNoSatırNo implements Comparable<DeğişkenNoSatırNo> {
+public class DegiskenNoSatirNo implements Comparable<DegiskenNoSatirNo> {
 
 	public int değişkenNo;
 	public int satırNo;
 
-	public DeğişkenNoSatırNo(int değişkenNo, int satırNo) {
+	public DegiskenNoSatirNo(int değişkenNo, int satırNo) {
 		this.değişkenNo = değişkenNo;
 		this.satırNo = satırNo;
 	}
 
 	@Override
-	public int compareTo(DeğişkenNoSatırNo diğerNesne) {
+	public int compareTo(DegiskenNoSatirNo diğerNesne) {
 		if (this.satırNo > diğerNesne.satırNo) {
 			return -1;
 		} else if (this.satırNo == diğerNesne.satırNo) {

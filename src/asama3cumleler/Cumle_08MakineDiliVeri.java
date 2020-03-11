@@ -1,19 +1,19 @@
-package aşama3cümleler;
+package asama3cumleler;
 
-import yardımcı.Değişkenler.CÜMLE;
+import yardimci.Degiskenler.CÜMLE;
 
-public class Cümle_08MakineDiliVeri extends Cümle {
+public class Cumle_08MakineDiliVeri extends Cumle {
 
 	public String veri;
 
-	public Cümle_08MakineDiliVeri(String veri) {
+	public Cumle_08MakineDiliVeri(String veri) {
 		super(CÜMLE.TİP_08MAKİNE_DİLİ_VERİ);
 		this.veri = veri;
 	}
 
 	@Override
 	public String toString() {
-		return "Cümle_08MakineDiliVeri[" + veri + "]";
+		return "Cumle_08MakineDiliVeri[" + veri + "]";
 	}
 
 }

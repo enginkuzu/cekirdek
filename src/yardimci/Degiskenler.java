@@ -1,9 +1,9 @@
-package yardımcı;
+package yardimci;
 
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class Değişkenler {
+public class Degiskenler {
 
 	public static final String UYGULAMA_ADI_VE_SÜRÜMÜ = "Çekirdek sürüm 0.1.2";
 	

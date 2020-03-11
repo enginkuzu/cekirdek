@@ -1,15 +1,15 @@
-package aşama3cümleler;
+package asama3cumleler;
 
-import yardımcı.Değişkenler;
-import yardımcı.Değişkenler.CÜMLE;
+import yardimci.Degiskenler;
+import yardimci.Degiskenler.CÜMLE;
 
-public class Cümle_01DeğişkenYeni extends Cümle {
+public class Cumle_01DegiskenYeni extends Cumle {
 
 	public int değişkenNo;
 	public String değişkenİsmi;
 	public int değişkenTipiId;
 
-	public Cümle_01DeğişkenYeni(int değişkenNo, String değişkenİsmi, int değişkenTipiId) {
+	public Cumle_01DegiskenYeni(int değişkenNo, String değişkenİsmi, int değişkenTipiId) {
 		super(CÜMLE.TİP_01DEĞİŞKEN_YENİ);
 		this.değişkenNo = değişkenNo;
 		this.değişkenİsmi = değişkenİsmi;
@@ -18,7 +18,7 @@ public class Cümle_01DeğişkenYeni extends Cümle {
 
 	@Override
 	public String toString() {
-		return "Cümle_01DeğişkenYeni[" + değişkenİsmi + " " + Değişkenler.TİP_MAP_ID_STR.get(değişkenTipiId) + " > "
+		return "Cumle_01DegiskenYeni[" + değişkenİsmi + " " + Degiskenler.TİP_MAP_ID_STR.get(değişkenTipiId) + " > "
 				+ değişkenNo + "]";
 	}
 

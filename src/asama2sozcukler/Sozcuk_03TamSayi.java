@@ -1,17 +1,17 @@
-package aşama2sözcükler;
+package asama2sozcukler;
 
-import yardımcı.Değişkenler.SÖZCÜK;
+import yardimci.Degiskenler.SÖZCÜK;
 
-public class Sözcük_03TamSayı extends Sözcük {
+public class Sozcuk_03TamSayi extends Sozcuk {
 
 	public String tamSayı = "";
 
-	public Sözcük_03TamSayı(char karakter) {
+	public Sozcuk_03TamSayi(char karakter) {
 		super(SÖZCÜK.TİP_03TAM_SAYI);
 		this.tamSayı = this.tamSayı + karakter;
 	}
 
-	public Sözcük_03TamSayı(String sayi) {
+	public Sozcuk_03TamSayi(String sayi) {
 		super(SÖZCÜK.TİP_03TAM_SAYI);
 		this.tamSayı = sayi;
 	}

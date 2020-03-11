@@ -1,15 +1,15 @@
-package aşama3cümleler;
+package asama3cumleler;
 
-import yardımcı.Değişkenler.CÜMLE;
+import yardimci.Degiskenler.CÜMLE;
 
-public class Cümle_04Operatörİşlemi extends Cümle {
+public class Cumle_04OperatorIslemi extends Cumle {
 
 	public int değişkenNo;
 	public String operatör;
 	public int parametreNo1;
 	public int parametreNo2;
 
-	public Cümle_04Operatörİşlemi(int değişkenNo, String operatör, int parametreNo1, int parametreNo2) {
+	public Cumle_04OperatorIslemi(int değişkenNo, String operatör, int parametreNo1, int parametreNo2) {
 		super(CÜMLE.TİP_04OPERATÖR_İŞLEMİ);
 		this.değişkenNo = değişkenNo;
 		this.operatör = operatör;
@@ -19,7 +19,7 @@ public class Cümle_04Operatörİşlemi extends Cümle {
 
 	@Override
 	public String toString() {
-		return "Cümle_04Operatörİşlemi[" + parametreNo1 + " " + operatör + " " + parametreNo2 + " > " + değişkenNo
+		return "Cumle_04OperatorIslemi[" + parametreNo1 + " " + operatör + " " + parametreNo2 + " > " + değişkenNo
 				+ "]";
 	}
 

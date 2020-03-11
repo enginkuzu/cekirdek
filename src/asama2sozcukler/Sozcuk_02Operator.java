@@ -1,17 +1,17 @@
-package aşama2sözcükler;
+package asama2sozcukler;
 
-import yardımcı.Değişkenler.SÖZCÜK;
+import yardimci.Degiskenler.SÖZCÜK;
 
-public class Sözcük_02Operatör extends Sözcük {
+public class Sozcuk_02Operator extends Sozcuk {
 
 	public String operatör = "";
 
-	public Sözcük_02Operatör(char karakter) {
+	public Sozcuk_02Operator(char karakter) {
 		super(SÖZCÜK.TİP_02OPERATÖR);
 		this.operatör = this.operatör + karakter;
 	}
 
-	public Sözcük_02Operatör(String operatör) {
+	public Sozcuk_02Operator(String operatör) {
 		super(SÖZCÜK.TİP_02OPERATÖR);
 		this.operatör = operatör;
 	}

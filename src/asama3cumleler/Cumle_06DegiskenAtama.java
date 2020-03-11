@@ -1,13 +1,13 @@
-package aşama3cümleler;
+package asama3cumleler;
 
-import yardımcı.Değişkenler.CÜMLE;
+import yardimci.Degiskenler.CÜMLE;
 
-public class Cümle_06DeğişkenAtama extends Cümle {
+public class Cumle_06DegiskenAtama extends Cumle {
 
 	public int değişkenNoKaynak;
 	public int değişkenNoHedef;
 
-	public Cümle_06DeğişkenAtama(int değişkenNoKaynak, int değişkenNoHedef) {
+	public Cumle_06DegiskenAtama(int değişkenNoKaynak, int değişkenNoHedef) {
 		super(CÜMLE.TİP_06DEĞİŞKEN_ATAMA);
 		this.değişkenNoKaynak = değişkenNoKaynak;
 		this.değişkenNoHedef = değişkenNoHedef;
@@ -15,7 +15,7 @@ public class Cümle_06DeğişkenAtama extends Cümle {
 
 	@Override
 	public String toString() {
-		return "Cümle_06DeğişkenAtama[" + değişkenNoKaynak + " > " + değişkenNoHedef + "]";
+		return "Cumle_06DegiskenAtama[" + değişkenNoKaynak + " > " + değişkenNoHedef + "]";
 	}
 
 }

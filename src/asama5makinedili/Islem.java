@@ -1,5 +1,5 @@
-package aşama5makinedili;
+package asama5makinedili;
 
-public abstract class İşlem {
+public abstract class Islem {
 
 }

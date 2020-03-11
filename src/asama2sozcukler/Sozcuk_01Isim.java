@@ -1,17 +1,17 @@
-package aşama2sözcükler;
+package asama2sozcukler;
 
-import yardımcı.Değişkenler.SÖZCÜK;
+import yardimci.Degiskenler.SÖZCÜK;
 
-public class Sözcük_01İsim extends Sözcük {
+public class Sozcuk_01Isim extends Sozcuk {
 
 	public String isim = "";
 
-	public Sözcük_01İsim(char karakter) {
+	public Sozcuk_01Isim(char karakter) {
 		super(SÖZCÜK.TİP_01İSİM);
 		this.isim = this.isim + karakter;
 	}
 
-	public Sözcük_01İsim(String isim) {
+	public Sozcuk_01Isim(String isim) {
 		super(SÖZCÜK.TİP_01İSİM);
 		this.isim = isim;
 	}

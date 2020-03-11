@@ -1,10 +1,10 @@
-package aşama5makinedili;
+package asama5makinedili;
 
-public class İşlem_03MakineDiliKomutu extends İşlem {
+public class Islem_03MakineDiliKomutu extends Islem {
 
 	public String komut;
 
-	public İşlem_03MakineDiliKomutu(String komut) {
+	public Islem_03MakineDiliKomutu(String komut) {
 		this.komut = komut;
 	}
 

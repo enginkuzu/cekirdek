@@ -1,12 +1,12 @@
-package aşama3cümleler;
+package asama3cumleler;
 
-public class Değişken {
+public class Degisken {
 
 	public int değişkenNo;
 	public String değişkenİsim;
 	public int değişkenTipiId;
 
-	public Değişken(int değişkenNo, String değişkenİsim, int değişkenTipiId) {
+	public Degisken(int değişkenNo, String değişkenİsim, int değişkenTipiId) {
 		this.değişkenNo = değişkenNo;
 		this.değişkenİsim = değişkenİsim;
 		this.değişkenTipiId = değişkenTipiId;

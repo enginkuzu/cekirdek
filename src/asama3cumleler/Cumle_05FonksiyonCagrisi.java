@@ -1,15 +1,15 @@
-package aşama3cümleler;
+package asama3cumleler;
 
-import yardımcı.Değişkenler.CÜMLE;
+import yardimci.Degiskenler.CÜMLE;
 
-public class Cümle_05FonksiyonÇağrısı extends Cümle {
+public class Cumle_05FonksiyonCagrisi extends Cumle {
 
 	public int değişkenNo;
 	public String fonksiyon;
 	public int fonksiyonId;
 	public int parametre;
 
-	public Cümle_05FonksiyonÇağrısı(int değişkenNo, String fonksiyon, int fonksiyonId, int parametre) {
+	public Cumle_05FonksiyonCagrisi(int değişkenNo, String fonksiyon, int fonksiyonId, int parametre) {
 		super(CÜMLE.TİP_05FUNKSİYON_ÇAĞRISI);
 		this.değişkenNo = değişkenNo;
 		this.fonksiyon = fonksiyon;
@@ -19,7 +19,7 @@ public class Cümle_05FonksiyonÇağrısı extends Cümle {
 
 	@Override
 	public String toString() {
-		return "Cümle_05FonksiyonÇağrısı[" + fonksiyon + "(" + parametre + ") > " + değişkenNo + "]";
+		return "Cumle_05FonksiyonCagrisi[" + fonksiyon + "(" + parametre + ") > " + değişkenNo + "]";
 	}
 
 }

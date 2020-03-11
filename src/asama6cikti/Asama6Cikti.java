@@ -1,15 +1,15 @@
-package aşama6çıktı;
+package asama6cikti;
 
-import sınıflar.KomutÇıktısı;
-import yardımcı.Fonksiyonlar;
+import siniflar.KomutCiktisi;
+import yardimci.Fonksiyonlar;
 
-public class Aşama6Çıktı {
+public class Asama6Cikti {
 
 	public static String işle(String dosyaAdı) {
 
 		dosyaAdı = dosyaAdı.substring(0, dosyaAdı.length() - 4);
 
-		KomutÇıktısı çıktı1 = Fonksiyonlar.komutÇalıştır(false,
+		KomutCiktisi çıktı1 = Fonksiyonlar.komutÇalıştır(false,
 				new String[] { "as", dosyaAdı + ".kod.5.s", "-o", dosyaAdı + ".o" });
 		if (!çıktı1.hataÇıktısı.isEmpty()) {
 			System.out.println(çıktı1.hataÇıktısı);
@@ -19,7 +19,7 @@ public class Aşama6Çıktı {
 			return çıktı1.normalÇıktı;
 		}
 
-		KomutÇıktısı çıktı2 = Fonksiyonlar.komutÇalıştır(false,
+		KomutCiktisi çıktı2 = Fonksiyonlar.komutÇalıştır(false,
 				new String[] { "ld", "-nostartfiles", "-s", dosyaAdı + ".o", "-o", dosyaAdı + ".bin" });
 		if (!çıktı2.hataÇıktısı.isEmpty()) {
 			System.out.println(çıktı2.hataÇıktısı);

@@ -1,13 +1,13 @@
-package aşama3cümleler;
+package asama3cumleler;
 
 import java.util.HashMap;
 import java.util.HashSet;
 
-import yardımcı.Değişkenler;
-import yardımcı.Fonksiyonlar;
-import yardımcı.Değişkenler.FONKSİYON;
+import yardimci.Degiskenler;
+import yardimci.Fonksiyonlar;
+import yardimci.Degiskenler.FONKSİYON;
 
-public class Fonksiyon_01OperatörFonksiyon extends Fonksiyon {
+public class Fonksiyon_01OperatorFonksiyon extends Fonksiyon {
 
 	public HashMap<String, HashSet<String>> özellikMap;
 	public boolean inline;
@@ -20,7 +20,7 @@ public class Fonksiyon_01OperatörFonksiyon extends Fonksiyon {
 	public String sonuçİsim;
 	public String sonuçTip;
 
-	public Fonksiyon_01OperatörFonksiyon(HashMap<String, HashSet<String>> özellikMap) {
+	public Fonksiyon_01OperatorFonksiyon(HashMap<String, HashSet<String>> özellikMap) {
 		super(FONKSİYON.TİP_01OPERATÖRFONKSİYON);
 		this.özellikMap = özellikMap;
 		//
@@ -33,8 +33,8 @@ public class Fonksiyon_01OperatörFonksiyon extends Fonksiyon {
 
 	@Override
 	public String toString() {
-		return "Fonksiyon_01OperatörFonksiyon[" + Değişkenler.TİP_MAP_ID_STR.get(değişken1TipId) + " " + operatör + " "
-				+ Değişkenler.TİP_MAP_ID_STR.get(değişken2TipId) + "] " + sonuçTip;
+		return "Fonksiyon_01OperatorFonksiyon[" + Degiskenler.TİP_MAP_ID_STR.get(değişken1TipId) + " " + operatör + " "
+				+ Degiskenler.TİP_MAP_ID_STR.get(değişken2TipId) + "] " + sonuçTip;
 	}
 
 }

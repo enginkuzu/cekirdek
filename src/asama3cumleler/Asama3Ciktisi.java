@@ -1,15 +1,15 @@
-package aşama3cümleler;
+package asama3cumleler;
 
 import java.util.HashMap;
 
-public class Aşama3Çıktısı {
+public class Asama3Ciktisi {
 
-	public HashMap<String, Fonksiyon_01OperatörFonksiyon> operatörFonksiyonMap;
-	public HashMap<String, Fonksiyon_02İsimliFonksiyon> isimFonksiyonMap;
+	public HashMap<String, Fonksiyon_01OperatorFonksiyon> operatörFonksiyonMap;
+	public HashMap<String, Fonksiyon_02IsimliFonksiyon> isimFonksiyonMap;
 	public Fonksiyon_03AnaFonksiyon anaFonksiyon;
 
-	public Aşama3Çıktısı(HashMap<String, Fonksiyon_01OperatörFonksiyon> operatörFonksiyonMap,
-			HashMap<String, Fonksiyon_02İsimliFonksiyon> isimFonksiyonMap, Fonksiyon_03AnaFonksiyon anaFonksiyon) {
+	public Asama3Ciktisi(HashMap<String, Fonksiyon_01OperatorFonksiyon> operatörFonksiyonMap,
+			HashMap<String, Fonksiyon_02IsimliFonksiyon> isimFonksiyonMap, Fonksiyon_03AnaFonksiyon anaFonksiyon) {
 		this.operatörFonksiyonMap = operatörFonksiyonMap;
 		this.isimFonksiyonMap = isimFonksiyonMap;
 		this.anaFonksiyon = anaFonksiyon;

@@ -1,1 +1,1 @@
-java -Dfile.encoding=UTF-8 -classpath bin aşama1başlangıç.Aşama1Başlangıç --tests
+java -Dfile.encoding=UTF-8 -classpath bin asama1baslangic.Asama1Baslangic --tests

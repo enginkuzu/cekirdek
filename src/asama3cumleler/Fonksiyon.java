@@ -1,10 +1,10 @@
-package aşama3cümleler;
+package asama3cumleler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import yardımcı.Değişkenler.FONKSİYON;
+import yardimci.Degiskenler.FONKSİYON;
 
 public abstract class Fonksiyon {
 
@@ -13,14 +13,14 @@ public abstract class Fonksiyon {
 	public FONKSİYON fonksiyon;
 	public int fonksiyonId;
 
-	public int geçiciDeğişkenNo = 0;
-	public int gerçekDeğişkenNo = 0;
-	public HashMap<Integer, Değişken> değişkenNoMap = new HashMap<Integer, Değişken>();
-	public HashMap<String, Değişken> değişkenİsimMap = new HashMap<String, Değişken>();
+	public int geçiciDegiskenNo = 0;
+	public int gerçekDegiskenNo = 0;
+	public HashMap<Integer, Degisken> değişkenNoMap = new HashMap<Integer, Degisken>();
+	public HashMap<String, Degisken> değişkenİsimMap = new HashMap<String, Degisken>();
 
 	public HashMap<String, HashSet<String>> özellikMap = new HashMap<String, HashSet<String>>();
 
-	public ArrayList<Cümle> cümleler = new ArrayList<Cümle>();
+	public ArrayList<Cumle> cümleler = new ArrayList<Cumle>();
 
 	public Fonksiyon(FONKSİYON fonksiyon) {
 		this.fonksiyon = fonksiyon;

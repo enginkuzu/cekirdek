@@ -1,6 +1,6 @@
-package aşama3cümleler;
+package asama3cumleler;
 
-import yardımcı.Değişkenler.FONKSİYON;
+import yardimci.Degiskenler.FONKSİYON;
 
 public class Fonksiyon_03AnaFonksiyon extends Fonksiyon {
 

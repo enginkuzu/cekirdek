@@ -1,14 +1,14 @@
-package aşama3cümleler;
+package asama3cumleler;
 
-import yardımcı.Değişkenler;
-import yardımcı.Değişkenler.CÜMLE;
+import yardimci.Degiskenler;
+import yardimci.Degiskenler.CÜMLE;
 
-public class Cümle_02GeçiciDeğişkenYeni extends Cümle {
+public class Cumle_02GeciciDegiskenYeni extends Cumle {
 
 	public int değişkenNo;
 	public int değişkenTipiId;
 
-	public Cümle_02GeçiciDeğişkenYeni(int değişkenNo, int değişkenTipiId) {
+	public Cumle_02GeciciDegiskenYeni(int değişkenNo, int değişkenTipiId) {
 		super(CÜMLE.TİP_02GEÇİCİ_DEĞİŞKEN_YENİ);
 		this.değişkenNo = değişkenNo;
 		this.değişkenTipiId = değişkenTipiId;
@@ -16,7 +16,7 @@ public class Cümle_02GeçiciDeğişkenYeni extends Cümle {
 
 	@Override
 	public String toString() {
-		return "Cümle_02GeçiciDeğişkenYeni[" + Değişkenler.TİP_MAP_ID_STR.get(değişkenTipiId) + " > " + değişkenNo
+		return "Cumle_02GeciciDegiskenYeni[" + Degiskenler.TİP_MAP_ID_STR.get(değişkenTipiId) + " > " + değişkenNo
 				+ "]";
 	}
 

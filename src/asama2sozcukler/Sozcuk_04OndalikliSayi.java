@@ -1,17 +1,17 @@
-package aşama2sözcükler;
+package asama2sozcukler;
 
-import yardımcı.Değişkenler.SÖZCÜK;
+import yardimci.Degiskenler.SÖZCÜK;
 
-public class Sözcük_04OndalıklıSayı extends Sözcük {
+public class Sozcuk_04OndalikliSayi extends Sozcuk {
 
 	public String ondalıklıSayı = "";
 
-	public Sözcük_04OndalıklıSayı(char karakter) {
+	public Sozcuk_04OndalikliSayi(char karakter) {
 		super(SÖZCÜK.TİP_04ONDALIKLI_SAYI);
 		this.ondalıklıSayı = this.ondalıklıSayı + karakter;
 	}
 
-	public Sözcük_04OndalıklıSayı(String sayı) {
+	public Sozcuk_04OndalikliSayi(String sayı) {
 		super(SÖZCÜK.TİP_04ONDALIKLI_SAYI);
 		this.ondalıklıSayı = sayı;
 	}

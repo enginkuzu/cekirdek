@@ -1,11 +1,11 @@
-package aşama5makinedili;
+package asama5makinedili;
 
-public class İşlem_01YığıttanSaklaca extends İşlem {
+public class Islem_01YigittanSaklaca extends Islem {
 
 	public int yığıtİndeks;
 	public String saklaç;
 
-	public İşlem_01YığıttanSaklaca(int yığıtİndeks, String saklaç) {
+	public Islem_01YigittanSaklaca(int yığıtİndeks, String saklaç) {
 		this.yığıtİndeks = yığıtİndeks;
 		this.saklaç = saklaç;
 	}

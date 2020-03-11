@@ -1,12 +1,12 @@
-package aşama2sözcükler;
+package asama2sozcukler;
 
-import yardımcı.Değişkenler.SÖZCÜK;
+import yardimci.Degiskenler.SÖZCÜK;
 
-public class Sözcük {
+public class Sozcuk {
 
 	public SÖZCÜK tip;
 
-	public Sözcük(SÖZCÜK tip) {
+	public Sozcuk(SÖZCÜK tip) {
 		this.tip = tip;
 	}
 

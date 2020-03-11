@@ -1,24 +1,24 @@
-package aşama1başlangıç;
+package asama1baslangic;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
-import aşama2sözcükler.Aşama2Sözcükler;
-import aşama2sözcükler.Sözcük;
-import aşama3cümleler.Aşama3Cümleler;
-import aşama3cümleler.Aşama3Çıktısı;
-import aşama4iyileştirmeler.Aşama4İyileştirmeler;
-import aşama5makinedili.Aşama5MakineDili;
-import aşama6çıktı.Aşama6Çıktı;
-import sınıflar.KomutÇıktısı;
-import yardımcı.Değişkenler;
-import yardımcı.Fonksiyonlar;
+import asama2sozcukler.Asama2Sozcukler;
+import asama2sozcukler.Sozcuk;
+import asama3cumleler.Asama3Cumleler;
+import asama3cumleler.Asama3Ciktisi;
+import asama4iyilestirmeler.Asama4Iyilestirmeler;
+import asama5makinedili.Asama5MakineDili;
+import asama6cikti.Asama6Cikti;
+import siniflar.KomutCiktisi;
+import yardimci.Degiskenler;
+import yardimci.Fonksiyonlar;
 
-public class Aşama1Başlangıç {
+public class Asama1Baslangic {
 
-	public Aşama1Başlangıç() {
+	public Asama1Baslangic() {
 
 		File testKlasörü = new File("testler");
 		ArrayList<String> kodDosyaları = new ArrayList<String>();
@@ -51,7 +51,7 @@ public class Aşama1Başlangıç {
 			} else {
 				String normalÇıktıDosyası = dosyaİsmiVeUzantısı + ".out";
 				if (tümDosyalar.contains(normalÇıktıDosyası)) {
-					KomutÇıktısı çıktı = Fonksiyonlar.komutÇalıştır(false,
+					KomutCiktisi çıktı = Fonksiyonlar.komutÇalıştır(false,
 							new String[] { "testler/" + dosyaİsmi + ".bin" });
 					String normalÇıktıDosyasıİçeriği = Fonksiyonlar.dosyaOku(new File("testler/" + normalÇıktıDosyası));
 					if (!normalÇıktıDosyasıİçeriği.equals(çıktı.normalÇıktı)) {
@@ -70,7 +70,7 @@ public class Aşama1Başlangıç {
 		System.out.println("TESTLER : " + başarılıSayaç + " başarılı, " + başarısızSayaç + " başarısız");
 	}
 
-	public Aşama1Başlangıç(String file) {
+	public Asama1Baslangic(String file) {
 		String hatalar = derle(file);
 		if (hatalar != null) {
 			System.out.println(hatalar);
@@ -88,35 +88,35 @@ public class Aşama1Başlangıç {
 		StringBuilder sb = new StringBuilder();
 		String kütüphaneler[] = { "mem.kod", "exit.kod", "i64.kod", "str.kod", "printhn.kod", "printn.kod" };
 		for (int i = 0; i < kütüphaneler.length; i++) {
-			String kütüphaneDosyası = "kütüphane/" + kütüphaneler[i];
+			String kütüphaneDosyası = "kutuphane/" + kütüphaneler[i];
 			String kütüphaneKaynakKodu = oku(kütüphaneDosyası);
 			if (kütüphaneKaynakKodu == null) {
-				return "Aşama1Başlangıç : " + kütüphaneDosyası + " okunamadı !!!";
+				return "Asama1Baslangic : " + kütüphaneDosyası + " okunamadı !!!";
 			}
 			sb.append(kütüphaneKaynakKodu);
 			sb.append("\n");
 		}
 		String kaynakKod = oku(kaynakKodDosyası);
 		if (kaynakKod == null) {
-			return "Aşama1Başlangıç : " + kaynakKodDosyası + " okunamadı !!!";
+			return "Asama1Baslangic : " + kaynakKodDosyası + " okunamadı !!!";
 		}
 		sb.append(kaynakKod);
 
-		Object sözcükler = Aşama2Sözcükler.işle(sb.toString(), kaynakKodDosyası);
+		Object sözcükler = Asama2Sozcukler.işle(sb.toString(), kaynakKodDosyası);
 		if (sözcükler instanceof String) {
 			return (String) sözcükler;
 		}
-		Object cümleler = Aşama3Cümleler.işle((ArrayList<Sözcük[]>) sözcükler, kaynakKodDosyası);
+		Object cümleler = Asama3Cumleler.işle((ArrayList<Sozcuk[]>) sözcükler, kaynakKodDosyası);
 		if (cümleler instanceof String) {
 			return (String) cümleler;
 		}
-		Aşama3Çıktısı iyileştirmeler = Aşama4İyileştirmeler.işle((Aşama3Çıktısı) cümleler, kaynakKodDosyası);
-		Aşama5MakineDili.işle(iyileştirmeler, kaynakKodDosyası);
-		return Aşama6Çıktı.işle(kaynakKodDosyası);
+		Asama3Ciktisi iyileştirmeler = Asama4Iyilestirmeler.işle((Asama3Ciktisi) cümleler, kaynakKodDosyası);
+		Asama5MakineDili.işle(iyileştirmeler, kaynakKodDosyası);
+		return Asama6Cikti.işle(kaynakKodDosyası);
 	}
 
 	private static void çalışmaParametreleriniEkranaYaz() {
-		if (Değişkenler.DİL_TÜRKÇE_Mİ) {
+		if (Degiskenler.DİL_TÜRKÇE_Mİ) {
 			System.out.println("Kullanım: derleyici dosya");
 			System.out.println("Kullanım: derleyici [parametreler]");
 			System.out.println("  --help        Parametreleri görüntüle.");
@@ -134,7 +134,7 @@ public class Aşama1Başlangıç {
 	}
 
 	private static void hiçParametreYok() {
-		if (Değişkenler.DİL_TÜRKÇE_Mİ) {
+		if (Degiskenler.DİL_TÜRKÇE_Mİ) {
 			System.out.println("ölümcül hata: Hiçbir şey istenmemiş.");
 			System.out.println("detaylar için --help parametresini kullanınız.");
 		} else {
@@ -144,7 +144,7 @@ public class Aşama1Başlangıç {
 	}
 
 	private static void hatalıParametreler() {
-		if (Değişkenler.DİL_TÜRKÇE_Mİ) {
+		if (Degiskenler.DİL_TÜRKÇE_Mİ) {
 			System.out.println("ölümcül hata: Hatalı parametreler.");
 			System.out.println("detaylar için --help parametresini kullanınız.");
 		} else {
@@ -154,7 +154,7 @@ public class Aşama1Başlangıç {
 	}
 
 	private static void sürümGörüntüle() {
-		System.out.println(Değişkenler.UYGULAMA_ADI_VE_SÜRÜMÜ);
+		System.out.println(Degiskenler.UYGULAMA_ADI_VE_SÜRÜMÜ);
 	}
 
 	public static void main(String[] parametreler) {
@@ -163,7 +163,7 @@ public class Aşama1Başlangıç {
 			String p1 = parametreler[0];
 			String p2 = parametreler[1];
 			if (p1.equals("--lang")) {
-				Değişkenler.DİL_TÜRKÇE_Mİ = p2.equals("tr");
+				Degiskenler.DİL_TÜRKÇE_Mİ = p2.equals("tr");
 			} else {
 				hatalıParametreler();
 			}
@@ -174,10 +174,10 @@ public class Aşama1Başlangıç {
 			} else if (p1.equals("--version")) {
 				sürümGörüntüle();
 			} else if (p1.equals("--tests")) {
-				Değişkenler.DİL_TÜRKÇE_Mİ = true;
-				new Aşama1Başlangıç();
+				Degiskenler.DİL_TÜRKÇE_Mİ = true;
+				new Asama1Baslangic();
 			} else {
-				new Aşama1Başlangıç(p1);
+				new Asama1Baslangic(p1);
 			}
 		} else {
 			hiçParametreYok();

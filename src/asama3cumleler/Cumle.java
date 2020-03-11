@@ -1,12 +1,12 @@
-package aşama3cümleler;
+package asama3cumleler;
 
-import yardımcı.Değişkenler.CÜMLE;
+import yardimci.Degiskenler.CÜMLE;
 
-public abstract class Cümle {
+public abstract class Cumle {
 
 	public CÜMLE tip;
 
-	public Cümle(CÜMLE tip) {
+	public Cumle(CÜMLE tip) {
 		this.tip = tip;
 	}
 

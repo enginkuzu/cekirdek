@@ -1,39 +1,39 @@
-package aşama3cümleler;
+package asama3cumleler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import aşama2sözcükler.Sözcük;
-import aşama2sözcükler.Sözcük_01İsim;
-import aşama2sözcükler.Sözcük_02Operatör;
-import aşama2sözcükler.Sözcük_03TamSayı;
-import aşama2sözcükler.Sözcük_05Metin;
-import yardımcı.Fonksiyonlar;
-import yardımcı.Değişkenler;
-import yardımcı.Değişkenler.SÖZCÜK;
+import asama2sozcukler.Sozcuk;
+import asama2sozcukler.Sozcuk_01Isim;
+import asama2sozcukler.Sozcuk_02Operator;
+import asama2sozcukler.Sozcuk_03TamSayi;
+import asama2sozcukler.Sozcuk_05Metin;
+import yardimci.Fonksiyonlar;
+import yardimci.Degiskenler;
+import yardimci.Degiskenler.SÖZCÜK;
 
-public class Aşama3Cümleler {
+public class Asama3Cumleler {
 
-	private static HashMap<String, Fonksiyon_01OperatörFonksiyon> operatörFonksiyonMap;
-	private static HashMap<String, Fonksiyon_02İsimliFonksiyon> isimFonksiyonMap;
+	private static HashMap<String, Fonksiyon_01OperatorFonksiyon> operatörFonksiyonMap;
+	private static HashMap<String, Fonksiyon_02IsimliFonksiyon> isimFonksiyonMap;
 	private static Fonksiyon_03AnaFonksiyon anaFonksiyon;
 	private static Fonksiyon aktifFonksiyon;
 	private static StringBuilder hatalar;
 
-	private static void hata01_BilinmeyenDeğişkenTipi(String değişkenTipi) {
+	private static void hata01_BilinmeyenDegiskenTipi(String değişkenTipi) {
 		hatalar.append("Bilinmeyen Değişken Tipi : " + değişkenTipi + " !!!\n");
 	}
 
-	private static void hata02_TanımsızDeğişken(String değişkenİsmi) {
+	private static void hata02_TanımsızDegisken(String değişkenİsmi) {
 		hatalar.append("Tanımsız Değişken : " + değişkenİsmi + " !!!\n");
 	}
 
-	private static void hata03_DeğişkenİsimÇakışması(String değişkenİsmi) {
+	private static void hata03_DegiskenİsimÇakışması(String değişkenİsmi) {
 		hatalar.append("Çok Defa Değişken Tanımlama : " + değişkenİsmi + " !!!\n");
 	}
 
-	private static void hata04_DeğişkenİsmiUygunDeğil(String değişkenİsmi) {
+	private static void hata04_DegiskenİsmiUygunDeğil(String değişkenİsmi) {
 		hatalar.append("Değişken İsmi Uygun Değil : " + değişkenİsmi + " !!!\n");
 	}
 
@@ -57,13 +57,13 @@ public class Aşama3Cümleler {
 				return true;
 			}
 		}
-		if (Değişkenler.ANAHTAR_KELIMELER.contains(değişkenİsmi)) {
+		if (Degiskenler.ANAHTAR_KELIMELER.contains(değişkenİsmi)) {
 			return true;
 		}
 		return false;
 	}
 
-	public static Object işle(ArrayList<Sözcük[]> tümCümleler, String dosyaAdı) {
+	public static Object işle(ArrayList<Sozcuk[]> tümCumleler, String dosyaAdı) {
 
 		operatörFonksiyonMap = new HashMap<>();
 		isimFonksiyonMap = new HashMap<>();
@@ -71,64 +71,64 @@ public class Aşama3Cümleler {
 		aktifFonksiyon = anaFonksiyon;
 		hatalar = new StringBuilder();
 
-		for (Sözcük[] cümle : tümCümleler) {
+		for (Sozcuk[] cümle : tümCumleler) {
 			if (cümle[0].tip == SÖZCÜK.TİP_13ÖZELLİK && cümle[cümle.length - 1].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// Fonksiyon Özelliği
 				HashSet<String> özellikSet = new HashSet<String>();
 				for (int i = 2; i < cümle.length - 1; i++) {
-					özellikSet.add(((Sözcük_01İsim) cümle[i]).isim);
+					özellikSet.add(((Sozcuk_01Isim) cümle[i]).isim);
 				}
-				aktifFonksiyon.özellikMap.put(((Sözcük_01İsim) cümle[1]).isim, özellikSet);
+				aktifFonksiyon.özellikMap.put(((Sozcuk_01Isim) cümle[1]).isim, özellikSet);
 			} else if (cümle[1].tip == SÖZCÜK.TİP_14AÇ_PARANTEZ) {
 				// Normal Fonksiyon Başlangıcı
-				Fonksiyon_02İsimliFonksiyon isimFonksiyon = new Fonksiyon_02İsimliFonksiyon(aktifFonksiyon.özellikMap);
-				isimFonksiyon.isim = ((Sözcük_01İsim) cümle[0]).isim;
+				Fonksiyon_02IsimliFonksiyon isimFonksiyon = new Fonksiyon_02IsimliFonksiyon(aktifFonksiyon.özellikMap);
+				isimFonksiyon.isim = ((Sozcuk_01Isim) cümle[0]).isim;
 				if (cümle.length > 5 && cümle[7].tip == SÖZCÜK.TİP_15KAPA_PARANTEZ) {
-					isimFonksiyon.değişken1İsim = ((Sözcük_01İsim) cümle[2]).isim;
-					String değişkenTipi = ((Sözcük_01İsim) cümle[4]).isim;
-					if (!Değişkenler.TİP_MAP_STR_ID.containsKey(değişkenTipi)) {
-						hata01_BilinmeyenDeğişkenTipi(değişkenTipi);
+					isimFonksiyon.değişken1İsim = ((Sozcuk_01Isim) cümle[2]).isim;
+					String değişkenTipi = ((Sozcuk_01Isim) cümle[4]).isim;
+					if (!Degiskenler.TİP_MAP_STR_ID.containsKey(değişkenTipi)) {
+						hata01_BilinmeyenDegiskenTipi(değişkenTipi);
 						continue;
 					}
-					isimFonksiyon.değişken1TipId = Değişkenler.TİP_MAP_STR_ID.get(değişkenTipi);
-					isimFonksiyon.değişken1TipAssembly = ((Sözcük_01İsim) cümle[6]).isim;
+					isimFonksiyon.değişken1TipId = Degiskenler.TİP_MAP_STR_ID.get(değişkenTipi);
+					isimFonksiyon.değişken1TipAssembly = ((Sozcuk_01Isim) cümle[6]).isim;
 				}
 				if (cümle.length > 5 && cümle[cümle.length - 8].tip == SÖZCÜK.TİP_15KAPA_PARANTEZ) {
-					String sonuçDeğişkenTipi = ((Sözcük_01İsim) cümle[cümle.length - 5]).isim;
-					if (!Değişkenler.TİP_MAP_STR_ID.containsKey(sonuçDeğişkenTipi)) {
-						hata01_BilinmeyenDeğişkenTipi(sonuçDeğişkenTipi);
+					String sonuçDegiskenTipi = ((Sozcuk_01Isim) cümle[cümle.length - 5]).isim;
+					if (!Degiskenler.TİP_MAP_STR_ID.containsKey(sonuçDegiskenTipi)) {
+						hata01_BilinmeyenDegiskenTipi(sonuçDegiskenTipi);
 						continue;
 					}
-					isimFonksiyon.sonuçİsim = ((Sözcük_01İsim) cümle[cümle.length - 7]).isim;
-					isimFonksiyon.sonuçTipId = Değişkenler.TİP_MAP_STR_ID.get(sonuçDeğişkenTipi);
-					isimFonksiyon.sonuçTipAssembly = ((Sözcük_01İsim) cümle[cümle.length - 3]).isim;
+					isimFonksiyon.sonuçİsim = ((Sozcuk_01Isim) cümle[cümle.length - 7]).isim;
+					isimFonksiyon.sonuçTipId = Degiskenler.TİP_MAP_STR_ID.get(sonuçDegiskenTipi);
+					isimFonksiyon.sonuçTipAssembly = ((Sozcuk_01Isim) cümle[cümle.length - 3]).isim;
 				}
 				aktifFonksiyon.özellikMap = new HashMap<>();
 				aktifFonksiyon = isimFonksiyon;
 				String anahtar = isimFonksiyon.isim + " " + isimFonksiyon.değişken1TipId;
 				isimFonksiyonMap.put(anahtar, isimFonksiyon);
-			} else if (cümle[0].tip == SÖZCÜK.TİP_01İSİM && ((Sözcük_01İsim) cümle[0]).isim.equals("inline")) {
+			} else if (cümle[0].tip == SÖZCÜK.TİP_01İSİM && ((Sozcuk_01Isim) cümle[0]).isim.equals("inline")) {
 				// Inline Fonksiyon Başlangıcı
-				String değişken1Tip = ((Sözcük_01İsim) cümle[5]).isim;
-				String değişken2Tip = ((Sözcük_01İsim) cümle[11]).isim;
-				if (!Değişkenler.TİP_MAP_STR_ID.containsKey(değişken1Tip)) {
-					hata01_BilinmeyenDeğişkenTipi(değişken1Tip);
+				String değişken1Tip = ((Sozcuk_01Isim) cümle[5]).isim;
+				String değişken2Tip = ((Sozcuk_01Isim) cümle[11]).isim;
+				if (!Degiskenler.TİP_MAP_STR_ID.containsKey(değişken1Tip)) {
+					hata01_BilinmeyenDegiskenTipi(değişken1Tip);
 					continue;
-				} else if (!Değişkenler.TİP_MAP_STR_ID.containsKey(değişken2Tip)) {
-					hata01_BilinmeyenDeğişkenTipi(değişken2Tip);
+				} else if (!Degiskenler.TİP_MAP_STR_ID.containsKey(değişken2Tip)) {
+					hata01_BilinmeyenDegiskenTipi(değişken2Tip);
 					continue;
 				}
-				Fonksiyon_01OperatörFonksiyon operatörFonksiyon = new Fonksiyon_01OperatörFonksiyon(
+				Fonksiyon_01OperatorFonksiyon operatörFonksiyon = new Fonksiyon_01OperatorFonksiyon(
 						aktifFonksiyon.özellikMap);
 				operatörFonksiyon.inline = true;
-				operatörFonksiyon.öncelik = ((Sözcük_01İsim) cümle[1]).isim.equals("p1") ? 1 : 2;
-				operatörFonksiyon.değişken1İsim = ((Sözcük_01İsim) cümle[3]).isim;
-				operatörFonksiyon.değişken1TipId = Değişkenler.TİP_MAP_STR_ID.get(değişken1Tip);
-				operatörFonksiyon.operatör = ((Sözcük_02Operatör) cümle[7]).operatör;
-				operatörFonksiyon.değişken2İsim = ((Sözcük_01İsim) cümle[9]).isim;
-				operatörFonksiyon.değişken2TipId = Değişkenler.TİP_MAP_STR_ID.get(değişken2Tip);
-				operatörFonksiyon.sonuçİsim = ((Sözcük_01İsim) cümle[13]).isim;
-				operatörFonksiyon.sonuçTip = ((Sözcük_01İsim) cümle[15]).isim;
+				operatörFonksiyon.öncelik = ((Sozcuk_01Isim) cümle[1]).isim.equals("p1") ? 1 : 2;
+				operatörFonksiyon.değişken1İsim = ((Sozcuk_01Isim) cümle[3]).isim;
+				operatörFonksiyon.değişken1TipId = Degiskenler.TİP_MAP_STR_ID.get(değişken1Tip);
+				operatörFonksiyon.operatör = ((Sozcuk_02Operator) cümle[7]).operatör;
+				operatörFonksiyon.değişken2İsim = ((Sozcuk_01Isim) cümle[9]).isim;
+				operatörFonksiyon.değişken2TipId = Degiskenler.TİP_MAP_STR_ID.get(değişken2Tip);
+				operatörFonksiyon.sonuçİsim = ((Sozcuk_01Isim) cümle[13]).isim;
+				operatörFonksiyon.sonuçTip = ((Sozcuk_01Isim) cümle[15]).isim;
 				aktifFonksiyon.özellikMap = new HashMap<>();
 				aktifFonksiyon = operatörFonksiyon;
 				//
@@ -137,19 +137,19 @@ public class Aşama3Cümleler {
 				operatörFonksiyonMap.put(anahtar, operatörFonksiyon);
 			} else if (aktifFonksiyon.özellikMap.containsKey("asm-data")) {
 				// Assembly Data Kodu
-				aktifFonksiyon.cümleler.add(new Cümle_08MakineDiliVeri(((Sözcük_05Metin) cümle[0]).metin));
+				aktifFonksiyon.cümleler.add(new Cumle_08MakineDiliVeri(((Sozcuk_05Metin) cümle[0]).metin));
 				aktifFonksiyon.özellikMap = new HashMap<>();
 			} else if (aktifFonksiyon.özellikMap.containsKey("asm-rodata")) {
 				// Assembly RO Data Kodu
-				aktifFonksiyon.cümleler.add(new Cümle_09MakineDiliSabitVeri(((Sözcük_05Metin) cümle[0]).metin));
+				aktifFonksiyon.cümleler.add(new Cumle_09MakineDiliSabitVeri(((Sozcuk_05Metin) cümle[0]).metin));
 				aktifFonksiyon.özellikMap = new HashMap<>();
 			} else if (aktifFonksiyon.özellikMap.containsKey("asm-bssdata")) {
 				// Assembly BSS Kodu
-				aktifFonksiyon.cümleler.add(new Cümle_10MakineDiliSembol(((Sözcük_05Metin) cümle[0]).metin));
+				aktifFonksiyon.cümleler.add(new Cumle_10MakineDiliSembol(((Sozcuk_05Metin) cümle[0]).metin));
 				aktifFonksiyon.özellikMap = new HashMap<>();
 			} else if (aktifFonksiyon.özellikMap.containsKey("asm")) {
 				// Assembly Kodu
-				aktifFonksiyon.cümleler.add(new Cümle_07MakineDiliKod(((Sözcük_05Metin) cümle[0]).metin));
+				aktifFonksiyon.cümleler.add(new Cumle_07MakineDiliKod(((Sozcuk_05Metin) cümle[0]).metin));
 				aktifFonksiyon.özellikMap = new HashMap<>();
 			} else if (cümle[0].tip == SÖZCÜK.TİP_17KAPA_SÜSLÜ && cümle[1].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// Fonksiyon Sonu
@@ -157,62 +157,62 @@ public class Aşama3Cümleler {
 			} else if (cümle.length == 4 && cümle[0].tip == SÖZCÜK.TİP_01İSİM && cümle[1].tip == SÖZCÜK.TİP_09ATAMA_SOLA
 					&& cümle[2].tip == SÖZCÜK.TİP_01İSİM && cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// sayı2 < sayı1;
-				String isimKaynak = ((Sözcük_01İsim) cümle[2]).isim;
-				String isimHedef = ((Sözcük_01İsim) cümle[0]).isim;
+				String isimKaynak = ((Sozcuk_01Isim) cümle[2]).isim;
+				String isimHedef = ((Sozcuk_01Isim) cümle[0]).isim;
 				if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimKaynak)) {
-					hata02_TanımsızDeğişken(isimKaynak);
+					hata02_TanımsızDegisken(isimKaynak);
 					continue;
 				} else if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
-					hata02_TanımsızDeğişken(isimHedef);
+					hata02_TanımsızDegisken(isimHedef);
 					continue;
 				}
 				aktifFonksiyon.cümleler
-						.add(new Cümle_06DeğişkenAtama(aktifFonksiyon.değişkenİsimMap.get(isimKaynak).değişkenNo,
+						.add(new Cumle_06DegiskenAtama(aktifFonksiyon.değişkenİsimMap.get(isimKaynak).değişkenNo,
 								aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo));
 			} else if (cümle.length == 4 && cümle[0].tip == SÖZCÜK.TİP_01İSİM && cümle[1].tip == SÖZCÜK.TİP_10ATAMA_SAĞA
 					&& cümle[2].tip == SÖZCÜK.TİP_01İSİM && cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// sayı1 > sayı2;
-				String isimKaynak = ((Sözcük_01İsim) cümle[0]).isim;
-				String isimHedef = ((Sözcük_01İsim) cümle[2]).isim;
+				String isimKaynak = ((Sozcuk_01Isim) cümle[0]).isim;
+				String isimHedef = ((Sozcuk_01Isim) cümle[2]).isim;
 				if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimKaynak)) {
-					hata02_TanımsızDeğişken(isimKaynak);
+					hata02_TanımsızDegisken(isimKaynak);
 					continue;
 				} else if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
-					hata02_TanımsızDeğişken(isimHedef);
+					hata02_TanımsızDegisken(isimHedef);
 					continue;
 				}
 				aktifFonksiyon.cümleler
-						.add(new Cümle_06DeğişkenAtama(aktifFonksiyon.değişkenİsimMap.get(isimKaynak).değişkenNo,
+						.add(new Cumle_06DegiskenAtama(aktifFonksiyon.değişkenİsimMap.get(isimKaynak).değişkenNo,
 								aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo));
 			} else if (cümle.length == 4 && cümle[0].tip == SÖZCÜK.TİP_03TAM_SAYI
 					&& cümle[1].tip == SÖZCÜK.TİP_10ATAMA_SAĞA && cümle[2].tip == SÖZCÜK.TİP_01İSİM
 					&& cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// 123 > sayı2;
-				String isimHedef = ((Sözcük_01İsim) cümle[2]).isim;
-				String tamSayı = ((Sözcük_03TamSayı) cümle[0]).tamSayı;
+				String isimHedef = ((Sozcuk_01Isim) cümle[2]).isim;
+				String tamSayı = ((Sozcuk_03TamSayi) cümle[0]).tamSayı;
 				if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
-					hata02_TanımsızDeğişken(isimHedef);
+					hata02_TanımsızDegisken(isimHedef);
 					continue;
 				} else if (Fonksiyonlar.parseLong(tamSayı) == null) {
-					hata05_SayıVeriTipineSığmıyor(tamSayı, Değişkenler.STRING_i64);
+					hata05_SayıVeriTipineSığmıyor(tamSayı, Degiskenler.STRING_i64);
 					continue;
 				}
-				aktifFonksiyon.cümleler.add(new Cümle_11SabitAtama(
-						aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo, tamSayı, Değişkenler.ID_i64));
+				aktifFonksiyon.cümleler.add(new Cumle_11SabitAtama(
+						aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo, tamSayı, Degiskenler.ID_i64));
 			} else if (cümle.length == 4 && cümle[0].tip == SÖZCÜK.TİP_01İSİM && cümle[1].tip == SÖZCÜK.TİP_09ATAMA_SOLA
 					&& cümle[2].tip == SÖZCÜK.TİP_03TAM_SAYI && cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// sayı2 < 123;
-				String isimHedef = ((Sözcük_01İsim) cümle[0]).isim;
-				String tamSayı = ((Sözcük_03TamSayı) cümle[2]).tamSayı;
+				String isimHedef = ((Sozcuk_01Isim) cümle[0]).isim;
+				String tamSayı = ((Sozcuk_03TamSayi) cümle[2]).tamSayı;
 				if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
-					hata02_TanımsızDeğişken(isimHedef);
+					hata02_TanımsızDegisken(isimHedef);
 					continue;
 				} else if (Fonksiyonlar.parseLong(tamSayı) == null) {
-					hata05_SayıVeriTipineSığmıyor(tamSayı, Değişkenler.STRING_i64);
+					hata05_SayıVeriTipineSığmıyor(tamSayı, Degiskenler.STRING_i64);
 					continue;
 				}
-				aktifFonksiyon.cümleler.add(new Cümle_11SabitAtama(
-						aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo, tamSayı, Değişkenler.ID_i64));
+				aktifFonksiyon.cümleler.add(new Cumle_11SabitAtama(
+						aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo, tamSayı, Degiskenler.ID_i64));
 			} else if (cümle.length == 4 && (cümle[0].tip == SÖZCÜK.TİP_01İSİM || cümle[0].tip == SÖZCÜK.TİP_03TAM_SAYI)
 					&& cümle[1].tip == SÖZCÜK.TİP_08NOKTA && cümle[2].tip == SÖZCÜK.TİP_01İSİM
 					&& cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
@@ -221,46 +221,46 @@ public class Aşama3Cümleler {
 				int değişkenNo;
 				int değişkenTipiId;
 				if (cümle[0].tip == SÖZCÜK.TİP_01İSİM) {
-					String isim = ((Sözcük_01İsim) cümle[0]).isim;
+					String isim = ((Sozcuk_01Isim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
-						hata02_TanımsızDeğişken(isim);
+						hata02_TanımsızDegisken(isim);
 						continue;
 					}
-					Değişken değişken = aktifFonksiyon.değişkenİsimMap.get(isim);
+					Degisken değişken = aktifFonksiyon.değişkenİsimMap.get(isim);
 					değişkenNo = değişken.değişkenNo;
 					değişkenTipiId = değişken.değişkenTipiId;
 				} else {
-					String tamSayı = ((Sözcük_03TamSayı) cümle[0]).tamSayı;
+					String tamSayı = ((Sozcuk_03TamSayi) cümle[0]).tamSayı;
 					if (Fonksiyonlar.parseLong(tamSayı) == null) {
-						hata05_SayıVeriTipineSığmıyor(tamSayı, Değişkenler.STRING_i64);
+						hata05_SayıVeriTipineSığmıyor(tamSayı, Degiskenler.STRING_i64);
 						continue;
 					}
-					aktifFonksiyon.geçiciDeğişkenNo--;
-					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDeğişkenNo,
-							new Değişken(aktifFonksiyon.geçiciDeğişkenNo, null, Değişkenler.ID_i64));
-					Cümle_02GeçiciDeğişkenYeni komut1 = new Cümle_02GeçiciDeğişkenYeni(aktifFonksiyon.geçiciDeğişkenNo,
-							Değişkenler.ID_i64);
+					aktifFonksiyon.geçiciDegiskenNo--;
+					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDegiskenNo,
+							new Degisken(aktifFonksiyon.geçiciDegiskenNo, null, Degiskenler.ID_i64));
+					Cumle_02GeciciDegiskenYeni komut1 = new Cumle_02GeciciDegiskenYeni(aktifFonksiyon.geçiciDegiskenNo,
+							Degiskenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut1);
-					Cümle_11SabitAtama komut = new Cümle_11SabitAtama(aktifFonksiyon.geçiciDeğişkenNo, tamSayı,
-							Değişkenler.ID_i64);
+					Cumle_11SabitAtama komut = new Cumle_11SabitAtama(aktifFonksiyon.geçiciDegiskenNo, tamSayı,
+							Degiskenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut);
 					değişkenNo = komut.değişkenNo;
 					değişkenTipiId = komut.sabitVeriTipiId;
 				}
-				String fonksiyonİsmi = ((Sözcük_01İsim) cümle[2]).isim;
+				String fonksiyonİsmi = ((Sozcuk_01Isim) cümle[2]).isim;
 				String anahtar = fonksiyonİsmi + " " + değişkenTipiId;
 				if (!isimFonksiyonMap.containsKey(anahtar)) {
 					hata06_TanımsızFonksiyon(fonksiyonİsmi);
 					continue;
 				}
-				Fonksiyon_02İsimliFonksiyon fonksiyon = isimFonksiyonMap.get(anahtar);
-				aktifFonksiyon.geçiciDeğişkenNo--;
-				aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDeğişkenNo,
-						new Değişken(aktifFonksiyon.geçiciDeğişkenNo, null, Değişkenler.ID_i64));
-				Cümle_02GeçiciDeğişkenYeni komut1 = new Cümle_02GeçiciDeğişkenYeni(aktifFonksiyon.geçiciDeğişkenNo,
-						Değişkenler.ID_i64);
+				Fonksiyon_02IsimliFonksiyon fonksiyon = isimFonksiyonMap.get(anahtar);
+				aktifFonksiyon.geçiciDegiskenNo--;
+				aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDegiskenNo,
+						new Degisken(aktifFonksiyon.geçiciDegiskenNo, null, Degiskenler.ID_i64));
+				Cumle_02GeciciDegiskenYeni komut1 = new Cumle_02GeciciDegiskenYeni(aktifFonksiyon.geçiciDegiskenNo,
+						Degiskenler.ID_i64);
 				aktifFonksiyon.cümleler.add(komut1);
-				Cümle_05FonksiyonÇağrısı komut = new Cümle_05FonksiyonÇağrısı(aktifFonksiyon.geçiciDeğişkenNo,
+				Cumle_05FonksiyonCagrisi komut = new Cumle_05FonksiyonCagrisi(aktifFonksiyon.geçiciDegiskenNo,
 						fonksiyonİsmi, fonksiyon.fonksiyonId, değişkenNo);
 				aktifFonksiyon.cümleler.add(komut);
 			} else if (cümle.length == 6 && cümle[0].tip == SÖZCÜK.TİP_01İSİM
@@ -271,45 +271,45 @@ public class Aşama3Cümleler {
 				// sayı:i64 < sayı1;
 				// sayı:i64 < 123;
 				// isim:str < "Engin";
-				String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
-				String değişkenTipi = ((Sözcük_01İsim) cümle[2]).isim;
+				String değişkenİsim = ((Sozcuk_01Isim) cümle[0]).isim;
+				String değişkenTipi = ((Sozcuk_01Isim) cümle[2]).isim;
 				if (değişkenİsmiKontrol(değişkenİsim)) {
-					hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
+					hata04_DegiskenİsmiUygunDeğil(değişkenİsim);
 					continue;
 				} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
-					hata03_DeğişkenİsimÇakışması(değişkenİsim);
+					hata03_DegiskenİsimÇakışması(değişkenİsim);
 					continue;
-				} else if (!Değişkenler.TİP_MAP_STR_ID.containsKey(değişkenTipi)) {
-					hata01_BilinmeyenDeğişkenTipi(değişkenTipi);
+				} else if (!Degiskenler.TİP_MAP_STR_ID.containsKey(değişkenTipi)) {
+					hata01_BilinmeyenDegiskenTipi(değişkenTipi);
 					continue;
 				}
-				aktifFonksiyon.gerçekDeğişkenNo++;
-				int değişkenTipiId = Değişkenler.TİP_MAP_STR_ID.get(değişkenTipi);
-				Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, değişkenİsim, değişkenTipiId);
+				aktifFonksiyon.gerçekDegiskenNo++;
+				int değişkenTipiId = Degiskenler.TİP_MAP_STR_ID.get(değişkenTipi);
+				Degisken değişken = new Degisken(aktifFonksiyon.gerçekDegiskenNo, değişkenİsim, değişkenTipiId);
 				aktifFonksiyon.değişkenNoMap.put(değişken.değişkenNo, değişken);
 				aktifFonksiyon.değişkenİsimMap.put(değişkenİsim, değişken);
 				aktifFonksiyon.cümleler
-						.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipiId));
+						.add(new Cumle_01DegiskenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipiId));
 				if (cümle[4].tip == SÖZCÜK.TİP_01İSİM) {
-					String isim = ((Sözcük_01İsim) cümle[4]).isim;
+					String isim = ((Sozcuk_01Isim) cümle[4]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
-						hata02_TanımsızDeğişken(isim);
+						hata02_TanımsızDegisken(isim);
 						continue;
 					}
 					int değişkenNo = aktifFonksiyon.değişkenİsimMap.get(isim).değişkenNo;
-					aktifFonksiyon.cümleler.add(new Cümle_06DeğişkenAtama(değişkenNo, değişken.değişkenNo));
+					aktifFonksiyon.cümleler.add(new Cumle_06DegiskenAtama(değişkenNo, değişken.değişkenNo));
 				} else if (cümle[4].tip == SÖZCÜK.TİP_03TAM_SAYI) {
-					String tamSayı = ((Sözcük_03TamSayı) cümle[4]).tamSayı;
+					String tamSayı = ((Sozcuk_03TamSayi) cümle[4]).tamSayı;
 					if (Fonksiyonlar.parseLong(tamSayı) == null) {
-						hata05_SayıVeriTipineSığmıyor(tamSayı, Değişkenler.STRING_i64);
+						hata05_SayıVeriTipineSığmıyor(tamSayı, Degiskenler.STRING_i64);
 						continue;
 					}
 					aktifFonksiyon.cümleler
-							.add(new Cümle_11SabitAtama(aktifFonksiyon.gerçekDeğişkenNo, tamSayı, Değişkenler.ID_i64));
+							.add(new Cumle_11SabitAtama(aktifFonksiyon.gerçekDegiskenNo, tamSayı, Degiskenler.ID_i64));
 				} else {
-					String metin = ((Sözcük_05Metin) cümle[4]).metin;
+					String metin = ((Sozcuk_05Metin) cümle[4]).metin;
 					aktifFonksiyon.cümleler
-							.add(new Cümle_11SabitAtama(aktifFonksiyon.gerçekDeğişkenNo, metin, Değişkenler.ID_str));
+							.add(new Cumle_11SabitAtama(aktifFonksiyon.gerçekDegiskenNo, metin, Degiskenler.ID_str));
 				}
 			} else if (cümle.length == 6 && (cümle[0].tip == SÖZCÜK.TİP_01İSİM || cümle[0].tip == SÖZCÜK.TİP_03TAM_SAYI)
 					&& cümle[1].tip == SÖZCÜK.TİP_10ATAMA_SAĞA && cümle[2].tip == SÖZCÜK.TİP_01İSİM
@@ -317,41 +317,41 @@ public class Aşama3Cümleler {
 					&& cümle[5].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// sayı1 > sayı:i64;
 				// 123 > sayı:i64;
-				String değişkenİsim = ((Sözcük_01İsim) cümle[2]).isim;
-				String değişkenTipi = ((Sözcük_01İsim) cümle[4]).isim;
+				String değişkenİsim = ((Sozcuk_01Isim) cümle[2]).isim;
+				String değişkenTipi = ((Sozcuk_01Isim) cümle[4]).isim;
 				if (değişkenİsmiKontrol(değişkenİsim)) {
-					hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
+					hata04_DegiskenİsmiUygunDeğil(değişkenİsim);
 					continue;
 				} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
-					hata03_DeğişkenİsimÇakışması(değişkenİsim);
+					hata03_DegiskenİsimÇakışması(değişkenİsim);
 					continue;
-				} else if (!Değişkenler.TİP_MAP_STR_ID.containsKey(değişkenTipi)) {
-					hata01_BilinmeyenDeğişkenTipi(değişkenTipi);
+				} else if (!Degiskenler.TİP_MAP_STR_ID.containsKey(değişkenTipi)) {
+					hata01_BilinmeyenDegiskenTipi(değişkenTipi);
 					continue;
 				}
-				aktifFonksiyon.gerçekDeğişkenNo++;
-				int değişkenTipiId = Değişkenler.TİP_MAP_STR_ID.get(değişkenTipi);
-				Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, değişkenİsim, değişkenTipiId);
+				aktifFonksiyon.gerçekDegiskenNo++;
+				int değişkenTipiId = Degiskenler.TİP_MAP_STR_ID.get(değişkenTipi);
+				Degisken değişken = new Degisken(aktifFonksiyon.gerçekDegiskenNo, değişkenİsim, değişkenTipiId);
 				aktifFonksiyon.değişkenNoMap.put(değişken.değişkenNo, değişken);
 				aktifFonksiyon.değişkenİsimMap.put(değişkenİsim, değişken);
 				aktifFonksiyon.cümleler
-						.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipiId));
+						.add(new Cumle_01DegiskenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipiId));
 				if (cümle[0].tip == SÖZCÜK.TİP_01İSİM) {
-					String isim = ((Sözcük_01İsim) cümle[0]).isim;
+					String isim = ((Sozcuk_01Isim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
-						hata02_TanımsızDeğişken(isim);
+						hata02_TanımsızDegisken(isim);
 						continue;
 					}
 					int değişkenNo = aktifFonksiyon.değişkenİsimMap.get(isim).değişkenNo;
-					aktifFonksiyon.cümleler.add(new Cümle_06DeğişkenAtama(değişkenNo, değişken.değişkenNo));
+					aktifFonksiyon.cümleler.add(new Cumle_06DegiskenAtama(değişkenNo, değişken.değişkenNo));
 				} else {
-					String tamSayı = ((Sözcük_03TamSayı) cümle[0]).tamSayı;
+					String tamSayı = ((Sozcuk_03TamSayi) cümle[0]).tamSayı;
 					if (Fonksiyonlar.parseLong(tamSayı) == null) {
-						hata05_SayıVeriTipineSığmıyor(tamSayı, Değişkenler.STRING_i64);
+						hata05_SayıVeriTipineSığmıyor(tamSayı, Degiskenler.STRING_i64);
 						continue;
 					}
 					aktifFonksiyon.cümleler
-							.add(new Cümle_11SabitAtama(aktifFonksiyon.gerçekDeğişkenNo, tamSayı, Değişkenler.ID_i64));
+							.add(new Cumle_11SabitAtama(aktifFonksiyon.gerçekDegiskenNo, tamSayı, Degiskenler.ID_i64));
 				}
 			} else if (cümle.length == 4 && cümle[0].tip == SÖZCÜK.TİP_01İSİM
 					&& cümle[1].tip == SÖZCÜK.TİP_11TANIMLAMA_SOLA
@@ -359,72 +359,72 @@ public class Aşama3Cümleler {
 					&& cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// sayı <: sayı1;
 				// sayı <: 123;
-				String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
+				String değişkenİsim = ((Sozcuk_01Isim) cümle[0]).isim;
 				if (değişkenİsmiKontrol(değişkenİsim)) {
-					hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
+					hata04_DegiskenİsmiUygunDeğil(değişkenİsim);
 					continue;
 				} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
-					hata03_DeğişkenİsimÇakışması(değişkenİsim);
+					hata03_DegiskenİsimÇakışması(değişkenİsim);
 					continue;
 				}
-				aktifFonksiyon.gerçekDeğişkenNo++;
-				Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, değişkenİsim, Değişkenler.ID_i64);
+				aktifFonksiyon.gerçekDegiskenNo++;
+				Degisken değişken = new Degisken(aktifFonksiyon.gerçekDegiskenNo, değişkenİsim, Degiskenler.ID_i64);
 				aktifFonksiyon.değişkenNoMap.put(değişken.değişkenNo, değişken);
 				aktifFonksiyon.değişkenİsimMap.put(değişkenİsim, değişken);
 				aktifFonksiyon.cümleler
-						.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipiId));
+						.add(new Cumle_01DegiskenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipiId));
 				if (cümle[2].tip == SÖZCÜK.TİP_01İSİM) {
-					String isim = ((Sözcük_01İsim) cümle[2]).isim;
+					String isim = ((Sozcuk_01Isim) cümle[2]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
-						hata02_TanımsızDeğişken(isim);
+						hata02_TanımsızDegisken(isim);
 						continue;
 					}
 					int değişkenNo = aktifFonksiyon.değişkenİsimMap.get(isim).değişkenNo;
-					aktifFonksiyon.cümleler.add(new Cümle_06DeğişkenAtama(değişkenNo, değişken.değişkenNo));
+					aktifFonksiyon.cümleler.add(new Cumle_06DegiskenAtama(değişkenNo, değişken.değişkenNo));
 				} else {
-					String tamSayı = ((Sözcük_03TamSayı) cümle[2]).tamSayı;
+					String tamSayı = ((Sozcuk_03TamSayi) cümle[2]).tamSayı;
 					if (Fonksiyonlar.parseLong(tamSayı) == null) {
-						hata05_SayıVeriTipineSığmıyor(tamSayı, Değişkenler.STRING_i64);
+						hata05_SayıVeriTipineSığmıyor(tamSayı, Degiskenler.STRING_i64);
 						continue;
 					}
 					aktifFonksiyon.cümleler
-							.add(new Cümle_11SabitAtama(aktifFonksiyon.gerçekDeğişkenNo, tamSayı, Değişkenler.ID_i64));
+							.add(new Cumle_11SabitAtama(aktifFonksiyon.gerçekDegiskenNo, tamSayı, Degiskenler.ID_i64));
 				}
 			} else if (cümle.length == 4 && (cümle[0].tip == SÖZCÜK.TİP_01İSİM || cümle[0].tip == SÖZCÜK.TİP_03TAM_SAYI)
 					&& cümle[1].tip == SÖZCÜK.TİP_12TANIMLAMA_SAĞA && cümle[2].tip == SÖZCÜK.TİP_01İSİM
 					&& cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
 				// sayı1 :> sayı;
 				// 123 :> sayı;
-				String değişkenİsim = ((Sözcük_01İsim) cümle[2]).isim;
+				String değişkenİsim = ((Sozcuk_01Isim) cümle[2]).isim;
 				if (değişkenİsmiKontrol(değişkenİsim)) {
-					hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
+					hata04_DegiskenİsmiUygunDeğil(değişkenİsim);
 					continue;
 				} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
-					hata03_DeğişkenİsimÇakışması(değişkenİsim);
+					hata03_DegiskenİsimÇakışması(değişkenİsim);
 					continue;
 				}
-				aktifFonksiyon.gerçekDeğişkenNo++;
-				Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, değişkenİsim, Değişkenler.ID_i64);
+				aktifFonksiyon.gerçekDegiskenNo++;
+				Degisken değişken = new Degisken(aktifFonksiyon.gerçekDegiskenNo, değişkenİsim, Degiskenler.ID_i64);
 				aktifFonksiyon.değişkenNoMap.put(değişken.değişkenNo, değişken);
 				aktifFonksiyon.değişkenİsimMap.put(değişkenİsim, değişken);
 				aktifFonksiyon.cümleler
-						.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipiId));
+						.add(new Cumle_01DegiskenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipiId));
 				if (cümle[0].tip == SÖZCÜK.TİP_01İSİM) {
-					String isim = ((Sözcük_01İsim) cümle[0]).isim;
+					String isim = ((Sozcuk_01Isim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim)) {
-						hata02_TanımsızDeğişken(isim);
+						hata02_TanımsızDegisken(isim);
 						continue;
 					}
 					int değişkenNo = aktifFonksiyon.değişkenİsimMap.get(isim).değişkenNo;
-					aktifFonksiyon.cümleler.add(new Cümle_06DeğişkenAtama(değişkenNo, değişken.değişkenNo));
+					aktifFonksiyon.cümleler.add(new Cumle_06DegiskenAtama(değişkenNo, değişken.değişkenNo));
 				} else {
-					String tamSayı = ((Sözcük_03TamSayı) cümle[0]).tamSayı;
+					String tamSayı = ((Sozcuk_03TamSayi) cümle[0]).tamSayı;
 					if (Fonksiyonlar.parseLong(tamSayı) == null) {
-						hata05_SayıVeriTipineSığmıyor(tamSayı, Değişkenler.STRING_i64);
+						hata05_SayıVeriTipineSığmıyor(tamSayı, Degiskenler.STRING_i64);
 						continue;
 					}
 					aktifFonksiyon.cümleler
-							.add(new Cümle_11SabitAtama(aktifFonksiyon.gerçekDeğişkenNo, tamSayı, Değişkenler.ID_i64));
+							.add(new Cumle_11SabitAtama(aktifFonksiyon.gerçekDegiskenNo, tamSayı, Degiskenler.ID_i64));
 				}
 			} else if (cümle.length == 6 && cümle[0].tip == SÖZCÜK.TİP_01İSİM
 					&& (cümle[1].tip == SÖZCÜK.TİP_09ATAMA_SOLA || cümle[1].tip == SÖZCÜK.TİP_11TANIMLAMA_SOLA)
@@ -439,28 +439,28 @@ public class Aşama3Cümleler {
 				int değişkenNo1;
 				int değişkenNo1TipId;
 				if (cümle[2].tip == SÖZCÜK.TİP_01İSİM) {
-					String isim1 = ((Sözcük_01İsim) cümle[2]).isim;
+					String isim1 = ((Sozcuk_01Isim) cümle[2]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim1)) {
-						hata02_TanımsızDeğişken(isim1);
+						hata02_TanımsızDegisken(isim1);
 						continue;
 					}
-					Değişken değişken = aktifFonksiyon.değişkenİsimMap.get(isim1);
+					Degisken değişken = aktifFonksiyon.değişkenİsimMap.get(isim1);
 					değişkenNo1 = değişken.değişkenNo;
 					değişkenNo1TipId = değişken.değişkenTipiId;
 				} else {
-					String tamSayı = ((Sözcük_03TamSayı) cümle[2]).tamSayı;
+					String tamSayı = ((Sozcuk_03TamSayi) cümle[2]).tamSayı;
 					if (Fonksiyonlar.parseLong(tamSayı) == null) {
-						hata05_SayıVeriTipineSığmıyor(tamSayı, Değişkenler.STRING_i64);
+						hata05_SayıVeriTipineSığmıyor(tamSayı, Degiskenler.STRING_i64);
 						continue;
 					}
-					aktifFonksiyon.geçiciDeğişkenNo--;
-					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDeğişkenNo,
-							new Değişken(aktifFonksiyon.geçiciDeğişkenNo, null, Değişkenler.ID_i64));
-					Cümle_02GeçiciDeğişkenYeni komut1 = new Cümle_02GeçiciDeğişkenYeni(aktifFonksiyon.geçiciDeğişkenNo,
-							Değişkenler.ID_i64);
+					aktifFonksiyon.geçiciDegiskenNo--;
+					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDegiskenNo,
+							new Degisken(aktifFonksiyon.geçiciDegiskenNo, null, Degiskenler.ID_i64));
+					Cumle_02GeciciDegiskenYeni komut1 = new Cumle_02GeciciDegiskenYeni(aktifFonksiyon.geçiciDegiskenNo,
+							Degiskenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut1);
-					Cümle_11SabitAtama komut = new Cümle_11SabitAtama(aktifFonksiyon.geçiciDeğişkenNo, tamSayı,
-							Değişkenler.ID_i64);
+					Cumle_11SabitAtama komut = new Cumle_11SabitAtama(aktifFonksiyon.geçiciDegiskenNo, tamSayı,
+							Degiskenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut);
 					değişkenNo1 = komut.değişkenNo;
 					değişkenNo1TipId = komut.sabitVeriTipiId;
@@ -468,68 +468,68 @@ public class Aşama3Cümleler {
 				int değişkenNo2;
 				int değişkenNo2TipId;
 				if (cümle[4].tip == SÖZCÜK.TİP_01İSİM) {
-					String isim2 = ((Sözcük_01İsim) cümle[4]).isim;
+					String isim2 = ((Sozcuk_01Isim) cümle[4]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim2)) {
-						hata02_TanımsızDeğişken(isim2);
+						hata02_TanımsızDegisken(isim2);
 						continue;
 					}
-					Değişken değişken = aktifFonksiyon.değişkenİsimMap.get(isim2);
+					Degisken değişken = aktifFonksiyon.değişkenİsimMap.get(isim2);
 					değişkenNo2 = değişken.değişkenNo;
 					değişkenNo2TipId = değişken.değişkenTipiId;
 				} else {
-					String tamSayı = ((Sözcük_03TamSayı) cümle[4]).tamSayı;
+					String tamSayı = ((Sozcuk_03TamSayi) cümle[4]).tamSayı;
 					if (Fonksiyonlar.parseLong(tamSayı) == null) {
-						hata05_SayıVeriTipineSığmıyor(tamSayı, Değişkenler.STRING_i64);
+						hata05_SayıVeriTipineSığmıyor(tamSayı, Degiskenler.STRING_i64);
 						continue;
 					}
-					aktifFonksiyon.geçiciDeğişkenNo--;
-					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDeğişkenNo,
-							new Değişken(aktifFonksiyon.geçiciDeğişkenNo, null, Değişkenler.ID_i64));
-					Cümle_02GeçiciDeğişkenYeni komut1 = new Cümle_02GeçiciDeğişkenYeni(aktifFonksiyon.geçiciDeğişkenNo,
-							Değişkenler.ID_i64);
+					aktifFonksiyon.geçiciDegiskenNo--;
+					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDegiskenNo,
+							new Degisken(aktifFonksiyon.geçiciDegiskenNo, null, Degiskenler.ID_i64));
+					Cumle_02GeciciDegiskenYeni komut1 = new Cumle_02GeciciDegiskenYeni(aktifFonksiyon.geçiciDegiskenNo,
+							Degiskenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut1);
-					Cümle_11SabitAtama komut = new Cümle_11SabitAtama(aktifFonksiyon.geçiciDeğişkenNo, tamSayı,
-							Değişkenler.ID_i64);
+					Cumle_11SabitAtama komut = new Cumle_11SabitAtama(aktifFonksiyon.geçiciDegiskenNo, tamSayı,
+							Degiskenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut);
 					değişkenNo2 = komut.değişkenNo;
 					değişkenNo2TipId = komut.sabitVeriTipiId;
 				}
-				String operatör = ((Sözcük_02Operatör) cümle[3]).operatör;
+				String operatör = ((Sozcuk_02Operator) cümle[3]).operatör;
 				String anahtar = değişkenNo1TipId + operatör + değişkenNo2TipId;
 				if (!operatörFonksiyonMap.containsKey(anahtar)) {
-					hata04_TanımsızOperatör(Değişkenler.TİP_MAP_ID_STR.get(değişkenNo1TipId) + " " + operatör + " "
-							+ Değişkenler.TİP_MAP_ID_STR.get(değişkenNo2TipId));
+					hata04_TanımsızOperatör(Degiskenler.TİP_MAP_ID_STR.get(değişkenNo1TipId) + " " + operatör + " "
+							+ Degiskenler.TİP_MAP_ID_STR.get(değişkenNo2TipId));
 					continue;
 				}
-				Fonksiyon_01OperatörFonksiyon fonksiyon = operatörFonksiyonMap.get(anahtar);
+				Fonksiyon_01OperatorFonksiyon fonksiyon = operatörFonksiyonMap.get(anahtar);
 				int değişkenNo0;
 				if (cümle[1].tip == SÖZCÜK.TİP_09ATAMA_SOLA) {
-					String isimHedef = ((Sözcük_01İsim) cümle[0]).isim;
+					String isimHedef = ((Sozcuk_01Isim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
-						hata02_TanımsızDeğişken(isimHedef);
+						hata02_TanımsızDegisken(isimHedef);
 						continue;
 					}
 					değişkenNo0 = aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo;
 				} else {
-					String değişkenİsim = ((Sözcük_01İsim) cümle[0]).isim;
+					String değişkenİsim = ((Sozcuk_01Isim) cümle[0]).isim;
 					if (değişkenİsmiKontrol(değişkenİsim)) {
-						hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
+						hata04_DegiskenİsmiUygunDeğil(değişkenİsim);
 						continue;
 					} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
-						hata03_DeğişkenİsimÇakışması(değişkenİsim);
+						hata03_DegiskenİsimÇakışması(değişkenİsim);
 						continue;
 					}
-					aktifFonksiyon.gerçekDeğişkenNo++;
-					Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, değişkenİsim,
-							Değişkenler.TİP_MAP_STR_ID.get(fonksiyon.sonuçTip));
+					aktifFonksiyon.gerçekDegiskenNo++;
+					Degisken değişken = new Degisken(aktifFonksiyon.gerçekDegiskenNo, değişkenİsim,
+							Degiskenler.TİP_MAP_STR_ID.get(fonksiyon.sonuçTip));
 					aktifFonksiyon.değişkenNoMap.put(değişken.değişkenNo, değişken);
 					aktifFonksiyon.değişkenİsimMap.put(değişkenİsim, değişken);
 					aktifFonksiyon.cümleler
-							.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipiId));
+							.add(new Cumle_01DegiskenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipiId));
 					değişkenNo0 = değişken.değişkenNo;
 				}
 				aktifFonksiyon.cümleler
-						.add(new Cümle_04Operatörİşlemi(değişkenNo0, operatör, değişkenNo1, değişkenNo2));
+						.add(new Cumle_04OperatorIslemi(değişkenNo0, operatör, değişkenNo1, değişkenNo2));
 			} else if (cümle.length == 6 && (cümle[0].tip == SÖZCÜK.TİP_01İSİM || cümle[0].tip == SÖZCÜK.TİP_03TAM_SAYI)
 					&& cümle[1].tip == SÖZCÜK.TİP_02OPERATÖR
 					&& (cümle[2].tip == SÖZCÜK.TİP_01İSİM || cümle[2].tip == SÖZCÜK.TİP_03TAM_SAYI)
@@ -541,54 +541,54 @@ public class Aşama3Cümleler {
 				// 123 + 123 :> sayı3;
 				int değişkenNo0;
 				if (cümle[3].tip == SÖZCÜK.TİP_10ATAMA_SAĞA) {
-					String isimHedef = ((Sözcük_01İsim) cümle[4]).isim;
+					String isimHedef = ((Sozcuk_01Isim) cümle[4]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isimHedef)) {
-						hata02_TanımsızDeğişken(isimHedef);
+						hata02_TanımsızDegisken(isimHedef);
 						continue;
 					}
 					değişkenNo0 = aktifFonksiyon.değişkenİsimMap.get(isimHedef).değişkenNo;
 				} else {
-					String değişkenİsim = ((Sözcük_01İsim) cümle[4]).isim;
+					String değişkenİsim = ((Sozcuk_01Isim) cümle[4]).isim;
 					if (değişkenİsmiKontrol(değişkenİsim)) {
-						hata04_DeğişkenİsmiUygunDeğil(değişkenİsim);
+						hata04_DegiskenİsmiUygunDeğil(değişkenİsim);
 						continue;
 					} else if (aktifFonksiyon.değişkenİsimMap.containsKey(değişkenİsim)) {
-						hata03_DeğişkenİsimÇakışması(değişkenİsim);
+						hata03_DegiskenİsimÇakışması(değişkenİsim);
 						continue;
 					}
-					aktifFonksiyon.gerçekDeğişkenNo++;
-					Değişken değişken = new Değişken(aktifFonksiyon.gerçekDeğişkenNo, değişkenİsim, Değişkenler.ID_i64);
+					aktifFonksiyon.gerçekDegiskenNo++;
+					Degisken değişken = new Degisken(aktifFonksiyon.gerçekDegiskenNo, değişkenİsim, Degiskenler.ID_i64);
 					aktifFonksiyon.değişkenNoMap.put(değişken.değişkenNo, değişken);
 					aktifFonksiyon.değişkenİsimMap.put(değişkenİsim, değişken);
 					aktifFonksiyon.cümleler
-							.add(new Cümle_01DeğişkenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipiId));
+							.add(new Cumle_01DegiskenYeni(değişken.değişkenNo, değişkenİsim, değişken.değişkenTipiId));
 					değişkenNo0 = değişken.değişkenNo;
 				}
 				int değişkenNo1;
 				int değişkenNo1TipId;
 				if (cümle[0].tip == SÖZCÜK.TİP_01İSİM) {
-					String isim1 = ((Sözcük_01İsim) cümle[0]).isim;
+					String isim1 = ((Sozcuk_01Isim) cümle[0]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim1)) {
-						hata02_TanımsızDeğişken(isim1);
+						hata02_TanımsızDegisken(isim1);
 						continue;
 					}
-					Değişken değişken = aktifFonksiyon.değişkenİsimMap.get(isim1);
+					Degisken değişken = aktifFonksiyon.değişkenİsimMap.get(isim1);
 					değişkenNo1 = değişken.değişkenNo;
 					değişkenNo1TipId = değişken.değişkenTipiId;
 				} else {
-					String tamSayı = ((Sözcük_03TamSayı) cümle[0]).tamSayı;
+					String tamSayı = ((Sozcuk_03TamSayi) cümle[0]).tamSayı;
 					if (Fonksiyonlar.parseLong(tamSayı) == null) {
-						hata05_SayıVeriTipineSığmıyor(tamSayı, Değişkenler.STRING_i64);
+						hata05_SayıVeriTipineSığmıyor(tamSayı, Degiskenler.STRING_i64);
 						continue;
 					}
-					aktifFonksiyon.geçiciDeğişkenNo--;
-					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDeğişkenNo,
-							new Değişken(aktifFonksiyon.geçiciDeğişkenNo, null, Değişkenler.ID_i64));
-					Cümle_02GeçiciDeğişkenYeni komut1 = new Cümle_02GeçiciDeğişkenYeni(aktifFonksiyon.geçiciDeğişkenNo,
-							Değişkenler.ID_i64);
+					aktifFonksiyon.geçiciDegiskenNo--;
+					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDegiskenNo,
+							new Degisken(aktifFonksiyon.geçiciDegiskenNo, null, Degiskenler.ID_i64));
+					Cumle_02GeciciDegiskenYeni komut1 = new Cumle_02GeciciDegiskenYeni(aktifFonksiyon.geçiciDegiskenNo,
+							Degiskenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut1);
-					Cümle_11SabitAtama komut = new Cümle_11SabitAtama(aktifFonksiyon.geçiciDeğişkenNo, tamSayı,
-							Değişkenler.ID_i64);
+					Cumle_11SabitAtama komut = new Cumle_11SabitAtama(aktifFonksiyon.geçiciDegiskenNo, tamSayı,
+							Degiskenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut);
 					değişkenNo1 = komut.değişkenNo;
 					değişkenNo1TipId = komut.sabitVeriTipiId;
@@ -596,45 +596,45 @@ public class Aşama3Cümleler {
 				int değişkenNo2;
 				int değişkenNo2TipId;
 				if (cümle[2].tip == SÖZCÜK.TİP_01İSİM) {
-					String isim2 = ((Sözcük_01İsim) cümle[2]).isim;
+					String isim2 = ((Sozcuk_01Isim) cümle[2]).isim;
 					if (!aktifFonksiyon.değişkenİsimMap.containsKey(isim2)) {
-						hata02_TanımsızDeğişken(isim2);
+						hata02_TanımsızDegisken(isim2);
 						continue;
 					}
-					Değişken değişken = aktifFonksiyon.değişkenİsimMap.get(isim2);
+					Degisken değişken = aktifFonksiyon.değişkenİsimMap.get(isim2);
 					değişkenNo2 = değişken.değişkenNo;
 					değişkenNo2TipId = değişken.değişkenTipiId;
 				} else {
-					String tamSayı = ((Sözcük_03TamSayı) cümle[2]).tamSayı;
+					String tamSayı = ((Sozcuk_03TamSayi) cümle[2]).tamSayı;
 					if (Fonksiyonlar.parseLong(tamSayı) == null) {
-						hata05_SayıVeriTipineSığmıyor(tamSayı, Değişkenler.STRING_i64);
+						hata05_SayıVeriTipineSığmıyor(tamSayı, Degiskenler.STRING_i64);
 						continue;
 					}
-					aktifFonksiyon.geçiciDeğişkenNo--;
-					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDeğişkenNo,
-							new Değişken(aktifFonksiyon.geçiciDeğişkenNo, null, Değişkenler.ID_i64));
-					Cümle_02GeçiciDeğişkenYeni komut1 = new Cümle_02GeçiciDeğişkenYeni(aktifFonksiyon.geçiciDeğişkenNo,
-							Değişkenler.ID_i64);
+					aktifFonksiyon.geçiciDegiskenNo--;
+					aktifFonksiyon.değişkenNoMap.put(aktifFonksiyon.geçiciDegiskenNo,
+							new Degisken(aktifFonksiyon.geçiciDegiskenNo, null, Degiskenler.ID_i64));
+					Cumle_02GeciciDegiskenYeni komut1 = new Cumle_02GeciciDegiskenYeni(aktifFonksiyon.geçiciDegiskenNo,
+							Degiskenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut1);
-					Cümle_11SabitAtama komut = new Cümle_11SabitAtama(aktifFonksiyon.geçiciDeğişkenNo, tamSayı,
-							Değişkenler.ID_i64);
+					Cumle_11SabitAtama komut = new Cumle_11SabitAtama(aktifFonksiyon.geçiciDegiskenNo, tamSayı,
+							Degiskenler.ID_i64);
 					aktifFonksiyon.cümleler.add(komut);
 					değişkenNo2 = komut.değişkenNo;
 					değişkenNo2TipId = komut.sabitVeriTipiId;
 				}
-				String operatör = ((Sözcük_02Operatör) cümle[1]).operatör;
+				String operatör = ((Sozcuk_02Operator) cümle[1]).operatör;
 				String anahtar = değişkenNo1TipId + operatör + değişkenNo2TipId;
 				if (!operatörFonksiyonMap.containsKey(anahtar)) {
-					hata04_TanımsızOperatör(Değişkenler.TİP_MAP_ID_STR.get(değişkenNo1TipId) + " " + operatör + " "
-							+ Değişkenler.TİP_MAP_ID_STR.get(değişkenNo2TipId));
+					hata04_TanımsızOperatör(Degiskenler.TİP_MAP_ID_STR.get(değişkenNo1TipId) + " " + operatör + " "
+							+ Degiskenler.TİP_MAP_ID_STR.get(değişkenNo2TipId));
 					continue;
 				}
 				aktifFonksiyon.cümleler
-						.add(new Cümle_04Operatörİşlemi(değişkenNo0, operatör, değişkenNo1, değişkenNo2));
+						.add(new Cumle_04OperatorIslemi(değişkenNo0, operatör, değişkenNo1, değişkenNo2));
 			} else {
-				// Bilinmeyen Cümle
+				// Bilinmeyen Cumle
 				hatalar.append("BİLİNMEYEN CÜMLE : ");
-				for (Sözcük c : cümle) {
+				for (Sozcuk c : cümle) {
 					hatalar.append(c);
 					hatalar.append(" ");
 				}
@@ -643,19 +643,19 @@ public class Aşama3Cümleler {
 		}
 
 		StringBuilder sb = new StringBuilder();
-		for (Fonksiyon_01OperatörFonksiyon operatörFonksiyon : operatörFonksiyonMap.values()) {
+		for (Fonksiyon_01OperatorFonksiyon operatörFonksiyon : operatörFonksiyonMap.values()) {
 			sb.append(operatörFonksiyon.toString());
 			sb.append("\n");
-			for (Cümle cümle : operatörFonksiyon.cümleler) {
+			for (Cumle cümle : operatörFonksiyon.cümleler) {
 				sb.append("\t");
 				sb.append(cümle.toString());
 				sb.append("\n");
 			}
 		}
-		for (Fonksiyon_02İsimliFonksiyon isimFonksiyon : isimFonksiyonMap.values()) {
+		for (Fonksiyon_02IsimliFonksiyon isimFonksiyon : isimFonksiyonMap.values()) {
 			sb.append(isimFonksiyon.toString());
 			sb.append("\n");
-			for (Cümle cümle : isimFonksiyon.cümleler) {
+			for (Cumle cümle : isimFonksiyon.cümleler) {
 				sb.append("\t");
 				sb.append(cümle.toString());
 				sb.append("\n");
@@ -664,7 +664,7 @@ public class Aşama3Cümleler {
 		{
 			sb.append(anaFonksiyon.toString());
 			sb.append("\n");
-			for (Cümle cümle : anaFonksiyon.cümleler) {
+			for (Cumle cümle : anaFonksiyon.cümleler) {
 				sb.append("\t");
 				sb.append(cümle.toString());
 				sb.append("\n");
@@ -676,7 +676,7 @@ public class Aşama3Cümleler {
 		if (hatalar.length() > 0) {
 			return hatalar.toString();
 		}
-		return new Aşama3Çıktısı(operatörFonksiyonMap, isimFonksiyonMap, anaFonksiyon);
+		return new Asama3Ciktisi(operatörFonksiyonMap, isimFonksiyonMap, anaFonksiyon);
 	}
 
 }

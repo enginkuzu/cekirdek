@@ -1,49 +1,49 @@
-package aşama2sözcükler;
+package asama2sozcukler;
 
 import java.util.ArrayList;
 
-import yardımcı.Fonksiyonlar;
-import yardımcı.Değişkenler.SÖZCÜK;
+import yardimci.Fonksiyonlar;
+import yardimci.Degiskenler.SÖZCÜK;
 
-public class Aşama2Sözcükler {
+public class Asama2Sozcukler {
 
-	private static Sözcük ikiÖncekiSözcük = null;
-	private static Sözcük birÖncekiSözcük = null;
-	private static ArrayList<Sözcük> aktifCümle = null;
-	private static ArrayList<Sözcük[]> tümCümleler = null;
+	private static Sozcuk ikiÖncekiSozcuk = null;
+	private static Sozcuk birÖncekiSozcuk = null;
+	private static ArrayList<Sozcuk> aktifCumle = null;
+	private static ArrayList<Sozcuk[]> tümCumleler = null;
 
-	public static void sözcükEkle(Sözcük sözcük) {
+	public static void sözcükEkle(Sozcuk sözcük) {
 		if (sözcük.tip == SÖZCÜK.TİP_06SATIR_SONU) {
-			aktifCümle.add(sözcük);
-			Sözcük[] cümle = new Sözcük[aktifCümle.size()];
-			aktifCümle.toArray(cümle);
-			tümCümleler.add(cümle);
-			aktifCümle = new ArrayList<Sözcük>();
+			aktifCumle.add(sözcük);
+			Sozcuk[] cümle = new Sozcuk[aktifCumle.size()];
+			aktifCumle.toArray(cümle);
+			tümCumleler.add(cümle);
+			aktifCumle = new ArrayList<Sozcuk>();
 		} else {
-			if (birÖncekiSözcük.tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ && sözcük.tip == SÖZCÜK.TİP_10ATAMA_SAĞA) {
-				aktifCümle.remove(aktifCümle.size() - 1);
-				sözcük = new Sözcük(SÖZCÜK.TİP_12TANIMLAMA_SAĞA);
-			} else if (birÖncekiSözcük.tip == SÖZCÜK.TİP_09ATAMA_SOLA && sözcük.tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ) {
-				aktifCümle.remove(aktifCümle.size() - 1);
-				sözcük = new Sözcük(SÖZCÜK.TİP_11TANIMLAMA_SOLA);
-			} else if (ikiÖncekiSözcük.tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ && birÖncekiSözcük.tip == SÖZCÜK.TİP_02OPERATÖR
+			if (birÖncekiSozcuk.tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ && sözcük.tip == SÖZCÜK.TİP_10ATAMA_SAĞA) {
+				aktifCumle.remove(aktifCumle.size() - 1);
+				sözcük = new Sozcuk(SÖZCÜK.TİP_12TANIMLAMA_SAĞA);
+			} else if (birÖncekiSozcuk.tip == SÖZCÜK.TİP_09ATAMA_SOLA && sözcük.tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ) {
+				aktifCumle.remove(aktifCumle.size() - 1);
+				sözcük = new Sozcuk(SÖZCÜK.TİP_11TANIMLAMA_SOLA);
+			} else if (ikiÖncekiSozcuk.tip == SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ && birÖncekiSozcuk.tip == SÖZCÜK.TİP_02OPERATÖR
 					&& sözcük.tip == SÖZCÜK.TİP_01İSİM) {
-				aktifCümle.remove(aktifCümle.size() - 1);
-				((Sözcük_01İsim) sözcük).isim = ((Sözcük_02Operatör) birÖncekiSözcük).operatör
-						+ ((Sözcük_01İsim) sözcük).isim;
+				aktifCumle.remove(aktifCumle.size() - 1);
+				((Sozcuk_01Isim) sözcük).isim = ((Sozcuk_02Operator) birÖncekiSozcuk).operatör
+						+ ((Sozcuk_01Isim) sözcük).isim;
 			}
-			aktifCümle.add(sözcük);
+			aktifCumle.add(sözcük);
 		}
-		ikiÖncekiSözcük = birÖncekiSözcük;
-		birÖncekiSözcük = sözcük;
+		ikiÖncekiSozcuk = birÖncekiSozcuk;
+		birÖncekiSozcuk = sözcük;
 	}
 
 	public static Object işle(String içerik, String dosyaAdı) {
 
-		ikiÖncekiSözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
-		birÖncekiSözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
-		aktifCümle = new ArrayList<Sözcük>();
-		tümCümleler = new ArrayList<Sözcük[]>();
+		ikiÖncekiSozcuk = new Sozcuk(SÖZCÜK.TİP_00YOK);
+		birÖncekiSozcuk = new Sozcuk(SÖZCÜK.TİP_00YOK);
+		aktifCumle = new ArrayList<Sozcuk>();
+		tümCumleler = new ArrayList<Sozcuk[]>();
 
 		StringBuilder hatalar = new StringBuilder();
 
@@ -55,7 +55,7 @@ public class Aşama2Sözcükler {
 		// durum 11 : Özellik
 		// durum 12,13 : Metin
 		int durum = 0;
-		Sözcük sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+		Sozcuk sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 
 		char[] karakterler = içerik.toCharArray();
 		for (int i = 0; i < karakterler.length; i++) {
@@ -68,92 +68,92 @@ public class Aşama2Sözcükler {
 				} else if (karakter == '\'') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
 					durum = 7;
 				} else if (karakter == ' ' || karakter == '\t' || karakter == '\n') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
 				} else if (karakter == ';') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
-					if (aktifCümle.isEmpty()) {
+					if (aktifCumle.isEmpty()) {
 						hatalar.append("Gereksiz yere ';' kullanılmış\n");
 					} else {
-						sözcükEkle(new Sözcük(SÖZCÜK.TİP_06SATIR_SONU));
+						sözcükEkle(new Sozcuk(SÖZCÜK.TİP_06SATIR_SONU));
 					}
 				} else if (karakter == ':') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ));
+					sözcükEkle(new Sozcuk(SÖZCÜK.TİP_07DEĞİŞKEN_TİPİ));
 				} else if (karakter == '.') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_08NOKTA));
+					sözcükEkle(new Sozcuk(SÖZCÜK.TİP_08NOKTA));
 				} else if (karakter == '<') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_09ATAMA_SOLA));
+					sözcükEkle(new Sozcuk(SÖZCÜK.TİP_09ATAMA_SOLA));
 				} else if (karakter == '>') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_10ATAMA_SAĞA));
+					sözcükEkle(new Sozcuk(SÖZCÜK.TİP_10ATAMA_SAĞA));
 				} else if (karakter == '@') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_13ÖZELLİK));
+					sözcükEkle(new Sozcuk(SÖZCÜK.TİP_13ÖZELLİK));
 					durum = 11;
 				} else if (karakter == '(') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_14AÇ_PARANTEZ));
+					sözcükEkle(new Sozcuk(SÖZCÜK.TİP_14AÇ_PARANTEZ));
 				} else if (karakter == ')') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_15KAPA_PARANTEZ));
+					sözcükEkle(new Sozcuk(SÖZCÜK.TİP_15KAPA_PARANTEZ));
 				} else if (karakter == '{') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_16AÇ_SÜSLÜ));
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_06SATIR_SONU));
+					sözcükEkle(new Sozcuk(SÖZCÜK.TİP_16AÇ_SÜSLÜ));
+					sözcükEkle(new Sozcuk(SÖZCÜK.TİP_06SATIR_SONU));
 				} else if (karakter == '}') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_17KAPA_SÜSLÜ));
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_06SATIR_SONU));
+					sözcükEkle(new Sozcuk(SÖZCÜK.TİP_17KAPA_SÜSLÜ));
+					sözcükEkle(new Sozcuk(SÖZCÜK.TİP_06SATIR_SONU));
 				} else if (karakter == ',') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_18VİRGÜL));
+					sözcükEkle(new Sozcuk(SÖZCÜK.TİP_18VİRGÜL));
 				} else if (karakter == '"') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
 					}
-					sözcük = new Sözcük_05Metin();
+					sözcük = new Sozcuk_05Metin();
 					durum = 12;
 				} else {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
@@ -161,13 +161,13 @@ public class Aşama2Sözcükler {
 					}
 					if (Character.isDigit(karakter)) {
 						durum = 4;
-						sözcük = new Sözcük_03TamSayı(karakter);
+						sözcük = new Sozcuk_03TamSayi(karakter);
 					} else if (karakter == '_' || Character.isLetter(karakter)) {
 						durum = 3;
-						sözcük = new Sözcük_01İsim(karakter);
+						sözcük = new Sozcuk_01Isim(karakter);
 					} else if (karakter == '+' || karakter == '-' || karakter == '*' || karakter == '/') {
 						durum = 1;
-						sözcük = new Sözcük_02Operatör(karakter);
+						sözcük = new Sozcuk_02Operator(karakter);
 					} else {
 						hatalar.append("Bilinmeyen Karakter : '" + karakter + "'\n");
 					}
@@ -176,34 +176,34 @@ public class Aşama2Sözcükler {
 				// durum 1 : Operatör
 				if (karakter == '+' || karakter == '-' || karakter == '*' || karakter == '/' || karakter == '<'
 						|| karakter == '>') {
-					((Sözcük_02Operatör) sözcük).operatör += karakter;
+					((Sozcuk_02Operator) sözcük).operatör += karakter;
 				} else {
 					i--;
 					durum = 0;
 					sözcükEkle(sözcük);
-					sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+					sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 				}
 			} else if (durum == 3) {
 				// durum 3 : isim
 				if (karakter == '_' || Character.isLetter(karakter) || Character.isDigit(karakter)) {
-					((Sözcük_01İsim) sözcük).isim += karakter;
+					((Sozcuk_01Isim) sözcük).isim += karakter;
 				} else {
 					i--;
 					durum = 0;
 					sözcükEkle(sözcük);
-					sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+					sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 				}
 			} else if (durum == 4) {
 				// durum 4,5,6 : Tam sayı ve ondalıklı sayı
 				if (Character.isDigit(karakter)) {
-					((Sözcük_03TamSayı) sözcük).tamSayı += karakter;
+					((Sozcuk_03TamSayi) sözcük).tamSayı += karakter;
 				} else if (karakter == '.') {
 					durum = 5;
-					sözcük = new Sözcük_04OndalıklıSayı(((Sözcük_03TamSayı) sözcük).tamSayı);
-					((Sözcük_04OndalıklıSayı) sözcük).ondalıklıSayı += karakter;
+					sözcük = new Sozcuk_04OndalikliSayi(((Sozcuk_03TamSayi) sözcük).tamSayı);
+					((Sozcuk_04OndalikliSayi) sözcük).ondalıklıSayı += karakter;
 				} else if (karakter == '_' || Character.isLetter(karakter)) {
 					durum = 3;
-					sözcük = new Sözcük_01İsim(((Sözcük_03TamSayı) sözcük).tamSayı + karakter);
+					sözcük = new Sozcuk_01Isim(((Sozcuk_03TamSayi) sözcük).tamSayı + karakter);
 				} else {
 					i--;
 					durum = 0;
@@ -212,17 +212,17 @@ public class Aşama2Sözcükler {
 				// durum 4,5,6 : Tam sayı ve ondalıklı sayı
 				if (Character.isDigit(karakter)) {
 					durum = 6;
-					((Sözcük_04OndalıklıSayı) sözcük).ondalıklıSayı += karakter;
+					((Sozcuk_04OndalikliSayi) sözcük).ondalıklıSayı += karakter;
 				} else {
 					i -= 2;
-					sözcük = new Sözcük_03TamSayı(((Sözcük_04OndalıklıSayı) sözcük).ondalıklıSayı.substring(0,
-							((Sözcük_04OndalıklıSayı) sözcük).ondalıklıSayı.length() - 1));
+					sözcük = new Sozcuk_03TamSayi(((Sozcuk_04OndalikliSayi) sözcük).ondalıklıSayı.substring(0,
+							((Sozcuk_04OndalikliSayi) sözcük).ondalıklıSayı.length() - 1));
 					durum = 0;
 				}
 			} else if (durum == 6) {
 				// durum 4,5,6 : Tam sayı ve ondalıklı sayı
 				if (Character.isDigit(karakter)) {
-					((Sözcük_04OndalıklıSayı) sözcük).ondalıklıSayı += karakter;
+					((Sozcuk_04OndalikliSayi) sözcük).ondalıklıSayı += karakter;
 				} else {
 					i--;
 					durum = 0;
@@ -260,20 +260,20 @@ public class Aşama2Sözcükler {
 				if (karakter == '\n') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
-					sözcükEkle(new Sözcük(SÖZCÜK.TİP_06SATIR_SONU));
+					sözcükEkle(new Sozcuk(SÖZCÜK.TİP_06SATIR_SONU));
 					durum = 0;
 				} else if (karakter == ' ') {
 					if (sözcük.tip != SÖZCÜK.TİP_00YOK) {
 						sözcükEkle(sözcük);
-						sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+						sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 					}
 				} else {
 					if (sözcük.tip == SÖZCÜK.TİP_00YOK) {
-						sözcük = new Sözcük_01İsim(karakter);
+						sözcük = new Sozcuk_01Isim(karakter);
 					} else {
-						((Sözcük_01İsim) sözcük).isim += karakter;
+						((Sozcuk_01Isim) sözcük).isim += karakter;
 					}
 				}
 			} else if (durum == 12) {
@@ -281,17 +281,17 @@ public class Aşama2Sözcükler {
 				if (karakter == '"') {
 					durum = 13;
 				} else {
-					((Sözcük_05Metin) sözcük).metin += karakter;
+					((Sozcuk_05Metin) sözcük).metin += karakter;
 				}
 			} else if (durum == 13) {
 				if (karakter == '"') {
-					((Sözcük_05Metin) sözcük).metin += karakter;
+					((Sozcuk_05Metin) sözcük).metin += karakter;
 					durum = 12;
 				} else {
 					i--;
 					durum = 0;
 					sözcükEkle(sözcük);
-					sözcük = new Sözcük(SÖZCÜK.TİP_00YOK);
+					sözcük = new Sozcuk(SÖZCÜK.TİP_00YOK);
 				}
 			}
 		}
@@ -301,8 +301,8 @@ public class Aşama2Sözcükler {
 		}
 
 		StringBuilder sb = new StringBuilder();
-		for (Sözcük[] cümle : tümCümleler) {
-			for (Sözcük kelime : cümle) {
+		for (Sozcuk[] cümle : tümCumleler) {
+			for (Sozcuk kelime : cümle) {
 				sb.append(kelime.toString());
 				sb.append(" ");
 			}
@@ -314,7 +314,7 @@ public class Aşama2Sözcükler {
 		if (hatalar.length() > 0) {
 			return hatalar.toString();
 		}
-		return tümCümleler;
+		return tümCumleler;
 	}
 
 }

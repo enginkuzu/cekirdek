@@ -1,16 +1,16 @@
-package aşama2sözcükler;
+package asama2sozcukler;
 
-import yardımcı.Değişkenler.SÖZCÜK;
+import yardimci.Degiskenler.SÖZCÜK;
 
-public class Sözcük_05Metin extends Sözcük {
+public class Sozcuk_05Metin extends Sozcuk {
 
 	public String metin = "";
 
-	public Sözcük_05Metin() {
+	public Sozcuk_05Metin() {
 		super(SÖZCÜK.TİP_05METİN);
 	}
 
-	public Sözcük_05Metin(String metin) {
+	public Sozcuk_05Metin(String metin) {
 		super(SÖZCÜK.TİP_05METİN);
 		this.metin = metin;
 	}
