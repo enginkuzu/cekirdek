@@ -73,12 +73,14 @@ public class Aşama3Cümleler {
 
 		for (Sözcük[] cümle : tümCümleler) {
 			if (cümle[0].tip == SÖZCÜK.TİP_13ÖZELLİK && cümle[cümle.length - 1].tip == SÖZCÜK.TİP_06SATIR_SONU) {
+				// Fonksiyon Özelliği
 				HashSet<String> özellikSet = new HashSet<String>();
 				for (int i = 2; i < cümle.length - 1; i++) {
 					özellikSet.add(((Sözcük_01İsim) cümle[i]).isim);
 				}
 				aktifFonksiyon.özellikMap.put(((Sözcük_01İsim) cümle[1]).isim, özellikSet);
 			} else if (cümle[1].tip == SÖZCÜK.TİP_14AÇ_PARANTEZ) {
+				// Normal Fonksiyon Başlangıcı
 				Fonksiyon_02İsimliFonksiyon isimFonksiyon = new Fonksiyon_02İsimliFonksiyon(aktifFonksiyon.özellikMap);
 				isimFonksiyon.isim = ((Sözcük_01İsim) cümle[0]).isim;
 				if (cümle.length > 5 && cümle[7].tip == SÖZCÜK.TİP_15KAPA_PARANTEZ) {
@@ -106,6 +108,7 @@ public class Aşama3Cümleler {
 				String anahtar = isimFonksiyon.isim + " " + isimFonksiyon.değişken1TipId;
 				isimFonksiyonMap.put(anahtar, isimFonksiyon);
 			} else if (cümle[0].tip == SÖZCÜK.TİP_01İSİM && ((Sözcük_01İsim) cümle[0]).isim.equals("inline")) {
+				// Inline Fonksiyon Başlangıcı
 				String değişken1Tip = ((Sözcük_01İsim) cümle[5]).isim;
 				String değişken2Tip = ((Sözcük_01İsim) cümle[11]).isim;
 				if (!Değişkenler.TİP_MAP_STR_ID.containsKey(değişken1Tip)) {
@@ -133,18 +136,23 @@ public class Aşama3Cümleler {
 						+ operatörFonksiyon.değişken2TipId;
 				operatörFonksiyonMap.put(anahtar, operatörFonksiyon);
 			} else if (aktifFonksiyon.özellikMap.containsKey("asm-data")) {
+				// Assembly Data Kodu
 				aktifFonksiyon.cümleler.add(new Cümle_08MakineDiliVeri(((Sözcük_05Metin) cümle[0]).metin));
 				aktifFonksiyon.özellikMap = new HashMap<>();
 			} else if (aktifFonksiyon.özellikMap.containsKey("asm-rodata")) {
+				// Assembly RO Data Kodu
 				aktifFonksiyon.cümleler.add(new Cümle_09MakineDiliSabitVeri(((Sözcük_05Metin) cümle[0]).metin));
 				aktifFonksiyon.özellikMap = new HashMap<>();
 			} else if (aktifFonksiyon.özellikMap.containsKey("asm-bssdata")) {
+				// Assembly BSS Kodu
 				aktifFonksiyon.cümleler.add(new Cümle_10MakineDiliSembol(((Sözcük_05Metin) cümle[0]).metin));
 				aktifFonksiyon.özellikMap = new HashMap<>();
 			} else if (aktifFonksiyon.özellikMap.containsKey("asm")) {
+				// Assembly Kodu
 				aktifFonksiyon.cümleler.add(new Cümle_07MakineDiliKod(((Sözcük_05Metin) cümle[0]).metin));
 				aktifFonksiyon.özellikMap = new HashMap<>();
 			} else if (cümle[0].tip == SÖZCÜK.TİP_17KAPA_SÜSLÜ && cümle[1].tip == SÖZCÜK.TİP_06SATIR_SONU) {
+				// Fonksiyon Sonu
 				aktifFonksiyon = anaFonksiyon;
 			} else if (cümle.length == 4 && cümle[0].tip == SÖZCÜK.TİP_01İSİM && cümle[1].tip == SÖZCÜK.TİP_09ATAMA_SOLA
 					&& cümle[2].tip == SÖZCÜK.TİP_01İSİM && cümle[3].tip == SÖZCÜK.TİP_06SATIR_SONU) {
@@ -624,6 +632,7 @@ public class Aşama3Cümleler {
 				aktifFonksiyon.cümleler
 						.add(new Cümle_04Operatörİşlemi(değişkenNo0, operatör, değişkenNo1, değişkenNo2));
 			} else {
+				// Bilinmeyen Cümle
 				hatalar.append("BİLİNMEYEN CÜMLE : ");
 				for (Sözcük c : cümle) {
 					hatalar.append(c);
