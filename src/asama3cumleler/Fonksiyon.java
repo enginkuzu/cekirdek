@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import asama2sozcukler.Sozcuk_06Degisken;
 import yardimci.Degiskenler.FONKSİYON;
 
 public abstract class Fonksiyon {
@@ -15,8 +16,8 @@ public abstract class Fonksiyon {
 
 	public int geçiciDegiskenNo = 0;
 	public int gerçekDegiskenNo = 0;
-	public HashMap<Integer, Degisken> değişkenNoMap = new HashMap<Integer, Degisken>();
-	public HashMap<String, Degisken> değişkenİsimMap = new HashMap<String, Degisken>();
+	public HashMap<Integer, Sozcuk_06Degisken> değişkenNoMap = new HashMap<Integer, Sozcuk_06Degisken>();
+	public HashMap<String, Sozcuk_06Degisken> değişkenİsimMap = new HashMap<String, Sozcuk_06Degisken>();
 
 	public HashMap<String, HashSet<String>> özellikMap = new HashMap<String, HashSet<String>>();
 

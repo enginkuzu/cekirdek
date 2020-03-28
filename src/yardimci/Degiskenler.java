@@ -28,7 +28,8 @@ public class Degiskenler {
 		TİP_15KAPA_PARANTEZ,
 		TİP_16AÇ_SÜSLÜ,
 		TİP_17KAPA_SÜSLÜ,
-		TİP_18VİRGÜL
+		TİP_18VİRGÜL,
+		TİP_99DEĞİŞKEN
 	}
 	
 	public enum CÜMLE {
