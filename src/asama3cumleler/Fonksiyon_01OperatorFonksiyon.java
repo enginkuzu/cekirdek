@@ -18,7 +18,7 @@ public class Fonksiyon_01OperatorFonksiyon extends Fonksiyon {
 	public String değişken2İsim;
 	public int değişken2TipId;
 	public String sonuçİsim;
-	public String sonuçTip;
+	public int sonuçTipId;
 
 	public Fonksiyon_01OperatorFonksiyon(HashMap<String, HashSet<String>> özellikMap) {
 		super(FONKSİYON.TİP_01OPERATÖRFONKSİYON);
@@ -34,7 +34,7 @@ public class Fonksiyon_01OperatorFonksiyon extends Fonksiyon {
 	@Override
 	public String toString() {
 		return "Fonksiyon_01OperatorFonksiyon[" + Degiskenler.TİP_MAP_ID_STR.get(değişken1TipId) + " " + operatör + " "
-				+ Degiskenler.TİP_MAP_ID_STR.get(değişken2TipId) + "] " + sonuçTip;
+				+ Degiskenler.TİP_MAP_ID_STR.get(değişken2TipId) + "] " + sonuçTipId;
 	}
 
 }
