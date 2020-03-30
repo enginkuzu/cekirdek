@@ -133,11 +133,35 @@ public class Asama3Cumleler {
 					} else if (sozcuk2.tip == SÖZCÜK.TİP_00YOK) {
 						index2 = i;
 						sozcuk2 = cümle[i];
+						break;
 					}
 				}
 			}
 			//
-			if ((sozcuk0.tip == SÖZCÜK.TİP_01İSİM || sozcuk0.tip == SÖZCÜK.TİP_03TAM_SAYI
+			if (sozcuk2.tip == SÖZCÜK.TİP_14AÇ_PARANTEZ) {
+				index += 2;
+			} else if (sozcuk0.tip == SÖZCÜK.TİP_14AÇ_PARANTEZ && sozcuk2.tip == SÖZCÜK.TİP_15KAPA_PARANTEZ) {
+				cümle[index0] = new Sozcuk_00Yok();
+				cümle[index1] = new Sozcuk_00Yok();
+				cümle[index2] = sozcuk1;
+				if (minIndex == index)
+					minIndex += 2;
+				index += 2;
+			} else if (sozcuk0.tip == SÖZCÜK.TİP_14AÇ_PARANTEZ) {
+				index++;
+			} else if (sozcuk1.tip == SÖZCÜK.TİP_15KAPA_PARANTEZ) {
+				int indexEski = index;
+				for (i = index0 - 1; i >= minIndex; i--) {
+					if (cümle[i].tip != SÖZCÜK.TİP_00YOK) {
+						index = i;
+						break;
+					}
+				}
+				if (indexEski == index) {
+					hata00_BeklenmeyenHata("0");
+					return false;
+				}
+			} else if ((sozcuk0.tip == SÖZCÜK.TİP_01İSİM || sozcuk0.tip == SÖZCÜK.TİP_03TAM_SAYI
 					|| sozcuk0.tip == SÖZCÜK.TİP_05METİN || sozcuk0.tip == SÖZCÜK.TİP_99DEĞİŞKEN)
 					&& sozcuk1.tip == SÖZCÜK.TİP_08NOKTA && sozcuk2.tip == SÖZCÜK.TİP_01İSİM) {
 				// -----------------
