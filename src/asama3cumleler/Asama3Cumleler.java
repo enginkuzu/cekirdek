@@ -112,12 +112,11 @@ public class Asama3Cumleler {
 		int index = minIndex;
 		while (minIndex != maxIndex) {
 			//
-			// System.out.println("min:" + minIndex + ", index:" + index + ", max:" +
-			// maxIndex);
-			// for (int i = minIndex; i <= maxIndex; i++) {
-			// System.out.println(cümle[i]);
-			// }
-			// System.out.println("---");
+			System.out.println("min:" + minIndex + ", index:" + index + ", max:" + maxIndex);
+			for (int i = minIndex; i <= maxIndex; i++) {
+				System.out.println(cümle[i]);
+			}
+			System.out.println("---");
 			//
 			int i = index;
 			int index0 = -1, index1 = -1, index2 = -1;
@@ -144,9 +143,26 @@ public class Asama3Cumleler {
 				cümle[index0] = new Sozcuk_00Yok();
 				cümle[index1] = new Sozcuk_00Yok();
 				cümle[index2] = sozcuk1;
-				if (minIndex == index)
-					minIndex += 2;
-				index += 2;
+				//
+				int yeniIndex = 0;
+				sozcuk0 = new Sozcuk_00Yok();
+				sozcuk1 = new Sozcuk_00Yok();
+				for (i = index0 - 1; i >= minIndex; i--) {
+					if (cümle[i].tip != SÖZCÜK.TİP_00YOK) {
+						if (sozcuk1.tip == SÖZCÜK.TİP_00YOK) {
+							sozcuk1 = cümle[i];
+						} else if (sozcuk0.tip == SÖZCÜK.TİP_00YOK) {
+							sozcuk0 = cümle[i];
+							yeniIndex = i;
+							break;
+						}
+					}
+				}
+				if ((sozcuk0.tip == SÖZCÜK.TİP_01İSİM || sozcuk0.tip == SÖZCÜK.TİP_03TAM_SAYI
+						|| sozcuk0.tip == SÖZCÜK.TİP_05METİN || sozcuk0.tip == SÖZCÜK.TİP_99DEĞİŞKEN)
+						&& sozcuk1.tip == SÖZCÜK.TİP_02OPERATÖR) {
+					index = yeniIndex;
+				}
 			} else if (sozcuk0.tip == SÖZCÜK.TİP_14AÇ_PARANTEZ) {
 				index++;
 			} else if (sozcuk1.tip == SÖZCÜK.TİP_15KAPA_PARANTEZ) {
@@ -193,8 +209,6 @@ public class Asama3Cumleler {
 				cümle[index0] = new Sozcuk_00Yok();
 				cümle[index1] = new Sozcuk_00Yok();
 				cümle[index2] = yeniDeğişken;
-				if (minIndex == index)
-					minIndex += 2;
 				index += 2;
 				//
 			} else if ((sozcuk0.tip == SÖZCÜK.TİP_01İSİM || sozcuk0.tip == SÖZCÜK.TİP_03TAM_SAYI
@@ -239,8 +253,6 @@ public class Asama3Cumleler {
 				cümle[index0] = new Sozcuk_00Yok();
 				cümle[index1] = new Sozcuk_00Yok();
 				cümle[index2] = yeniDeğişken;
-				if (minIndex == index)
-					minIndex += 2;
 				index += 2;
 				//
 			} else {
