@@ -231,23 +231,68 @@ public class Asama3Cumleler {
 				if (kaynakDeğişken2 == null)
 					return false;
 				//
-				String operatör = ((Sozcuk_02Operator) sozcuk1).operatör;
-				String anahtar = kaynakDeğişken1.değişkenTipiId + operatör + kaynakDeğişken2.değişkenTipiId;
-				if (!operatörFonksiyonMap.containsKey(anahtar)) {
+				String operatör1 = ((Sozcuk_02Operator) sozcuk1).operatör;
+				String anahtar1 = kaynakDeğişken1.değişkenTipiId + operatör1 + kaynakDeğişken2.değişkenTipiId;
+				if (!operatörFonksiyonMap.containsKey(anahtar1)) {
 					hata04_TanımsızOperatör(Degiskenler.TİP_MAP_ID_STR.get(kaynakDeğişken1.değişkenTipiId) + " "
-							+ operatör + " " + Degiskenler.TİP_MAP_ID_STR.get(kaynakDeğişken2.değişkenTipiId));
+							+ operatör1 + " " + Degiskenler.TİP_MAP_ID_STR.get(kaynakDeğişken2.değişkenTipiId));
 					return false;
 				}
-				Fonksiyon_01OperatorFonksiyon fonksiyon = operatörFonksiyonMap.get(anahtar);
+				Fonksiyon_01OperatorFonksiyon fonksiyon1 = operatörFonksiyonMap.get(anahtar1);
+				//
+				int index3 = -1;
+				Sozcuk sozcuk3 = new Sozcuk_00Yok();
+				for (int i = index2 + 1; i <= maxIndex; i++) {
+					if (cümle[i].tip != SÖZCÜK.TİP_00YOK) {
+						index3 = i;
+						sozcuk3 = cümle[i];
+						break;
+					}
+				}
+				if (sozcuk3.tip == SÖZCÜK.TİP_08NOKTA) {
+					index = index2;
+					continue;
+				}
+				//
+				if (sozcuk3.tip == SÖZCÜK.TİP_02OPERATÖR) {
+					int index4 = -1;
+					Sozcuk sozcuk4 = new Sozcuk_00Yok();
+					for (int i = index3 + 1; i <= maxIndex; i++) {
+						if (cümle[i].tip != SÖZCÜK.TİP_00YOK) {
+							index4 = i;
+							sozcuk4 = cümle[i];
+							break;
+						}
+					}
+					if (sozcuk4.tip == SÖZCÜK.TİP_01İSİM || sozcuk4.tip == SÖZCÜK.TİP_03TAM_SAYI
+							|| sozcuk4.tip == SÖZCÜK.TİP_05METİN || sozcuk4.tip == SÖZCÜK.TİP_99DEĞİŞKEN) {
+						Sozcuk_06Degisken kaynakDeğişken3 = değişkeneDönüştür(sozcuk4);
+						if (kaynakDeğişken3 == null)
+							return false;
+						//
+						String operatör2 = ((Sozcuk_02Operator) sozcuk3).operatör;
+						String anahtar2 = kaynakDeğişken2.değişkenTipiId + operatör2 + kaynakDeğişken3.değişkenTipiId;
+						if (!operatörFonksiyonMap.containsKey(anahtar2)) {
+							hata04_TanımsızOperatör(Degiskenler.TİP_MAP_ID_STR.get(kaynakDeğişken2.değişkenTipiId) + " "
+									+ operatör2 + " " + Degiskenler.TİP_MAP_ID_STR.get(kaynakDeğişken3.değişkenTipiId));
+							return false;
+						}
+						Fonksiyon_01OperatorFonksiyon fonksiyon2 = operatörFonksiyonMap.get(anahtar2);
+						if (fonksiyon2.öncelik > fonksiyon1.öncelik) {
+							index = index2;
+							continue;
+						}
+					}
+				}
 				//
 				int yeniDeğişkenNo = --aktifFonksiyon.geçiciDegiskenNo;
-				int yeniDeğişkenTipId = fonksiyon.sonuçTipId;
+				int yeniDeğişkenTipId = fonksiyon1.sonuçTipId;
 				Sozcuk_06Degisken yeniDeğişken = new Sozcuk_06Degisken(yeniDeğişkenNo, null, yeniDeğişkenTipId);
 				aktifFonksiyon.değişkenNoMap.put(yeniDeğişkenNo, yeniDeğişken);
 				Cumle_02GeciciDegiskenYeni yeniCümle1 = new Cumle_02GeciciDegiskenYeni(yeniDeğişkenNo,
 						yeniDeğişkenTipId);
 				aktifFonksiyon.cümleler.add(yeniCümle1);
-				Cumle_04OperatorIslemi yeniCümle2 = new Cumle_04OperatorIslemi(yeniDeğişkenNo, operatör,
+				Cumle_04OperatorIslemi yeniCümle2 = new Cumle_04OperatorIslemi(yeniDeğişkenNo, operatör1,
 						kaynakDeğişken1.değişkenNo, kaynakDeğişken2.değişkenNo);
 				aktifFonksiyon.cümleler.add(yeniCümle2);
 				//
