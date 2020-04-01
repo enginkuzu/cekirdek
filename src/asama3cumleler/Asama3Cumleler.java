@@ -118,10 +118,9 @@ public class Asama3Cumleler {
 			}
 			System.out.println("---");
 			//
-			int i = index;
 			int index0 = -1, index1 = -1, index2 = -1;
 			Sozcuk sozcuk0 = new Sozcuk_00Yok(), sozcuk1 = new Sozcuk_00Yok(), sozcuk2 = new Sozcuk_00Yok();
-			for (; i <= maxIndex; i++) {
+			for (int i = index; i <= maxIndex; i++) {
 				if (cümle[i].tip != SÖZCÜK.TİP_00YOK) {
 					if (sozcuk0.tip == SÖZCÜK.TİP_00YOK) {
 						index0 = i;
@@ -147,7 +146,7 @@ public class Asama3Cumleler {
 				int yeniIndex = 0;
 				sozcuk0 = new Sozcuk_00Yok();
 				sozcuk1 = new Sozcuk_00Yok();
-				for (i = index0 - 1; i >= minIndex; i--) {
+				for (int i = index0 - 1; i >= minIndex; i--) {
 					if (cümle[i].tip != SÖZCÜK.TİP_00YOK) {
 						if (sozcuk1.tip == SÖZCÜK.TİP_00YOK) {
 							sozcuk1 = cümle[i];
@@ -167,7 +166,7 @@ public class Asama3Cumleler {
 				index++;
 			} else if (sozcuk1.tip == SÖZCÜK.TİP_15KAPA_PARANTEZ) {
 				int indexEski = index;
-				for (i = index0 - 1; i >= minIndex; i--) {
+				for (int i = index0 - 1; i >= minIndex; i--) {
 					if (cümle[i].tip != SÖZCÜK.TİP_00YOK) {
 						index = i;
 						break;
@@ -209,7 +208,9 @@ public class Asama3Cumleler {
 				cümle[index0] = new Sozcuk_00Yok();
 				cümle[index1] = new Sozcuk_00Yok();
 				cümle[index2] = yeniDeğişken;
-				index += 2;
+				if (minIndex == index)
+					minIndex = index2;
+				index = index2;
 				//
 			} else if ((sozcuk0.tip == SÖZCÜK.TİP_01İSİM || sozcuk0.tip == SÖZCÜK.TİP_03TAM_SAYI
 					|| sozcuk0.tip == SÖZCÜK.TİP_05METİN || sozcuk0.tip == SÖZCÜK.TİP_99DEĞİŞKEN)
@@ -253,7 +254,9 @@ public class Asama3Cumleler {
 				cümle[index0] = new Sozcuk_00Yok();
 				cümle[index1] = new Sozcuk_00Yok();
 				cümle[index2] = yeniDeğişken;
-				index += 2;
+				if (minIndex == index)
+					minIndex = index2;
+				index = index2;
 				//
 			} else {
 				hata00_BeklenmeyenHata("1");

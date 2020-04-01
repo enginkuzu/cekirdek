@@ -11,11 +11,11 @@
 '(6) :> sayı5;
 'sayı5.printhn;
 
-0 + 1 + (2) + (3 + 4) * (5 + 6) + 7 :> sayı6;
-sayı6.printhn;
+'0 + 1 + (2) + (3 + 4) * (5 + 6) + 7 :> sayı6;
+'sayı6.printhn;
 
-' 1 + 2 * 3 + 4 :> sayı7;
-' sayı7.printhn;
+1 + 2 * 3 + 4 :> sayı7;
+sayı7.printhn;
 
 ' 1 + 2 * (1 + 2) + 4 :> sayı8;
 ' sayı8.printhn;
