@@ -161,6 +161,10 @@ public class Asama3Cumleler {
 						|| sozcuk0.tip == SÖZCÜK.TİP_05METİN || sozcuk0.tip == SÖZCÜK.TİP_99DEĞİŞKEN)
 						&& sozcuk1.tip == SÖZCÜK.TİP_02OPERATÖR) {
 					index = yeniIndex;
+				} else {
+					if (minIndex == index)
+						minIndex = index2;
+					index = index2;
 				}
 			} else if (sozcuk0.tip == SÖZCÜK.TİP_14AÇ_PARANTEZ) {
 				index++;
