@@ -112,11 +112,11 @@ public class Asama3Cumleler {
 		int index = minIndex;
 		while (minIndex != maxIndex) {
 			//
-			System.out.println("min:" + minIndex + ", index:" + index + ", max:" + maxIndex);
-			for (int i = minIndex; i <= maxIndex; i++) {
-				System.out.println(cümle[i]);
-			}
-			System.out.println("---");
+			/*
+			 * System.out.println("min:" + minIndex + ", index:" + index + ", max:" +
+			 * maxIndex); for (int i = minIndex; i <= maxIndex; i++) {
+			 * System.out.println(cümle[i]); } System.out.println("---");
+			 */
 			//
 			int index0 = -1, index1 = -1, index2 = -1;
 			Sozcuk sozcuk0 = new Sozcuk_00Yok(), sozcuk1 = new Sozcuk_00Yok(), sozcuk2 = new Sozcuk_00Yok();
@@ -255,6 +255,7 @@ public class Asama3Cumleler {
 				}
 				//
 				if (sozcuk3.tip == SÖZCÜK.TİP_02OPERATÖR) {
+					//
 					int index4 = -1;
 					Sozcuk sozcuk4 = new Sozcuk_00Yok();
 					for (int i = index3 + 1; i <= maxIndex; i++) {
@@ -264,6 +265,7 @@ public class Asama3Cumleler {
 							break;
 						}
 					}
+					//
 					if (sozcuk4.tip == SÖZCÜK.TİP_01İSİM || sozcuk4.tip == SÖZCÜK.TİP_03TAM_SAYI
 							|| sozcuk4.tip == SÖZCÜK.TİP_05METİN || sozcuk4.tip == SÖZCÜK.TİP_99DEĞİŞKEN) {
 						Sozcuk_06Degisken kaynakDeğişken3 = değişkeneDönüştür(sozcuk4);
@@ -302,6 +304,26 @@ public class Asama3Cumleler {
 				if (minIndex == index)
 					minIndex = index2;
 				index = index2;
+				//
+				int index_1 = -1, index_2 = -1;
+				Sozcuk sozcuk_1 = new Sozcuk_00Yok(), sozcuk_2 = new Sozcuk_00Yok();
+				for (int i = index0 - 1; i >= minIndex; i--) {
+					if (cümle[i].tip != SÖZCÜK.TİP_00YOK) {
+						if (sozcuk_1.tip == SÖZCÜK.TİP_00YOK) {
+							index_1 = i;
+							sozcuk_1 = cümle[i];
+						} else if (sozcuk_2.tip == SÖZCÜK.TİP_00YOK) {
+							index_2 = i;
+							sozcuk_2 = cümle[i];
+							break;
+						}
+					}
+				}
+				if ((sozcuk_2.tip == SÖZCÜK.TİP_01İSİM || sozcuk_2.tip == SÖZCÜK.TİP_03TAM_SAYI
+						|| sozcuk_2.tip == SÖZCÜK.TİP_05METİN || sozcuk_2.tip == SÖZCÜK.TİP_99DEĞİŞKEN)
+						&& sozcuk_1.tip == SÖZCÜK.TİP_02OPERATÖR) {
+					index = index_2;
+				}
 				//
 			} else {
 				hata00_BeklenmeyenHata("1");
