@@ -266,7 +266,10 @@ public class Asama3Cumleler {
 						}
 					}
 					//
-					if (sozcuk4.tip == SÖZCÜK.TİP_01İSİM || sozcuk4.tip == SÖZCÜK.TİP_03TAM_SAYI
+					if (sozcuk4.tip == SÖZCÜK.TİP_14AÇ_PARANTEZ) {
+						index = index4;
+						continue;
+					} else if (sozcuk4.tip == SÖZCÜK.TİP_01İSİM || sozcuk4.tip == SÖZCÜK.TİP_03TAM_SAYI
 							|| sozcuk4.tip == SÖZCÜK.TİP_05METİN || sozcuk4.tip == SÖZCÜK.TİP_99DEĞİŞKEN) {
 						Sozcuk_06Degisken kaynakDeğişken3 = değişkeneDönüştür(sozcuk4);
 						if (kaynakDeğişken3 == null)

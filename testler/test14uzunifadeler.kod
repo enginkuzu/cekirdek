@@ -17,9 +17,9 @@
 '1 + 2 * 3 + 4 :> sayı7;
 'sayı7.printhn;
 
-1 + 2 * (1 + 2) + 4 :> sayı8;
-sayı8.printhn;
+'1 + 2 * (1 + 2) + 4 :> sayı8;
+'sayı8.printhn;
 
-'"Çekirdek" + "Programlama" + "Dili" :> metin1;
-'metin1.printn;
+"Çekirdek" + "Programlama" + "Dili" :> metin1;
+metin1.printn;
 
