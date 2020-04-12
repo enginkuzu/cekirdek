@@ -278,7 +278,7 @@ public class Asama5MakineDili {
 				}
 				String saklaç = saklaçtakiDegiskenler.get(cümle04.parametre).saklaçAdresi;
 				işlemler.add(new Islem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
-				işlemler.add(new Islem_03MakineDiliKomutu("\tmov rax," + saklaç + "\n"));
+				işlemler.add(new Islem_03MakineDiliKomutu("\tmov rax, " + saklaç + "\n"));
 				işlemler.add(
 						new Islem_03MakineDiliKomutu("\tcall fn" + fonksiyonIdHazırla(cümle04.fonksiyonId) + "\n"));
 			} else if (cümle instanceof Cumle_11SabitAtama) {
@@ -292,10 +292,10 @@ public class Asama5MakineDili {
 				String saklaç = saklaçtakiDegiskenler.get(cümle05.değişkenNo).saklaçAdresi;
 				işlemler.add(new Islem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
 				if (cümle05.sabitVeriTipiId == Degiskenler.ID_i64) {
-					işlemler.add(new Islem_03MakineDiliKomutu("\tmov " + saklaç + "," + cümle05.sabitVeri + "\n"));
+					işlemler.add(new Islem_03MakineDiliKomutu("\tmov " + saklaç + ", " + cümle05.sabitVeri + "\n"));
 				} else if (cümle05.sabitVeriTipiId == Degiskenler.ID_str) {
 					işlemler.add(new Islem_03MakineDiliKomutu(
-							"\tlea " + saklaç + "," + ".str_" + cümle05.değişkenNo + "\n"));
+							"\tlea " + saklaç + ", " + ".str_" + cümle05.değişkenNo + "\n"));
 				}
 			} else if (cümle instanceof Cumle_06DegiskenAtama) {
 				Cumle_06DegiskenAtama cümle06 = (Cumle_06DegiskenAtama) cümle;
@@ -314,7 +314,7 @@ public class Asama5MakineDili {
 				String saklaçKaynak = saklaçtakiDegiskenler.get(cümle06.değişkenNoKaynak).saklaçAdresi;
 				String saklaçHedef = saklaçtakiDegiskenler.get(cümle06.değişkenNoHedef).saklaçAdresi;
 				işlemler.add(new Islem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
-				işlemler.add(new Islem_03MakineDiliKomutu("\tmov " + saklaçHedef + "," + saklaçKaynak + "\n"));
+				işlemler.add(new Islem_03MakineDiliKomutu("\tmov " + saklaçHedef + ", " + saklaçKaynak + "\n"));
 			} else {
 				işlemler.add(new Islem_03MakineDiliKomutu("\n\t# " + cümle + "\n"));
 				işlemler.add(new Islem_03MakineDiliKomutu("-BİLİNMEYEN-(" + cümle + ")-\n"));

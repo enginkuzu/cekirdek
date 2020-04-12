@@ -10,6 +10,7 @@ inline p1 (metin1:str, +, metin2:str) metin3:+str {
 	mov al, [metin2]
 	add al, bl
 	mov rcx, rax
+	inc rax
 	call fn1		# mem_alloc_get
 	mov metin3, rbx
 	mov [rbx], cl
@@ -44,6 +45,7 @@ inline p1 (metin1:+str, +, metin2:str) metin3:+str {
 	mov al, [metin2]
 	add al, bl
 	mov rcx, rax
+	inc rax
 	call fn1		# mem_alloc_get
 	mov metin3, rbx
 	mov [rbx], cl
