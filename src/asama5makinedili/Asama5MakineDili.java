@@ -238,15 +238,22 @@ public class Asama5MakineDili {
 				}
 			} else if (cümle instanceof Cumle_04OperatorIslemi) {
 				Cumle_04OperatorIslemi cümle03 = (Cumle_04OperatorIslemi) cümle;
-				String anahtar = çıktı.anaFonksiyon.değişkenNoMap.get(cümle03.parametreNo1).değişkenTipiId
-						+ cümle03.operatör + çıktı.anaFonksiyon.değişkenNoMap.get(cümle03.parametreNo2).değişkenTipiId;
-				Fonksiyon_01OperatorFonksiyon operatörFonksiyon = çıktı.operatörFonksiyonMap.get(anahtar);
-				if (!saklaçtakiDegiskenler.containsKey(cümle03.parametreNo1)) {
-					if (saklaçStack.isEmpty()) {
-						saklaçtaYerAç(çıktı, i);
+				String anahtar = null;
+				if (cümle03.parametreNo1 == 0) {
+					anahtar = Degiskenler.ID_none + cümle03.operatör
+							+ çıktı.anaFonksiyon.değişkenNoMap.get(cümle03.parametreNo2).değişkenTipiId;
+				} else {
+					anahtar = çıktı.anaFonksiyon.değişkenNoMap.get(cümle03.parametreNo1).değişkenTipiId
+							+ cümle03.operatör
+							+ çıktı.anaFonksiyon.değişkenNoMap.get(cümle03.parametreNo2).değişkenTipiId;
+					if (!saklaçtakiDegiskenler.containsKey(cümle03.parametreNo1)) {
+						if (saklaçStack.isEmpty()) {
+							saklaçtaYerAç(çıktı, i);
+						}
+						değişkeniYığıttanSaklacaTaşı(cümle03.parametreNo1);
 					}
-					değişkeniYığıttanSaklacaTaşı(cümle03.parametreNo1);
 				}
+				Fonksiyon_01OperatorFonksiyon operatörFonksiyon = çıktı.operatörFonksiyonMap.get(anahtar);
 				if (!saklaçtakiDegiskenler.containsKey(cümle03.parametreNo2)) {
 					if (saklaçStack.isEmpty()) {
 						saklaçtaYerAç(çıktı, i);
@@ -260,8 +267,10 @@ public class Asama5MakineDili {
 					değişkeniYığıttanSaklacaTaşı(cümle03.değişkenNo);
 				}
 				String kod = ((Cumle_07MakineDiliKod) operatörFonksiyon.cümleler.get(0)).kod;
-				kod = kod.replace(operatörFonksiyon.değişken1İsim,
-						saklaçtakiDegiskenler.get(cümle03.parametreNo1).saklaçAdresi);
+				if (cümle03.parametreNo1 != 0) {
+					kod = kod.replace(operatörFonksiyon.değişken1İsim,
+							saklaçtakiDegiskenler.get(cümle03.parametreNo1).saklaçAdresi);
+				}
 				kod = kod.replace(operatörFonksiyon.değişken2İsim,
 						saklaçtakiDegiskenler.get(cümle03.parametreNo2).saklaçAdresi);
 				kod = kod.replace(operatörFonksiyon.sonuçİsim,

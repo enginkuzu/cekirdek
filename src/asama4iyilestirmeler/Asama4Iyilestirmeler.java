@@ -35,7 +35,8 @@ public class Asama4Iyilestirmeler {
 				map.put(cümle02.değişkenNo, new DegiskenKullanimRaporu(cümle02.değişkenNo, i));
 			} else if (cümle instanceof Cumle_04OperatorIslemi) {
 				Cumle_04OperatorIslemi cümle03 = (Cumle_04OperatorIslemi) cümle;
-				map.get(cümle03.parametreNo1).ekleOkuma(i);
+				if (cümle03.parametreNo1 != 0)
+					map.get(cümle03.parametreNo1).ekleOkuma(i);
 				map.get(cümle03.parametreNo2).ekleOkuma(i);
 				map.get(cümle03.değişkenNo).ekleYazma(-i);
 			} else if (cümle instanceof Cumle_05FonksiyonCagrisi) {

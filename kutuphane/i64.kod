@@ -1,4 +1,20 @@
 
+
+@arch x86-64
+@sideeffect 0
+inline p3 (+, değer:i64) sonuç:i64 {
+	@asm
+	"mov sonuç, değer";
+}
+
+@arch x86-64
+@sideeffect 0
+inline p3 (-, değer:i64) sonuç:i64 {
+	@asm
+	"neg değer
+	mov sonuç, değer";
+}
+
 @arch x86-64
 @sideeffect 0
 inline p1 (değer1:i64, +, değer2:i64) toplam:i64 {

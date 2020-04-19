@@ -1,0 +1,24 @@
+
+sayı1 <: -1;
+sayı1.printhn;
+sayı2 <: 0;
+sayı2.printhn;
+sayı3 <: +1;
+sayı3.printhn;
+sayı4 <: +sayı1;
+sayı4.printhn;
+sayı5 <: -sayı1;
+sayı5.printhn;
+
+'-1.printhn
+'0.printhn
+'+1.printhn
+
+'sayı6 <: 10 + +9 + -8 - +7 - -6;
+'sayı6.printhn;
+
+'sayı7 <: -(+(-(1)));
+'sayı7.printhn;
+
+'sayı8 <: -5 * +4 * -3 / +2;
+'sayı8.printhn;
