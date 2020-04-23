@@ -12,9 +12,9 @@ public class Fonksiyon_01OperatorFonksiyon extends Fonksiyon {
 	public HashMap<String, HashSet<String>> özellikMap;
 	public boolean inline;
 	public int öncelik;
-	public String operatör;
 	public String değişken1İsim;
 	public int değişken1TipId;
+	public String operatör;
 	public String değişken2İsim;
 	public int değişken2TipId;
 	public String sonuçİsim;
