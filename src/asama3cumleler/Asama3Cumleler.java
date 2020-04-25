@@ -112,11 +112,11 @@ public class Asama3Cumleler {
 		int index = minIndex;
 		while (minIndex != maxIndex) {
 			//
-			/*
-			 * System.out.println("min:" + minIndex + ", index:" + index + ", max:" +
-			 * maxIndex); for (int i = minIndex; i <= maxIndex; i++) {
-			 * System.out.println(cümle[i]); } System.out.println("---");
-			 */
+			System.out.println("min:" + minIndex + ", index:" + index + ", max:" + maxIndex);
+			for (int i = minIndex; i <= maxIndex; i++) {
+				System.out.println(cümle[i]);
+			}
+			System.out.println("---");
 			//
 			int index0 = -1, index1 = -1, index2 = -1;
 			Sozcuk sozcuk0 = new Sozcuk_00Yok(), sozcuk1 = new Sozcuk_00Yok(), sozcuk2 = new Sozcuk_00Yok();
@@ -182,8 +182,7 @@ public class Asama3Cumleler {
 				}
 			} else if (sozcuk0.tip == SÖZCÜK.TİP_02OPERATÖR
 					&& (sozcuk1.tip == SÖZCÜK.TİP_01İSİM || sozcuk1.tip == SÖZCÜK.TİP_03TAM_SAYI
-							|| sozcuk1.tip == SÖZCÜK.TİP_05METİN || sozcuk1.tip == SÖZCÜK.TİP_99DEĞİŞKEN)
-					&& sozcuk2.tip == SÖZCÜK.TİP_00YOK) {
+							|| sozcuk1.tip == SÖZCÜK.TİP_05METİN || sozcuk1.tip == SÖZCÜK.TİP_99DEĞİŞKEN)) {
 				// -----------------
 				// -123
 				// -sayı
@@ -706,11 +705,8 @@ public class Asama3Cumleler {
 				//
 				satırıİşle(hedefDeğişken, cümle, 4, cümle.length - 2);
 				//
-			} else if (cümle.length >= 4
-					&& (cümle[0].tip == SÖZCÜK.TİP_01İSİM || cümle[0].tip == SÖZCÜK.TİP_03TAM_SAYI
-							|| cümle[0].tip == SÖZCÜK.TİP_05METİN)
-					&& cümle[1].tip == SÖZCÜK.TİP_08NOKTA && cümle[2].tip == SÖZCÜK.TİP_01İSİM
-					&& cümle[cümle.length - 1].tip == SÖZCÜK.TİP_06SATIR_SONU) {
+			} else if (cümle.length >= 4 && cümle[cümle.length - 1].tip == SÖZCÜK.TİP_06SATIR_SONU) {
+				//
 				// sayı1.printhn;
 				// 123.printhn;
 				//
